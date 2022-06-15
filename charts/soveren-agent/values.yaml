@@ -3,6 +3,7 @@ kafka:
     name: soveren/kafka
     tag: kraft
     pullPolicy: IfNotPresent
+  priorityClassName: ""
   resources:
     requests:
       cpu: "100m"
@@ -20,6 +21,7 @@ digger:
     name: soveren/digger
     tag: latest
     pullPolicy: IfNotPresent
+  priorityClassName: ""
   resources:
     limits:
       cpu: "200m"
@@ -38,6 +40,7 @@ detectionTool:
     name: soveren/detection-tool
     tag: latest
     pullPolicy: IfNotPresent
+  priorityClassName: ""
   resources: 
     requests:
       memory: "1024Mi"
@@ -55,6 +58,7 @@ interceptor:
     name: soveren/interceptor
     tag: latest
     pullPolicy: Always
+  priorityClassName: ""
   resources:
     limits:
       memory: 250Mi

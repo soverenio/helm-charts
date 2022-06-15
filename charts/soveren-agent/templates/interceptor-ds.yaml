@@ -15,6 +15,9 @@ spec:
       labels:
         {{- include "interceptor.matchLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.interceptor.priorityClassName }}
+      priorityClassName: {{ .Values.interceptor.priorityClassName }}
+      {{- end }}
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true

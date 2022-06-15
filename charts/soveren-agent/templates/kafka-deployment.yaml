@@ -16,6 +16,9 @@ spec:
       labels:
         {{- include "kafka.matchLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.kafka.priorityClassName }}
+      priorityClassName: {{ .Values.kafka.priorityClassName }}
+      {{- end }}
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka

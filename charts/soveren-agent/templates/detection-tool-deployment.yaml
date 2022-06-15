@@ -15,6 +15,9 @@ spec:
       labels:
         {{- include "detectionTool.matchLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.detectionTool.priorityClassName }}
+      priorityClassName: "{{ .Values.detectionTool.priorityClassName }}"
+      {{- end }}
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}

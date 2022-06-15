@@ -15,6 +15,9 @@ spec:
       labels:
         {{- include "digger.matchLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.digger.priorityClassName }}
+      priorityClassName: {{ .Values.digger.priorityClassName }}
+      {{- end }}
       serviceAccountName: {{ .Release.Name }}-digger
       initContainers:
       - name: check-kafka-ready
