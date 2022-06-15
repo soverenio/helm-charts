@@ -68,11 +68,15 @@ spec:
         - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_PIDRESOLVER"
           value: "hostname"
         - name: "SVRN_INTERCEPTOR_PRODUCER_BROKERS"
-          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.service.port }}"
+          {{- if .Values.kafka.embedded.enabled }}
+          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}"
+          {{- else }}
+          value: "{{ join "," .Values.kafka.external.brokers }}"
+          {{- end }}
         - name: "SVRN_INTERCEPTOR_PRODUCER_TOPIC"
-          value: "events"
+          value: "{{ .Values.kafka.topics.eventsTopicName }}"
         - name: "SVRN_INTERCEPTOR_PRODUCER_HEARTBEATTOPIC"
-          value: "heartbeat"
+          value: "{{ .Values.kafka.topics.heartbeatTopicName }}"
         resources:
           {{- toYaml .Values.interceptor.resources | nindent 10 }}
         securityContext:

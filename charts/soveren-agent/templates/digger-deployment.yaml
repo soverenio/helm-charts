@@ -36,7 +36,11 @@ spec:
       initContainers:
       - name: check-kafka-ready
         image: bash:5.1.4
-        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-kafka {{ .Values.kafka.service.port }} && break; done' ]
+        {{- if .Values.kafka.embedded.enabled }}
+        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-kafka {{ .Values.kafka.embedded.service.port }} && break; done' ]
+        {{- else }}
+        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ first .Values.kafka.external.brokers | replace ":" " " }} && break; done' ]
+        {{- end }}
       - name: check-detection-ready
         image: bash:5.1.4
         args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-detection-tool {{ .Values.detectionTool.service.port }} && break; done' ]
@@ -70,19 +74,23 @@ spec:
         - name: "SVRN_DIGGER_DETECTIONTOOL_URI"
           value: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
         - name: "SVRN_DIGGER_KAFKA_BROKERS"
-          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.service.port }}"
+          {{- if .Values.kafka.embedded.enabled }}
+          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}"
+          {{- else }}
+          value: "{{ join "," .Values.kafka.external.brokers }}"
+          {{- end }}
         - name: "SVRN_DIGGER_KAFKA_CONSUMER_GROUP"
           value: "worker_1"
         - name: "SVRN_DIGGER_KAFKA_CONSUMER_HANDLERNAME"
           value: "worker_1"
         - name: "SVRN_DIGGER_KAFKA_CONSUMER_TOPIC"
-          value: "events"
+          value: "{{ .Values.kafka.topics.eventsTopicName }}"
         - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_GROUP"
           value: "worker_2"
         - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_HANDLERNAME"
           value: "worker_2"
         - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_TOPIC"
-          value: "heartbeat"
+          value: "{{ .Values.kafka.topics.heartbeatTopicName }}"
         - name: "SVRN_DIGGER_KAFKA_RESENDSLEEP"
           value: "1s"
         - name: "SVRN_DIGGER_INSTRUMENTATION_SERVER_LISTENADDRESS"

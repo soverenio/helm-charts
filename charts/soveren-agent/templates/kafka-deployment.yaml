@@ -1,17 +1,17 @@
----
+{{- if .Values.kafka.embedded.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}-kafka
   namespace: {{ .Release.Namespace }}
-  {{- if .Values.kafka.deploymentAnnotations }}
+  {{- if .Values.kafka.embedded.deploymentAnnotations }}
   annotations:
-    {{- toYaml .Values.kafka.deploymentAnnotations | nindent 4 }}
+    {{- toYaml .Values.kafka.embedded.deploymentAnnotations | nindent 4 }}
   {{- end }}
   labels:
     {{- include "kafka.labels" . | nindent 4 }}
-    {{- if .Values.kafka.deploymentLabels }}
-    {{- toYaml .Values.kafka.deploymentLabels | nindent 4 }}
+    {{- if .Values.kafka.embedded.deploymentLabels }}
+    {{- toYaml .Values.kafka.embedded.deploymentLabels | nindent 4 }}
     {{- end }}
 spec:
   replicas: 1
@@ -20,24 +20,24 @@ spec:
       {{- include "kafka.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- if .Values.kafka.podAnnotations }}
+      {{- if .Values.kafka.embedded.podAnnotations }}
       annotations:
-        {{- toYaml .Values.kafka.podAnnotations | nindent 8 }}
+        {{- toYaml .Values.kafka.embedded.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
         {{- include "kafka.labels" . | nindent 8 }}
-        {{- if .Values.kafka.podLabels }}
-        {{- toYaml .Values.kafka.podLabels | nindent 8 }}
+        {{- if .Values.kafka.embedded.podLabels }}
+        {{- toYaml .Values.kafka.embedded.podLabels | nindent 8 }}
         {{- end }}
     spec:
-      {{- if .Values.kafka.priorityClassName }}
-      priorityClassName: {{ .Values.kafka.priorityClassName }}
+      {{- if .Values.kafka.embedded.priorityClassName }}
+      priorityClassName: {{ .Values.kafka.embedded.priorityClassName }}
       {{- end }}
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka
-        image: {{ .Values.kafka.image.name }}:{{ .Values.kafka.image.tag }}
-        imagePullPolicy: {{ .Values.kafka.image.pullPolicy }}
+        image: {{ .Values.kafka.embedded.image.name }}:{{ .Values.kafka.embedded.image.tag }}
+        imagePullPolicy: {{ .Values.kafka.embedded.image.pullPolicy }}
         args:
         - "--override"
         - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
@@ -51,14 +51,15 @@ spec:
         - containerPort: 9092
         env:
         - name: "KAFKA_CREATE_TOPICS"
-          value: "heartbeat:1:1,events:10:1"
+          value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1"
         - name: MY_POD_IP
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
         resources:
-          {{- toYaml .Values.kafka.resources | nindent 10 }}
+          {{- toYaml .Values.kafka.embedded.resources | nindent 10 }}
         lifecycle:
           preStop:
             exec:
               command: [ "sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done" ]
+{{- end }}

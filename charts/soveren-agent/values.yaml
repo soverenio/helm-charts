@@ -1,23 +1,31 @@
 kafka:
-  deploymentAnnotations: {}
-  deploymentLabels: {}
-  podAnnotations: {}
-  podLabels: {}
-  image:
-    name: soveren/kafka
-    tag: kraft
-    pullPolicy: IfNotPresent
-  priorityClassName: ""
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "100Mi"
-    limits:
-      memory: "1024Mi"
-  service:
-    annotations: {}
-    labels: {}
-    port: 9092
+  topics:
+    eventsTopicName: events
+    heartbeatTopicName: heartbeat
+  embedded:
+    enabled: true
+    deploymentAnnotations: {}
+    deploymentLabels: {}
+    podAnnotations: {}
+    podLabels: {}
+    image:
+      name: soveren/kafka
+      tag: kraft
+      pullPolicy: IfNotPresent
+    priorityClassName: ""
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "100Mi"
+      limits:
+        memory: "1024Mi"
+    service:
+      annotations: {}
+      labels: {}
+      port: 9092
+  external:
+    # kafka.external.brokers used only if kafka.embedded.enabled=false
+    brokers: []
 
 digger:
   deploymentAnnotations: {}
