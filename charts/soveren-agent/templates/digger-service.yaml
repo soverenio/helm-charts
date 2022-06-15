@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-digger
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.digger.service.annotations }}
+  annotations:
+    {{- toYaml .Values.digger.service.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "digger.labels" . | nindent 4 }}
+    {{- if .Values.digger.service.labels }}
+    {{- toYaml .Values.digger.service.labels | nindent 4 }}
+    {{- end }}
+spec:
+  ports:
+  - name: http
+    port: {{ .Values.digger.service.port }}
+    targetPort: 9000
+  - name: "metrics"
+    port: {{ .Values.digger.service.metricsPort }}
+    targetPort: 9090
+  selector:
+    {{- include "digger.matchLabels" . | nindent 4 }}

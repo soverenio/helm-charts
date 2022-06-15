@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-kafka
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kafka.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "kafka.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "kafka.matchLabels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: kafka
+        image: soveren/kafka:kraft
+        args:
+        - "--override"
+        - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
+        - "--override"
+        - "log.retention.hours=1"
+        - "--override"
+        - "log.retention.bytes=268435456"
+        - "--override"
+        - "auto.create.topics.enable=false"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9092
+        env:
+        - name: "KAFKA_CREATE_TOPICS"
+          value: "heartbeat:1:1,events:10:1"
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            memory: "1024Mi"
+        lifecycle:
+          preStop:
+            exec:
+              command: [ "sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done" ]

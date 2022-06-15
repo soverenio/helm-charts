@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}-interceptor
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "interceptor.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "interceptor.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "interceptor.matchLabels" . | nindent 8 }}
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      hostPID: true
+      serviceAccountName: {{ .Release.Name }}-interceptor
+      containers:
+      - name: interceptor
+        image: soveren/interceptor:latest
+        env:
+        - name: "SVRN_INTERCEPTOR_LOG_LEVEL"
+          value: "info"
+        - name: "SVRN_INTERCEPTOR_SOURCE_OBSERVINGPERIOD"
+          value: "30s"
+        - name: "SVRN_INTERCEPTOR_SOURCE_MAPPERTTL"
+          value: "10m0s"
+        - name: "SVRN_INTERCEPTOR_SOURCE_ASSEMBLER_TIMEOUT"
+          value: "2m0s"
+        - name: "SVRN_INTERCEPTOR_SOURCE_ASSEMBLER_MAXBUFFEREDPAGESTOTAL"
+          value: "100000"
+        - name: "SVRN_INTERCEPTOR_SOURCE_ASSEMBLER_MAXBUFFEREDPAGESPERCONNECTION"
+          value: "4000"
+        - name: "SVRN_INTERCEPTOR_SOURCE_EXCLUDEDIFACE"
+          value: "nflog,bluetooth-monitor,nfqueue,tunl0,ip6tnl0,lo,docker0,services1,eth0,cni0"
+        - name: "SVRN_INTERCEPTOR_SOURCE_FILTER_URLFILTER"
+          value: "/metrics,/healthz,/api/health,/api/v2/alive,/api/v2/detect"
+        - name: "SVRN_INTERCEPTOR_SOURCE_FILTER_RESPONSECODE"
+          value: "400"
+        - name: "SVRN_INTERCEPTOR_SOURCE_FILTER_REQUESTMETHOD"
+          value: "HEAD"
+        - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_ENABLED"
+          value: "false"
+        - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_KUBERNETESNAMESPACE"
+          value: "test"
+        - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_PIDRESOLVER"
+          value: "hostname"
+        - name: "SVRN_INTERCEPTOR_PRODUCER_BROKERS"
+          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.service.port }}"
+        - name: "SVRN_INTERCEPTOR_PRODUCER_TOPIC"
+          value: "events"
+        - name: "SVRN_INTERCEPTOR_PRODUCER_HEARTBEATTOPIC"
+          value: "heartbeat"
+        resources:
+          limits:
+            memory: 250Mi
+          requests:
+            cpu: 100m
+            memory: 250Mi
+        securityContext:
+          privileged: true
+      terminationGracePeriodSeconds: 30

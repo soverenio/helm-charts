@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-digger
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "digger.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "digger.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "digger.matchLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}-digger
+      initContainers:
+      - name: check-kafka-ready
+        image: bash:5.1.4
+        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-kafka {{ .Values.kafka.service.port }} && break; done' ]
+      - name: check-detection-ready
+        image: bash:5.1.4
+        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-detection-tool {{ .Values.detectionTool.service.port }} && break; done' ]
+      containers:
+      - name: digger
+        image: soveren/digger:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: "http"
+          containerPort: 9000
+        - name: "metrics"
+          containerPort: 9090
+        env:
+        - name: "SVRN_DIGGER_STATSCLIENT_TOKEN"
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-token
+              key: token
+        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_ADDRESS"
+          value: "stats.soveren.io:443"
+        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_TIMEOUT"
+          value: "10s"
+        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_USETLS"
+          value: "true"
+        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_INSECURE"
+          value: "false"
+        - name: "SVRN_DIGGER_STOPTIMEOUT"
+          value: "60s"
+        - name: "SVRN_DIGGER_LOG_FORMATTER"
+          value: "text"
+        - name: "SVRN_DIGGER_DETECTIONTOOL_URI"
+          value: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
+        - name: "SVRN_DIGGER_KAFKA_BROKERS"
+          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.service.port }}"
+        - name: "SVRN_DIGGER_KAFKA_CONSUMER_GROUP"
+          value: "worker_1"
+        - name: "SVRN_DIGGER_KAFKA_CONSUMER_HANDLERNAME"
+          value: "worker_1"
+        - name: "SVRN_DIGGER_KAFKA_CONSUMER_TOPIC"
+          value: "events"
+        - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_GROUP"
+          value: "worker_2"
+        - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_HANDLERNAME"
+          value: "worker_2"
+        - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_TOPIC"
+          value: "heartbeat"
+        - name: "SVRN_DIGGER_KAFKA_RESENDSLEEP"
+          value: "1s"
+        - name: "SVRN_DIGGER_INSTRUMENTATION_SERVER_LISTENADDRESS"
+          value: "0.0.0.0:9000"
+        - name: "SVRN_DIGGER_INSTRUMENTATION_TRACING_AGENTENDPOINT"
+          value: ""
+        - name: "SVRN_DIGGER_INSTRUMENTATION_TRACING_COLLECTORENDPOINT"
+          value: ""
+        - name: "SVRN_DIGGER_INSTRUMENTATION_TRACING_PROBABILITYRATE"
+          value: "0"
+        - name: SVRN_DIGGER_RESOLVER_KUBERNETES_ENABLED
+          value: "true"
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "512Mi"
+          requests:
+            cpu: "50m"
+            memory: "256Mi"
+        readinessProbe:
+          tcpSocket:
+            port: 9000
+          timeoutSeconds: 3
+      restartPolicy: Always

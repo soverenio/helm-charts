@@ -1,0 +1,19 @@
+kafka:
+  service:
+    annotations: {}
+    labels: {}
+    port: 9092
+
+digger:
+  token: ""
+  service:
+    annotations: {}
+    labels: {}
+    port: 9000
+    metricsPort: 9090
+
+detectionTool:
+  service:
+    annotations: {}
+    labels: {}
+    port: 8000

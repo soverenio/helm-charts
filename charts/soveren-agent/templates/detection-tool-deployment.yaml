@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-detection-tool
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "detectionTool.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "detectionTool.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "detectionTool.matchLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: detection-tool
+        image: soveren/detection-tool:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "250m"
+          limits:
+            memory: "2048Mi"
+            cpu: "2000m"
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          timeoutSeconds: 3
+      restartPolicy: Always
