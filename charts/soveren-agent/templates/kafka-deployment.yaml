@@ -22,8 +22,8 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka
-        image: {{ .Values.interceptor.image.name }}:{{ .Values.interceptor.image.tag }}
-        imagePullPolicy: {{ .Values.interceptor.image.pullPolicy }}
+        image: {{ .Values.kafka.image.name }}:{{ .Values.kafka.image.tag }}
+        imagePullPolicy: {{ .Values.kafka.image.pullPolicy }}
         args:
         - "--override"
         - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
