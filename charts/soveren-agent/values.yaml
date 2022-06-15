@@ -1,4 +1,8 @@
 kafka:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
   image:
     name: soveren/kafka
     tag: kraft
@@ -16,6 +20,10 @@ kafka:
     port: 9092
 
 digger:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
   token: ""
   image:
     name: soveren/digger
@@ -36,6 +44,10 @@ digger:
     metricsPort: 9090
 
 detectionTool:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
   image:
     name: soveren/detection-tool
     tag: latest
@@ -54,6 +66,10 @@ detectionTool:
     port: 8000
 
 interceptor:
+  daemonSetAnnotations: {}
+  daemonSetLabels: {}
+  podAnnotations: {}
+  podLabels: {}
   image:
     name: soveren/interceptor
     tag: latest

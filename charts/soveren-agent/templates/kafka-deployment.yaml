@@ -4,8 +4,15 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-kafka
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.kafka.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.kafka.deploymentAnnotations | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "kafka.labels" . | nindent 4 }}
+    {{- if .Values.kafka.deploymentLabels }}
+    {{- toYaml .Values.kafka.deploymentLabels | nindent 4 }}
+    {{- end }}
 spec:
   replicas: 1
   selector:
@@ -13,8 +20,15 @@ spec:
       {{- include "kafka.matchLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if .Values.kafka.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.kafka.podAnnotations | nindent 8 }}
+      {{- end }}
       labels:
-        {{- include "kafka.matchLabels" . | nindent 8 }}
+        {{- include "kafka.labels" . | nindent 8 }}
+        {{- if .Values.kafka.podLabels }}
+        {{- toYaml .Values.kafka.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.kafka.priorityClassName }}
       priorityClassName: {{ .Values.kafka.priorityClassName }}

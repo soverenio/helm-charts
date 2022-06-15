@@ -3,8 +3,15 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-detection-tool
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.detectionTool.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.detectionTool.deploymentAnnotations | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "detectionTool.labels" . | nindent 4 }}
+    {{- if .Values.detectionTool.deploymentLabels }}
+    {{- toYaml .Values.detectionTool.deploymentLabels | nindent 4 }}
+    {{- end }}
 spec:
   replicas: 1
   selector:
@@ -12,8 +19,15 @@ spec:
       {{- include "detectionTool.matchLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if .Values.detectionTool.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.detectionTool.podAnnotations | nindent 8 }}
+      {{- end }}
       labels:
-        {{- include "detectionTool.matchLabels" . | nindent 8 }}
+        {{- include "detectionTool.labels" . | nindent 8 }}
+        {{- if .Values.detectionTool.podLabels }}
+        {{- toYaml .Values.detectionTool.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.detectionTool.priorityClassName }}
       priorityClassName: "{{ .Values.detectionTool.priorityClassName }}"

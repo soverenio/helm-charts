@@ -3,8 +3,15 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-digger
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.digger.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.digger.deploymentAnnotations | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "digger.labels" . | nindent 4 }}
+    {{- if .Values.digger.deploymentLabels }}
+    {{- toYaml .Values.digger.deploymentLabels | nindent 4 }}
+    {{- end }}
 spec:
   replicas: 1
   selector:
@@ -12,8 +19,15 @@ spec:
       {{- include "digger.matchLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if .Values.digger.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.digger.podAnnotations | nindent 8 }}
+      {{- end }}
       labels:
-        {{- include "digger.matchLabels" . | nindent 8 }}
+        {{- include "digger.labels" . | nindent 8 }}
+        {{- if .Values.digger.podLabels }}
+        {{- toYaml .Values.digger.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.digger.priorityClassName }}
       priorityClassName: {{ .Values.digger.priorityClassName }}

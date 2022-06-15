@@ -4,16 +4,30 @@ kind: DaemonSet
 metadata:
   name: {{ .Release.Name }}-interceptor
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.interceptor.daemonSetAnnotations }}
+  annotations:
+    {{- toYaml .Values.interceptor.daemonSetAnnotations | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "interceptor.labels" . | nindent 4 }}
+    {{- if .Values.interceptor.daemonSetLabels }}
+    {{- toYaml .Values.interceptor.daemonSetLabels | nindent 4 }}
+    {{- end }}
 spec:
   selector:
     matchLabels:
       {{- include "interceptor.matchLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if .Values.interceptor.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.interceptor.podAnnotations | nindent 8 }}
+      {{- end }}
       labels:
-        {{- include "interceptor.matchLabels" . | nindent 8 }}
+        {{- include "interceptor.labels" . | nindent 8 }}
+        {{- if .Values.interceptor.podLabels }}
+        {{- toYaml .Values.interceptor.podLabels | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.interceptor.priorityClassName }}
       priorityClassName: {{ .Values.interceptor.priorityClassName }}
