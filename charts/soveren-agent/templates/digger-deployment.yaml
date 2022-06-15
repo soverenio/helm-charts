@@ -45,9 +45,9 @@ spec:
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
         imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
         ports:
-        - name: "http"
+        - name: http
           containerPort: 9000
-        - name: "metrics"
+        - name: metrics
           containerPort: 9090
         env:
         - name: "SVRN_DIGGER_STATSCLIENT_TOKEN"
