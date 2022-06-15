@@ -19,7 +19,8 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka
-        image: soveren/kafka:kraft
+        image: {{ .Values.interceptor.image.name }}:{{ .Values.interceptor.image.tag }}
+        imagePullPolicy: {{ .Values.interceptor.image.pullPolicy }}
         args:
         - "--override"
         - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
@@ -29,7 +30,6 @@ spec:
         - "log.retention.bytes=268435456"
         - "--override"
         - "auto.create.topics.enable=false"
-        imagePullPolicy: Always
         ports:
         - containerPort: 9092
         env:
@@ -40,11 +40,7 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         resources:
-          requests:
-            cpu: "100m"
-            memory: "100Mi"
-          limits:
-            memory: "1024Mi"
+          {{- toYaml .Values.kafka.resources | nindent 10 }}
         lifecycle:
           preStop:
             exec:

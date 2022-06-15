@@ -25,8 +25,8 @@ spec:
         args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-detection-tool {{ .Values.detectionTool.service.port }} && break; done' ]
       containers:
       - name: digger
-        image: soveren/digger:latest
-        imagePullPolicy: IfNotPresent
+        image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
+        imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
         ports:
         - name: "http"
           containerPort: 9000
@@ -79,12 +79,7 @@ spec:
         - name: SVRN_DIGGER_RESOLVER_KUBERNETES_ENABLED
           value: "true"
         resources:
-          limits:
-            cpu: "200m"
-            memory: "512Mi"
-          requests:
-            cpu: "50m"
-            memory: "256Mi"
+          {{- toYaml .Values.digger.resources | nindent 10 }}
         readinessProbe:
           tcpSocket:
             port: 9000

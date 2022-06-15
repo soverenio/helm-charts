@@ -1,4 +1,14 @@
 kafka:
+  image:
+    name: soveren/kafka
+    tag: kraft
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "100Mi"
+    limits:
+      memory: "1024Mi"
   service:
     annotations: {}
     labels: {}
@@ -6,6 +16,17 @@ kafka:
 
 digger:
   token: ""
+  image:
+    name: soveren/digger
+    tag: latest
+    pullPolicy: IfNotPresent
+  resources:
+    limits:
+      cpu: "200m"
+      memory: "512Mi"
+    requests:
+      cpu: "50m"
+      memory: "256Mi"
   service:
     annotations: {}
     labels: {}
@@ -13,7 +34,30 @@ digger:
     metricsPort: 9090
 
 detectionTool:
+  image:
+    name: soveren/detection-tool
+    tag: latest
+    pullPolicy: IfNotPresent
+  resources: 
+    requests:
+      memory: "1024Mi"
+      cpu: "250m"
+    limits:
+      memory: "2048Mi"
+      cpu: "2000m"
   service:
     annotations: {}
     labels: {}
     port: 8000
+
+interceptor:
+  image:
+    name: soveren/interceptor
+    tag: latest
+    pullPolicy: Always
+  resources:
+    limits:
+      memory: 250Mi
+    requests:
+      cpu: 100m
+      memory: 250Mi

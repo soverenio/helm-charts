@@ -21,7 +21,8 @@ spec:
       serviceAccountName: {{ .Release.Name }}-interceptor
       containers:
       - name: interceptor
-        image: soveren/interceptor:latest
+        image: {{ .Values.interceptor.image.name }}:{{ .Values.interceptor.image.tag }}
+        imagePullPolicy: {{ .Values.interceptor.image.pullPolicy }}
         env:
         - name: "SVRN_INTERCEPTOR_LOG_LEVEL"
           value: "info"
@@ -56,11 +57,7 @@ spec:
         - name: "SVRN_INTERCEPTOR_PRODUCER_HEARTBEATTOPIC"
           value: "heartbeat"
         resources:
-          limits:
-            memory: 250Mi
-          requests:
-            cpu: 100m
-            memory: 250Mi
+          {{- toYaml .Values.interceptor.resources | nindent 10 }}
         securityContext:
           privileged: true
       terminationGracePeriodSeconds: 30

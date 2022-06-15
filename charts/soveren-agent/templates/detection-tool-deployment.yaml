@@ -17,17 +17,12 @@ spec:
     spec:
       containers:
       - name: detection-tool
-        image: soveren/detection-tool:latest
-        imagePullPolicy: IfNotPresent
+        image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
+        imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         ports:
         - containerPort: 8000
         resources:
-          requests:
-            memory: "1024Mi"
-            cpu: "250m"
-          limits:
-            memory: "2048Mi"
-            cpu: "2000m"
+          {{- toYaml .Values.detectionTool.resources | nindent 10 }}
         readinessProbe:
           tcpSocket:
             port: 8000
