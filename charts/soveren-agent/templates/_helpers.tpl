@@ -51,3 +51,11 @@ app.kubernetes.io/component: interceptor
 {{ include "interceptor.matchLabels" . }}
 {{ include "common.metaLabels" . }}
 {{- end -}}
+
+{{- define "kafka.brokersStr" -}}
+{{- if .Values.kafka.embedded.enabled -}}
+{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}
+{{- else -}}
+{{ join "," .Values.kafka.external.brokers }}
+{{- end -}}
+{{- end -}}

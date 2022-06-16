@@ -63,11 +63,7 @@ spec:
         - name: "SVRN_DIGGER_DETECTIONTOOL_URI"
           value: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
         - name: "SVRN_DIGGER_KAFKA_BROKERS"
-          {{- if .Values.kafka.embedded.enabled }}
-          value: "{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}"
-          {{- else }}
-          value: "{{ join "," .Values.kafka.external.brokers }}"
-          {{- end }}
+          value: "{{ include "kafka.brokersStr" . }}"
         - name: "SVRN_DIGGER_KAFKA_CONSUMER_GROUP"
           value: "worker_1"
         - name: "SVRN_DIGGER_KAFKA_CONSUMER_HANDLERNAME"
