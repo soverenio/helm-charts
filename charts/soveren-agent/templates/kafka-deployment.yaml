@@ -56,8 +56,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-        {{- if .Values.kafka.env }}
-        {{- toYaml .Values.kafka.env | nindent 8 }}
+        {{- if .Values.kafka.embedded.env }}
+        {{- toYaml .Values.kafka.embedded.env | nindent 8 }}
         {{- end }}
         resources:
           {{- toYaml .Values.kafka.embedded.resources | nindent 10 }}
