@@ -40,39 +40,9 @@ spec:
       - name: interceptor
         image: {{ .Values.interceptor.image.name }}:{{ .Values.interceptor.image.tag }}
         imagePullPolicy: {{ .Values.interceptor.image.pullPolicy }}
-        env:
-        - name: "SVRN_INTERCEPTOR_LOG_LEVEL"
-          value: "info"
-        - name: "SVRN_INTERCEPTOR_SOURCE_OBSERVINGPERIOD"
-          value: "30s"
-        - name: "SVRN_INTERCEPTOR_SOURCE_MAPPERTTL"
-          value: "10m0s"
-        - name: "SVRN_INTERCEPTOR_SOURCE_ASSEMBLER_TIMEOUT"
-          value: "2m0s"
-        - name: "SVRN_INTERCEPTOR_SOURCE_ASSEMBLER_MAXBUFFEREDPAGESTOTAL"
-          value: "100000"
-        - name: "SVRN_INTERCEPTOR_SOURCE_ASSEMBLER_MAXBUFFEREDPAGESPERCONNECTION"
-          value: "4000"
-        - name: "SVRN_INTERCEPTOR_SOURCE_EXCLUDEDIFACE"
-          value: "nflog,bluetooth-monitor,nfqueue,tunl0,ip6tnl0,lo,docker0,services1,eth0,cni0"
-        - name: "SVRN_INTERCEPTOR_SOURCE_FILTER_URLFILTER"
-          value: "/metrics,/healthz,/api/health,/api/v2/alive,/api/v2/detect"
-        - name: "SVRN_INTERCEPTOR_SOURCE_FILTER_RESPONSECODE"
-          value: "400"
-        - name: "SVRN_INTERCEPTOR_SOURCE_FILTER_REQUESTMETHOD"
-          value: "HEAD"
-        - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_ENABLED"
-          value: "false"
-        - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_KUBERNETESNAMESPACE"
-          value: "test"
-        - name: "SVRN_INTERCEPTOR_NAMESPACEEXPLORER_PIDRESOLVER"
-          value: "hostname"
-        - name: "SVRN_INTERCEPTOR_PRODUCER_BROKERS"
-          value: "{{ include "kafka.brokersStr" . }}"
-        - name: "SVRN_INTERCEPTOR_PRODUCER_TOPIC"
-          value: "{{ .Values.kafka.topics.eventsTopicName }}"
-        - name: "SVRN_INTERCEPTOR_PRODUCER_HEARTBEATTOPIC"
-          value: "{{ .Values.kafka.topics.heartbeatTopicName }}"
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-interceptor
         resources:
           {{- toYaml .Values.interceptor.resources | nindent 10 }}
         securityContext:

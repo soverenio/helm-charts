@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-digger
+  namespace: {{ .Release.Namespace }}
+data:
+  SVRN_DIGGER_DETECTIONTOOL_URI: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
+  SVRN_DIGGER_KAFKA_BROKERS: "{{ include "kafka.brokersStr" . }}"
+  SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_TOPIC: "{{ .Values.kafka.topics.heartbeatTopicName }}"
+  SVRN_DIGGER_KAFKA_CONSUMER_TOPIC: "{{ .Values.kafka.topics.eventsTopicName }}"
+  SVRN_DIGGER_RESOLVER_KUBERNETES_ENABLED: "true"
+  SVRN_DIGGER_STATSCLIENT_CLIENT_ADDRESS: "stats.soveren.io:443"
+  SVRN_DIGGER_STATSCLIENT_CLIENT_TIMEOUT: "10s"
+  SVRN_DIGGER_STATSCLIENT_CLIENT_USETLS: "true"

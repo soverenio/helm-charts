@@ -42,52 +42,15 @@ spec:
           containerPort: 9000
         - name: metrics
           containerPort: 9090
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-digger
         env:
-        - name: "SVRN_DIGGER_STATSCLIENT_TOKEN"
+        - name: SVRN_DIGGER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-token
               key: token
-        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_ADDRESS"
-          value: "stats.soveren.io:443"
-        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_TIMEOUT"
-          value: "10s"
-        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_USETLS"
-          value: "true"
-        - name: "SVRN_DIGGER_STATSCLIENT_CLIENT_INSECURE"
-          value: "false"
-        - name: "SVRN_DIGGER_STOPTIMEOUT"
-          value: "60s"
-        - name: "SVRN_DIGGER_LOG_FORMATTER"
-          value: "text"
-        - name: "SVRN_DIGGER_DETECTIONTOOL_URI"
-          value: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
-        - name: "SVRN_DIGGER_KAFKA_BROKERS"
-          value: "{{ include "kafka.brokersStr" . }}"
-        - name: "SVRN_DIGGER_KAFKA_CONSUMER_GROUP"
-          value: "worker_1"
-        - name: "SVRN_DIGGER_KAFKA_CONSUMER_HANDLERNAME"
-          value: "worker_1"
-        - name: "SVRN_DIGGER_KAFKA_CONSUMER_TOPIC"
-          value: "{{ .Values.kafka.topics.eventsTopicName }}"
-        - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_GROUP"
-          value: "worker_2"
-        - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_HANDLERNAME"
-          value: "worker_2"
-        - name: "SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_TOPIC"
-          value: "{{ .Values.kafka.topics.heartbeatTopicName }}"
-        - name: "SVRN_DIGGER_KAFKA_RESENDSLEEP"
-          value: "1s"
-        - name: "SVRN_DIGGER_INSTRUMENTATION_SERVER_LISTENADDRESS"
-          value: "0.0.0.0:9000"
-        - name: "SVRN_DIGGER_INSTRUMENTATION_TRACING_AGENTENDPOINT"
-          value: ""
-        - name: "SVRN_DIGGER_INSTRUMENTATION_TRACING_COLLECTORENDPOINT"
-          value: ""
-        - name: "SVRN_DIGGER_INSTRUMENTATION_TRACING_PROBABILITYRATE"
-          value: "0"
-        - name: SVRN_DIGGER_RESOLVER_KUBERNETES_ENABLED
-          value: "true"
         resources:
           {{- toYaml .Values.digger.resources | nindent 10 }}
         readinessProbe:
