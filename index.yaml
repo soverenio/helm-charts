@@ -3,6 +3,16 @@ entries:
   soveren-agent:
   - apiVersion: v2
     appVersion: "2022-6-1"
+    created: "2022-06-16T16:51:37.278434863Z"
+    description: Data flow monitoring and analytics platform
+    digest: aacf5265eb31bdc959b0538fe099edd751a523926b42e85fe37c07e0c40fd22a
+    home: https://soveren.io
+    name: soveren-agent
+    urls:
+    - https://github.com/soverenio/helm-charts/releases/download/soveren-agent-0.1.9/soveren-agent-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: "2022-6-1"
     created: "2022-06-16T13:58:02.722187618Z"
     description: Data flow monitoring and analytics platform
     digest: 03122275e3c56dbaa7820d1a133494444a9995ca860989b5378fe1b6490df427
@@ -91,4 +101,4 @@ entries:
     urls:
     - https://github.com/soverenio/helm-charts/releases/download/soveren-agent-0.1.0/soveren-agent-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-16T13:58:02.722218717Z"
+generated: "2022-06-16T16:51:37.278488068Z"
