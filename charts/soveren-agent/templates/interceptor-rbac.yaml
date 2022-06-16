@@ -4,12 +4,16 @@ kind: ServiceAccount
 metadata:
   name: {{ .Release.Name }}-interceptor
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "interceptor.labels" . | nindent 4 }}
 
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ .Release.Name }}-pods-reader
+  labels:
+    {{- include "interceptor.labels" . | nindent 4 }}
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -20,6 +24,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ .Release.Name }}-pods-reader
+  labels:
+    {{- include "interceptor.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Release.Name }}-interceptor

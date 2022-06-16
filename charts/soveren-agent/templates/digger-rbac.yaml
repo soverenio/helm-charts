@@ -4,12 +4,16 @@ kind: ServiceAccount
 metadata:
   name: {{ .Release.Name }}-digger
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "digger.labels" . | nindent 4 }}
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: {{ .Release.Name }}-digger-read
+  labels:
+    {{- include "digger.labels" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Release.Name }}-digger

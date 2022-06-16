@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-digger
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "digger.labels" . | nindent 4 }}
 data:
   SVRN_DIGGER_DETECTIONTOOL_URI: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
   SVRN_DIGGER_KAFKA_BROKERS: "{{ include "kafka.brokersStr" . }}"

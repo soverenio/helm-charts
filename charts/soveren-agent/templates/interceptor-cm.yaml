@@ -3,9 +3,12 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-interceptor
   namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "interceptor.labels" . | nindent 4 }}
 data:
   SVRN_INTERCEPTOR_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_INTERCEPTOR_PRODUCER_HEARTBEATTOPIC: "{{ .Values.kafka.topics.heartbeatTopicName }}"
+  SVRN_INTERCEPTOR_PRODUCER_SENDERQUEUEWORKERPOOLCOUNT: "1"
   SVRN_INTERCEPTOR_PRODUCER_TOPIC: "{{ .Values.kafka.topics.eventsTopicName }}"
   SVRN_INTERCEPTOR_SOURCE_EXCLUDEDIFACE: "nflog,bluetooth-monitor,nfqueue,tunl0,ip6tnl0,lo,docker0,services1,eth0,cni0"
   SVRN_INTERCEPTOR_SOURCE_FILTER_REQUESTMETHOD: "HEAD"
