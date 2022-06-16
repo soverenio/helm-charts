@@ -33,17 +33,6 @@ spec:
       priorityClassName: {{ .Values.digger.priorityClassName }}
       {{- end }}
       serviceAccountName: {{ .Release.Name }}-digger
-      initContainers:
-      - name: check-kafka-ready
-        image: bash:5.1.4
-        {{- if .Values.kafka.embedded.enabled }}
-        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-kafka {{ .Values.kafka.embedded.service.port }} && break; done' ]
-        {{- else }}
-        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ first .Values.kafka.external.brokers | replace ":" " " }} && break; done' ]
-        {{- end }}
-      - name: check-detection-ready
-        image: bash:5.1.4
-        args: [ '-c', 'for attempt in {1..60}; do sleep 2; nc -zvw5 {{ .Release.Name }}-detection-tool {{ .Values.detectionTool.service.port }} && break; done' ]
       containers:
       - name: digger
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
