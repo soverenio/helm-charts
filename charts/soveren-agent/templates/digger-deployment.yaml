@@ -51,6 +51,9 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}-token
               key: token
+        {{- if .Values.digger.env }}
+        {{- toYaml .Values.digger.env | nindent 8 }}
+        {{- end }}
         resources:
           {{- toYaml .Values.digger.resources | nindent 10 }}
         readinessProbe:

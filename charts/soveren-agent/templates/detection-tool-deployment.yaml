@@ -38,6 +38,10 @@ spec:
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         ports:
         - containerPort: 8000
+        {{- if .Values.detectionTool.env }}
+        env:
+        {{- toYaml .Values.detectionTool.env | nindent 8 }}
+        {{- end }}
         resources:
           {{- toYaml .Values.detectionTool.resources | nindent 10 }}
         readinessProbe:

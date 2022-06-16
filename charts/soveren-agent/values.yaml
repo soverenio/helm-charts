@@ -12,6 +12,7 @@ kafka:
       name: soveren/kafka
       tag: kraft
       pullPolicy: IfNotPresent
+    env: []
     priorityClassName: ""
     resources:
       requests:
@@ -37,6 +38,7 @@ digger:
     name: soveren/digger
     tag: latest
     pullPolicy: IfNotPresent
+  env: []
   priorityClassName: ""
   resources:
     limits:
@@ -60,6 +62,7 @@ detectionTool:
     name: soveren/detection-tool
     tag: latest
     pullPolicy: IfNotPresent
+  env: []
   priorityClassName: ""
   resources: 
     requests:
@@ -82,6 +85,7 @@ interceptor:
     name: soveren/interceptor
     tag: latest
     pullPolicy: Always
+  env: []
   priorityClassName: ""
   resources:
     limits:
