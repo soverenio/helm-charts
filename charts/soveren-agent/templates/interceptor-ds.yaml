@@ -35,11 +35,13 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true
-      serviceAccountName: {{ .Release.Name }}-interceptor
       containers:
       - name: interceptor
         image: {{ .Values.interceptor.image.name }}:{{ .Values.interceptor.image.tag }}
         imagePullPolicy: {{ .Values.interceptor.image.pullPolicy }}
+        ports:
+        - name: metrics
+          containerPort: 9090
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-interceptor
