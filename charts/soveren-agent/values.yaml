@@ -24,6 +24,9 @@ kafka:
       annotations: {}
       labels: {}
       port: 9092
+    metrics:
+      enabled: false
+      port: 9308
   external:
     # kafka.external.brokers used only if kafka.embedded.enabled=false
     brokers: []

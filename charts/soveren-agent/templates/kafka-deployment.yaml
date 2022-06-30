@@ -65,4 +65,23 @@ spec:
           preStop:
             exec:
               command: [ "sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done" ]
+      {{- if .Values.kafka.embedded.metrics.enabled }}
+      - name: kafka-exporter
+        image: danielqsj/kafka-exporter:v1.4.2
+        args:
+        - --kafka.server=localhost:9092
+        ports:
+        - containerPort: 9308
+        readinessProbe:
+          tcpSocket:
+            port: 9308
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        {{- end }}
 {{- end }}
