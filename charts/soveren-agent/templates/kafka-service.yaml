@@ -16,10 +16,12 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - port: {{ .Values.kafka.embedded.service.port }}
+  - name: kafka
+    port: {{ .Values.kafka.embedded.service.port }}
     targetPort: 9092
   {{- if .Values.kafka.embedded.metrics.enabled }}
-  - port: {{ .Values.kafka.embedded.metrics.port }}
+  - name: metrics
+    port: {{ .Values.kafka.embedded.metrics.port }}
     targetPort: 9308
   {{- end }}
   selector:
