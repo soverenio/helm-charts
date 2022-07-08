@@ -40,7 +40,7 @@ digger:
   image:
     name: soveren/digger
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   env: []
   priorityClassName: ""
   resources:
@@ -54,7 +54,6 @@ digger:
     annotations: {}
     labels: {}
     port: 9000
-    metricsPort: 9090
 
 detectionTool:
   deploymentAnnotations: {}
@@ -64,15 +63,15 @@ detectionTool:
   image:
     name: soveren/detection-tool
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   env: []
   priorityClassName: ""
   resources: 
     requests:
-      memory: "1024Mi"
+      memory: "3072Mi"
       cpu: "250m"
     limits:
-      memory: "2048Mi"
+      memory: "3584Mi"
       cpu: "2000m"
   service:
     annotations: {}

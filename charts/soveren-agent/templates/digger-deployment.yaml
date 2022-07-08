@@ -38,10 +38,7 @@ spec:
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
         imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
         ports:
-        - name: http
-          containerPort: 9000
-        - name: metrics
-          containerPort: 9090
+        - containerPort: 9000
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-digger

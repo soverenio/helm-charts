@@ -15,11 +15,7 @@ metadata:
     {{- end }}
 spec:
   ports:
-  - name: http
-    port: {{ .Values.digger.service.port }}
+  - port: {{ .Values.digger.service.port }}
     targetPort: 9000
-  - name: metrics
-    port: {{ .Values.digger.service.metricsPort }}
-    targetPort: 9090
   selector:
     {{- include "digger.matchLabels" . | nindent 4 }}
