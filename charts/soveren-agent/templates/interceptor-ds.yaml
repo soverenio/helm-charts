@@ -24,7 +24,7 @@ spec:
         {{- toYaml .Values.interceptor.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "interceptor.labels" . | nindent 8 }}
+        {{- include "interceptor.matchLabels" . | nindent 8 }}
         {{- if .Values.interceptor.podLabels }}
         {{- toYaml .Values.interceptor.podLabels | nindent 8 }}
         {{- end }}

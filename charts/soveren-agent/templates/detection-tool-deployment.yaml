@@ -24,7 +24,7 @@ spec:
         {{- toYaml .Values.detectionTool.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "detectionTool.labels" . | nindent 8 }}
+        {{- include "detectionTool.matchLabels" . | nindent 8 }}
         {{- if .Values.detectionTool.podLabels }}
         {{- toYaml .Values.detectionTool.podLabels | nindent 8 }}
         {{- end }}

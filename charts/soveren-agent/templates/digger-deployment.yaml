@@ -24,7 +24,7 @@ spec:
         {{- toYaml .Values.digger.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "digger.labels" . | nindent 8 }}
+        {{- include "digger.matchLabels" . | nindent 8 }}
         {{- if .Values.digger.podLabels }}
         {{- toYaml .Values.digger.podLabels | nindent 8 }}
         {{- end }}
