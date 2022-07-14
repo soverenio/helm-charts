@@ -42,6 +42,8 @@ spec:
         - "--override"
         - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
         - "--override"
+        - "log.roll.hours=1"
+        - "--override"
         - "log.retention.hours=1"
         - "--override"
         - "log.retention.bytes=268435456"
