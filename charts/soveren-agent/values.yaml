@@ -41,7 +41,7 @@ digger:
   image:
     name: soveren/digger
     tag: v0.13.2
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
@@ -64,7 +64,7 @@ detectionTool:
   image:
     name: soveren/detection-tool
     tag: v0.15.10
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources: 
@@ -87,7 +87,7 @@ interceptor:
   image:
     name: soveren/interceptor
     tag: v0.13.2
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
