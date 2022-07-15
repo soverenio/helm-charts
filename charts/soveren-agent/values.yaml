@@ -39,7 +39,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: latest
+    tag: v0.13.2
     pullPolicy: Always
   env: []
   priorityClassName: ""
@@ -62,7 +62,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: latest
+    tag: v0.15.10
     pullPolicy: Always
   env: []
   priorityClassName: ""
@@ -85,7 +85,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: latest
+    tag: v0.13.2
     pullPolicy: Always
   env: []
   priorityClassName: ""
