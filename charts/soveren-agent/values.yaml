@@ -17,8 +17,9 @@ kafka:
     resources:
       requests:
         cpu: "100m"
-        memory: "100Mi"
+        memory: "512Mi"
       limits:
+        cpu: "300m"
         memory: "1024Mi"
     service:
       annotations: {}
@@ -39,17 +40,17 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: latest
-    pullPolicy: Always
+    tag: v0.13.2
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
-    limits:
-      cpu: "200m"
-      memory: "512Mi"
     requests:
-      cpu: "50m"
+      cpu: "100m"
       memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
   service:
     annotations: {}
     labels: {}
@@ -62,8 +63,8 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: latest
-    pullPolicy: Always
+    tag: v0.15.10
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources: 
@@ -85,13 +86,14 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: latest
-    pullPolicy: Always
+    tag: v0.13.2
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
-    limits:
-      memory: 250Mi
     requests:
-      cpu: 100m
-      memory: 250Mi
+      cpu: "100m"
+      memory: "384Mi"
+    limits:
+      cpu: "500m"
+      memory: "768Mi"
