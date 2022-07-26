@@ -19,8 +19,9 @@ spec:
       {{- include "digger.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- if .Values.digger.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/digger-cm.yaml") . | sha256sum }}
+      {{- if .Values.digger.podAnnotations }}
         {{- toYaml .Values.digger.podAnnotations | nindent 8 }}
       {{- end }}
       labels:

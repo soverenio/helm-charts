@@ -19,8 +19,9 @@ spec:
       {{- include "interceptor.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- if .Values.interceptor.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/interceptor-cm.yaml") . | sha256sum }}
+      {{- if .Values.interceptor.podAnnotations }}
         {{- toYaml .Values.interceptor.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
