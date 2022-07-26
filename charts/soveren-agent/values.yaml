@@ -97,3 +97,8 @@ interceptor:
     limits:
       cpu: "500m"
       memory: "768Mi"
+  metricsPort: 9090
+  service:
+    annotations: {}
+    labels: {}
+    port: 9090

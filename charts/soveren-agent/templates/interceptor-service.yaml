@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-interceptor
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.interceptor.service.annotations }}
+  annotations:
+    {{- toYaml .Values.interceptor.service.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "interceptor.labels" . | nindent 4 }}
+    {{- if .Values.interceptor.service.labels }}
+    {{- toYaml .Values.interceptor.service.labels | nindent 4 }}
+    {{- end }}
+spec:
+  clusterIP: None
+  ports:
+  - port: {{ .Values.interceptor.service.port }}
+    targetPort: {{ .Values.interceptor.metricsPort }}
+  selector:
+    {{- include "interceptor.matchLabels" . | nindent 4 }}

@@ -42,7 +42,7 @@ spec:
         imagePullPolicy: {{ .Values.interceptor.image.pullPolicy }}
         ports:
         - name: metrics
-          containerPort: 9090
+          containerPort: {{ .Values.interceptor.metricsPort }}
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-interceptor
