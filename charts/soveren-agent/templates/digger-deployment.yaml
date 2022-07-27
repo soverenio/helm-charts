@@ -39,7 +39,10 @@ spec:
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
         imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
         ports:
-        - containerPort: 9000
+        - name: server
+          containerPort: 9000
+        - name: metricsender
+          containerPort: 9100
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-digger

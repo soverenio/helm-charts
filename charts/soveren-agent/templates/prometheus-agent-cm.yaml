@@ -1,0 +1,33 @@
+{{- if .Values.prometheusAgent.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-prometheus-agent
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "prometheusAgent.labels" . | nindent 4 }}
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    remote_write:
+    - name: digger
+      url: http://{{ .Release.Name }}-digger.{{ .Release.Namespace }}:9100/metrics/send
+    scrape_configs:
+    - job_name: digger
+      static_configs:
+      - targets:
+        - {{ .Release.Name }}-digger:{{ .Values.digger.service.port }}
+    - job_name: interceptor
+      dns_sd_configs:
+      - type: A
+        names:
+        - {{ .Release.Name }}-interceptor
+        port: {{ .Values.interceptor.metricsPort }}
+    {{- if .Values.kafka.embedded.metrics.enabled }}
+    - job_name: kafka
+      static_configs:
+      - targets:
+        - {{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.metrics.port }}
+    {{- end }}
+{{- end }}

@@ -39,8 +39,8 @@ digger:
   podLabels: {}
   token: ""
   image:
-    name: soveren/digger
-    tag: v0.13.3
+    name: soveren/digger@sha256
+    tag: 819175d1505bf68d6f5d9bebaef56100e394c9737e4e7784a95e58ac8b0dd244
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -102,3 +102,23 @@ interceptor:
     annotations: {}
     labels: {}
     port: 9090
+
+prometheusAgent:
+  enabled: true
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
+  image:
+    name: prom/prometheus
+    tag: v2.37.0
+    pullPolicy: IfNotPresent
+  env: []
+  priorityClassName: ""
+  resources: 
+    requests:
+      memory: "128Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"

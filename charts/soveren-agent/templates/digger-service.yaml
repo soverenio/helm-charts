@@ -15,7 +15,13 @@ metadata:
     {{- end }}
 spec:
   ports:
-  - port: {{ .Values.digger.service.port }}
+  - name: server
+    port: {{ .Values.digger.service.port }}
     targetPort: 9000
+  {{- if .Values.prometheusAgent.enabled }}
+  - name: metricsender
+    port: 9100
+    targetPort: 9100
+  {{- end }}
   selector:
     {{- include "digger.matchLabels" . | nindent 4 }}

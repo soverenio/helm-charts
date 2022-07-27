@@ -52,6 +52,16 @@ app.kubernetes.io/component: interceptor
 {{ include "common.metaLabels" . }}
 {{- end -}}
 
+{{- define "prometheusAgent.matchLabels" -}}
+app.kubernetes.io/component: prometheus-agent
+{{ include "common.matchLabels" . }}
+{{- end -}}
+
+{{- define "prometheusAgent.labels" -}}
+{{ include "prometheusAgent.matchLabels" . }}
+{{ include "common.metaLabels" . }}
+{{- end -}}
+
 {{- define "kafka.brokersStr" -}}
 {{- if .Values.kafka.embedded.enabled -}}
 {{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}

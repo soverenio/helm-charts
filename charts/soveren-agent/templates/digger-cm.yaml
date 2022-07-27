@@ -7,6 +7,9 @@ metadata:
     {{- include "digger.labels" . | nindent 4 }}
 data:
   SVRN_DIGGER_DETECTIONTOOL_URI: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
+  {{- if .Values.prometheusAgent.enabled }}
+  SVRN_DIGGER_INSTRUMENTATION_METRICSENDER_ENABLED: "true"
+  {{- end }}
   SVRN_DIGGER_KAFKA_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_TOPIC: "{{ .Values.kafka.topics.heartbeatTopicName }}"
   SVRN_DIGGER_KAFKA_CONSUMER_TOPIC: "{{ .Values.kafka.topics.eventsTopicName }}"
