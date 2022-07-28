@@ -46,11 +46,11 @@ digger:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "100m"
+      cpu: "200m"
       memory: "256Mi"
     limits:
-      cpu: "500m"
-      memory: "512Mi"
+      cpu: "2000m"
+      memory: "768Mi"
   service:
     annotations: {}
     labels: {}
@@ -67,7 +67,7 @@ detectionTool:
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
-  resources: 
+  resources:
     requests:
       memory: "3072Mi"
       cpu: "250m"
@@ -92,11 +92,11 @@ interceptor:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "100m"
+      cpu: "200m"
       memory: "384Mi"
     limits:
-      cpu: "500m"
-      memory: "768Mi"
+      cpu: "1500m"
+      memory: "2048Mi"
   metricsPort: 9090
   service:
     annotations: {}
