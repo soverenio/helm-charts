@@ -39,18 +39,18 @@ digger:
   podLabels: {}
   token: ""
   image:
-    name: soveren/digger@sha256
-    tag: 819175d1505bf68d6f5d9bebaef56100e394c9737e4e7784a95e58ac8b0dd244
+    name: soveren/digger
+    tag: v0.13.4
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
     requests:
-      cpu: "100m"
+      cpu: "200m"
       memory: "256Mi"
     limits:
-      cpu: "500m"
-      memory: "512Mi"
+      cpu: "2000m"
+      memory: "768Mi"
   service:
     annotations: {}
     labels: {}
@@ -63,11 +63,11 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v0.15.10
+    tag: v0.15.12
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
-  resources: 
+  resources:
     requests:
       memory: "3072Mi"
       cpu: "250m"
@@ -86,17 +86,17 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.13.3
+    tag: v0.13.4
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
     requests:
-      cpu: "100m"
+      cpu: "200m"
       memory: "384Mi"
     limits:
-      cpu: "500m"
-      memory: "768Mi"
+      cpu: "1500m"
+      memory: "2048Mi"
   metricsPort: 9090
   service:
     annotations: {}
@@ -117,8 +117,8 @@ prometheusAgent:
   priorityClassName: ""
   resources: 
     requests:
-      memory: "128Mi"
-      cpu: "250m"
+      memory: "64Mi"
+      cpu: "50m"
     limits:
-      memory: "512Mi"
-      cpu: "500m"
+      memory: "256Mi"
+      cpu: "200m"
