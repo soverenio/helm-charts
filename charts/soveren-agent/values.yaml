@@ -21,6 +21,8 @@ kafka:
       limits:
         cpu: "300m"
         memory: "1024Mi"
+    affinity: {}
+    tolerations: []
     service:
       annotations: {}
       labels: {}
@@ -51,6 +53,8 @@ digger:
     limits:
       cpu: "2000m"
       memory: "768Mi"
+  affinity: {}
+  tolerations: []
   service:
     annotations: {}
     labels: {}
@@ -74,6 +78,8 @@ detectionTool:
     limits:
       memory: "3584Mi"
       cpu: "2000m"
+  affinity: {}
+  tolerations: []
   service:
     annotations: {}
     labels: {}
@@ -97,6 +103,8 @@ interceptor:
     limits:
       cpu: "1500m"
       memory: "2048Mi"
+  affinity: {}
+  tolerations: []
   metricsPort: 9090
   service:
     annotations: {}
@@ -122,3 +130,5 @@ prometheusAgent:
     limits:
       memory: "256Mi"
       cpu: "200m"
+  affinity: {}
+  tolerations: []

@@ -34,6 +34,14 @@ spec:
       {{- if .Values.prometheusAgent.priorityClassName }}
       priorityClassName: {{ .Values.prometheusAgent.priorityClassName }}
       {{- end }}
+      {{- if .Values.prometheusAgent.affinity }}
+      affinity:
+      {{- toYaml .Values.prometheusAgent.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.prometheusAgent.tolerations }}
+      tolerations:
+      {{- toYaml .Values.prometheusAgent.tolerations | nindent 8 }}
+      {{- end }}
       containers:
       - name: prometheus
         image: {{ .Values.prometheusAgent.image.name }}:{{ .Values.prometheusAgent.image.tag }}

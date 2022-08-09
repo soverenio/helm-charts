@@ -33,6 +33,14 @@ spec:
       {{- if .Values.digger.priorityClassName }}
       priorityClassName: {{ .Values.digger.priorityClassName }}
       {{- end }}
+      {{- if .Values.digger.affinity }}
+      affinity:
+      {{- toYaml .Values.digger.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.digger.tolerations }}
+      tolerations:
+      {{- toYaml .Values.digger.tolerations | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ .Release.Name }}-digger
       containers:
       - name: digger

@@ -33,6 +33,14 @@ spec:
       {{- if .Values.kafka.embedded.priorityClassName }}
       priorityClassName: {{ .Values.kafka.embedded.priorityClassName }}
       {{- end }}
+      {{- if .Values.kafka.embedded.affinity }}
+      affinity:
+      {{- toYaml .Values.kafka.embedded.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.kafka.embedded.tolerations }}
+      tolerations:
+      {{- toYaml .Values.kafka.embedded.tolerations | nindent 8 }}
+      {{- end }}
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka

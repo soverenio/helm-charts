@@ -32,6 +32,14 @@ spec:
       {{- if .Values.detectionTool.priorityClassName }}
       priorityClassName: {{ .Values.detectionTool.priorityClassName }}
       {{- end }}
+      {{- if .Values.detectionTool.affinity }}
+      affinity:
+      {{- toYaml .Values.detectionTool.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.detectionTool.tolerations }}
+      tolerations:
+      {{- toYaml .Values.detectionTool.tolerations | nindent 8 }}
+      {{- end }}
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}

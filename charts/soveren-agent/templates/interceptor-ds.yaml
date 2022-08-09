@@ -33,6 +33,14 @@ spec:
       {{- if .Values.interceptor.priorityClassName }}
       priorityClassName: {{ .Values.interceptor.priorityClassName }}
       {{- end }}
+      {{- if .Values.interceptor.affinity }}
+      affinity:
+      {{- toYaml .Values.interceptor.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.interceptor.tolerations }}
+      tolerations:
+      {{- toYaml .Values.interceptor.tolerations | nindent 8 }}
+      {{- end }}
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true
