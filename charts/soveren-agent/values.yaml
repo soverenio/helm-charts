@@ -76,7 +76,7 @@ detectionTool:
       memory: "3072Mi"
       cpu: "250m"
     limits:
-      memory: "3584Mi"
+      memory: "4584Mi" # FIXME: temporary memory limit increase. This must be AT MOST 3584Mi
       cpu: "2000m"
   affinity: {}
   tolerations: []
