@@ -42,7 +42,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.13.4
+    tag: v0.13.5
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -67,7 +67,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v0.15.12
+    tag: v0.16.2
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -76,7 +76,7 @@ detectionTool:
       memory: "3072Mi"
       cpu: "250m"
     limits:
-      memory: "3584Mi"
+      memory: "4584Mi" # FIXME: temporary memory limit increase. This must be AT MOST 3584Mi
       cpu: "2000m"
   affinity: {}
   tolerations: []
@@ -92,7 +92,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.13.4
+    tag: v0.13.5
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
