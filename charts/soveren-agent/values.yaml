@@ -67,7 +67,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v0.16.2
+    tag: v0.16.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -76,7 +76,7 @@ detectionTool:
       memory: "3072Mi"
       cpu: "250m"
     limits:
-      memory: "4584Mi" # FIXME: temporary memory limit increase. This must be AT MOST 3584Mi
+      memory: "3584Mi"
       cpu: "2000m"
   affinity: {}
   tolerations: []
