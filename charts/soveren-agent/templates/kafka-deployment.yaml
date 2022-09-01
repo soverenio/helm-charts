@@ -50,15 +50,19 @@ spec:
         - "--override"
         - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
         - "--override"
-        - "log.roll.ms=900000"
+        - "auto.create.topics.enable=false"
+        - "--override"
+        - "log.retention.bytes=83886080"
+        - "--override"
+        - "log.retention.check.interval.ms=10000"
         - "--override"
         - "log.retention.hours=1"
         - "--override"
-        - "log.segment.bytes=67108864"
+        - "log.roll.ms=900000"
         - "--override"
-        - "log.retention.bytes=268435456"
+        - "log.segment.bytes=8388608"
         - "--override"
-        - "auto.create.topics.enable=false"
+        - "log.segment.delete.delay.ms=0"
         ports:
         - containerPort: 9092
         env:
