@@ -86,8 +86,7 @@ spec:
       {{- if .Values.kafka.embedded.metrics.enabled }}
       - name: kafka-exporter
         image: danielqsj/kafka-exporter:v1.6.0
-        args:
-        - --kafka.server=localhost:9092
+        command: [ 'sh', '-c', 'while sleep 5; do nc -vzw1 localhost 9092 && exec /bin/kafka_exporter --kafka.server=localhost:9092; done' ]
         ports:
         - containerPort: 9308
         readinessProbe:
