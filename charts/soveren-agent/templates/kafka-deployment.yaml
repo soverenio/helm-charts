@@ -50,15 +50,15 @@ spec:
         - "--override"
         - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
         - "--override"
-        - "log.roll.ms=900000"
-        - "--override"
-        - "log.retention.hours=1"
-        - "--override"
-        - "log.segment.bytes=67108864"
+        - "auto.create.topics.enable=false"
         - "--override"
         - "log.retention.bytes=268435456"
         - "--override"
-        - "auto.create.topics.enable=false"
+        - "log.retention.hours=1"
+        - "--override"
+        - "log.roll.ms=900000"
+        - "--override"
+        - "log.segment.bytes=67108864"
         ports:
         - containerPort: 9092
         env:
@@ -82,8 +82,7 @@ spec:
       {{- if .Values.kafka.embedded.metrics.enabled }}
       - name: kafka-exporter
         image: danielqsj/kafka-exporter:v1.6.0
-        args:
-        - --kafka.server=localhost:9092
+        command: [ 'sh', '-c', 'while sleep 5; do nc -vzw1 localhost 9092 && exec /bin/kafka_exporter --kafka.server=localhost:9092; done' ]
         ports:
         - containerPort: 9308
         readinessProbe:

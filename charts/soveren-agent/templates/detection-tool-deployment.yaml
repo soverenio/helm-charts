@@ -21,6 +21,7 @@ spec:
     metadata:
       {{- if .Values.detectionTool.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/detection-tool-cm.yaml") . | sha256sum }}
         {{- toYaml .Values.detectionTool.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
@@ -46,6 +47,9 @@ spec:
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         ports:
         - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-detection-tool
         {{- if .Values.detectionTool.env }}
         env:
         {{- toYaml .Values.detectionTool.env | nindent 8 }}

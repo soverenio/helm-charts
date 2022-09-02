@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-detection-tool
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "detectionTool.labels" . | nindent 4 }}
+data:
+  SVRN_DETECTION_TOOL_LANG: {{ default "none" .Values.detectionTool.lang }}
+

@@ -17,10 +17,10 @@ kafka:
     resources:
       requests:
         cpu: "100m"
-        memory: "1024Mi"
+        memory: "1280Mi"
       limits:
         cpu: "300m"
-        memory: "1024Mi"
+        memory: "1280Mi"
     affinity: {}
     tolerations: []
     service:
@@ -67,7 +67,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v0.16.3
+    tag: v0.16.10
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
