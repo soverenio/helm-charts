@@ -48,8 +48,8 @@ spec:
         ports:
         - containerPort: 8000
         envFrom:
-          - configMapRef:
-              name: {{ .Release.Name }}-detection-tool
+        - configMapRef:
+            name: {{ .Release.Name }}-detection-tool
         {{- if .Values.detectionTool.env }}
         env:
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
