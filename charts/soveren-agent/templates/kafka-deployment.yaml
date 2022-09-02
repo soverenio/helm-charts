@@ -52,17 +52,13 @@ spec:
         - "--override"
         - "auto.create.topics.enable=false"
         - "--override"
-        - "log.retention.bytes=83886080"
-        - "--override"
-        - "log.retention.check.interval.ms=10000"
+        - "log.retention.bytes=268435456"
         - "--override"
         - "log.retention.hours=1"
         - "--override"
         - "log.roll.ms=900000"
         - "--override"
-        - "log.segment.bytes=8388608"
-        - "--override"
-        - "log.segment.delete.delay.ms=0"
+        - "log.segment.bytes=67108864"
         ports:
         - containerPort: 9092
         env:
