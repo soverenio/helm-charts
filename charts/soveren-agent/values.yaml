@@ -125,10 +125,10 @@ prometheusAgent:
   priorityClassName: ""
   resources: 
     requests:
-      memory: "64Mi"
-      cpu: "50m"
+      memory: "192Mi"
+      cpu: "75m"
     limits:
-      memory: "64Mi"
-      cpu: "50m"
+      memory: "192Mi"
+      cpu: "75m"
   affinity: {}
   tolerations: []
