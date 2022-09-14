@@ -33,6 +33,10 @@ spec:
       {{- if .Values.interceptor.priorityClassName }}
       priorityClassName: {{ .Values.interceptor.priorityClassName }}
       {{- end }}
+      {{- if .Values.interceptor.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.interceptor.nodeSelector | nindent 8 }}
+      {{- end }}
       {{- if .Values.interceptor.affinity }}
       affinity:
       {{- toYaml .Values.interceptor.affinity | nindent 8 }}

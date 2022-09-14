@@ -33,6 +33,10 @@ spec:
       {{- if .Values.digger.priorityClassName }}
       priorityClassName: {{ .Values.digger.priorityClassName }}
       {{- end }}
+      {{- if .Values.digger.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.digger.nodeSelector | nindent 8 }}
+      {{- end }}
       {{- if .Values.digger.affinity }}
       affinity:
       {{- toYaml .Values.digger.affinity | nindent 8 }}

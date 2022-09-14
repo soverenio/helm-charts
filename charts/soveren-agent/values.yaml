@@ -21,6 +21,7 @@ kafka:
       limits:
         cpu: "200m"
         memory: "1280Mi"
+    nodeSelector: {}
     affinity: {}
     tolerations: []
     service:
@@ -53,6 +54,7 @@ digger:
     limits:
       cpu: "1500m"
       memory: "768Mi"
+  nodeSelector: {}
   affinity: {}
   tolerations: []
   service:
@@ -78,6 +80,7 @@ detectionTool:
     limits:
       memory: "3584Mi"
       cpu: "1100m"
+  nodeSelector: {}
   affinity: {}
   tolerations: []
   service:
@@ -103,6 +106,7 @@ interceptor:
     limits:
       cpu: "1500m"
       memory: "2048Mi"
+  nodeSelector: {}
   affinity: {}
   tolerations: []
   metricsPort: 9090
@@ -130,5 +134,6 @@ prometheusAgent:
     limits:
       memory: "192Mi"
       cpu: "75m"
+  nodeSelector: {}
   affinity: {}
   tolerations: []
