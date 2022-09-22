@@ -54,8 +54,13 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
-        {{- if .Values.detectionTool.env }}
         env:
+        - name: SVRN_DETECTION_TOOL_STATS_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-token
+              key: token 
+        {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
         {{- end }}
         resources:
