@@ -10,7 +10,7 @@ kafka:
     podLabels: {}
     image:
       name: soveren/kafka
-      tag: kraft
+      tag: 11_2.13-3.2.1
       pullPolicy: IfNotPresent
     env: []
     priorityClassName: ""
@@ -43,7 +43,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.13.5
+    tag: v0.13.6
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -69,14 +69,14 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v0.16.10
+    tag: v0.17.11
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
     requests:
-      memory: "3072Mi"
-      cpu: "1000m"
+      memory: "2048Mi"
+      cpu: "500m"
     limits:
       memory: "3584Mi"
       cpu: "1100m"
@@ -95,13 +95,13 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.13.5
+    tag: v0.13.6
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
     requests:
-      cpu: "1250m"
+      cpu: "1000m"
       memory: "1536Mi"
     limits:
       cpu: "1500m"
