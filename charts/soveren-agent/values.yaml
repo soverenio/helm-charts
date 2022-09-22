@@ -12,7 +12,9 @@ kafka:
       name: soveren/kafka
       tag: 11_2.13-3.2.1
       pullPolicy: IfNotPresent
-    env: []
+    env:
+    - name: KAFKA_HEAP_OPTS
+      value: -Xmx512m -Xms512m
     priorityClassName: ""
     resources:
       requests:
