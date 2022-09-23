@@ -10,9 +10,11 @@ kafka:
     podLabels: {}
     image:
       name: soveren/kafka
-      tag: kraft
+      tag: 11_2.13-3.2.1
       pullPolicy: IfNotPresent
-    env: []
+    env:
+    - name: KAFKA_HEAP_OPTS
+      value: -Xmx512m -Xms512m
     priorityClassName: ""
     resources:
       requests:
@@ -43,7 +45,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.13.5
+    tag: v0.13.6
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -69,7 +71,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v0.16.10
+    tag: v0.17.11
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -95,7 +97,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.13.5
+    tag: v0.13.6
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
