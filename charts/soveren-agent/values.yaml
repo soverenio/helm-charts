@@ -2,6 +2,7 @@ kafka:
   topics:
     eventsTopicName: events
     heartbeatTopicName: heartbeat
+    iplistTopicName: iplist
   embedded:
     enabled: true
     deploymentAnnotations: {}
