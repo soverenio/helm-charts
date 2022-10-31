@@ -37,6 +37,10 @@ kafka:
   external:
     # kafka.external.brokers used only if kafka.embedded.enabled=false
     brokers: []
+  kubernetesfilterlist:
+    # filter by kubernetes namespace definitions. Empty list allows everything. You can set it via env like this:
+    # "{\"namespace\":\"namespace1\"} {\"namespace\":\"namespace2\"}"
+    definitions: ""
 
 digger:
   deploymentAnnotations: {}

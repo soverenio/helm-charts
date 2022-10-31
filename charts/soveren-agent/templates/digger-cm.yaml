@@ -21,6 +21,4 @@ data:
   SVRN_DIGGER_SAMPLER_ACTIVECLUSTERING_ENABLED: "true"
   SVRN_DIGGER_IPLISTPRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_DIGGER_IPLISTPRODUCER_TOPIC: "{{ .Values.kafka.topics.iplistTopicName }}"
-  SVRN_DIGGER_KUBERNETESFILTERLIST_ENABLED: "false"
-#  Settings to filter by kubernetes definitions. Empty list allows everything. You can set it via env like this: SVRN_DIGGER_KUBERNETESFILTERLIST_DEFINITIONS="{\"namespace\":\"namespace1\"} {\"namespace\":\"namespace2\"}"
-  SVRN_DIGGER_KUBERNETESFILTERLIST_DEFINITIONS=""
+  SVRN_DIGGER_KUBERNETESFILTERLIST_DEFINITIONS: "{{ .Values.kubernetesfilterlist.definitions }}"
