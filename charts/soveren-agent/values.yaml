@@ -71,7 +71,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v1.1.0
+    tag: v1.1.5
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
