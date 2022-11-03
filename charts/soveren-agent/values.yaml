@@ -45,7 +45,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.14.2
+    tag: v0.14.2-openssl
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
