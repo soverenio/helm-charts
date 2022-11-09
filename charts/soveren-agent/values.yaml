@@ -64,6 +64,9 @@ digger:
     annotations: {}
     labels: {}
     port: 9000
+  cfg:
+    log:
+      level: error
   kubernetesfilterlist:
     # filter by kubernetes namespace definitions. Empty list allows everything. You can set it via env like this:
     # "{\"namespace\":\"namespace1\"} {\"namespace\":\"namespace2\"}"
@@ -76,7 +79,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v1.1.5
+    tag: v1.1.7
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -94,6 +97,9 @@ detectionTool:
     annotations: {}
     labels: {}
     port: 8000
+  cfg:
+    logging:
+      level: error
 
 interceptor:
   daemonSetAnnotations: {}
@@ -121,6 +127,9 @@ interceptor:
     annotations: {}
     labels: {}
     port: 9090
+  cfg:
+    log:
+      level: error
 
 prometheusAgent:
   enabled: true
