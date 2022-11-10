@@ -20,10 +20,10 @@ kafka:
     resources:
       requests:
         cpu: "150m"
-        memory: "1280Mi"
+        memory: "768Mi"
       limits:
         cpu: "200m"
-        memory: "1280Mi"
+        memory: "1024Mi"
     nodeSelector: {}
     affinity: {}
     tolerations: []
@@ -86,11 +86,11 @@ detectionTool:
   priorityClassName: ""
   resources:
     requests:
-      memory: "3072Mi"
       cpu: "1000m"
+      memory: "1792Mi"
     limits:
-      memory: "3584Mi"
       cpu: "1100m"
+      memory: "2304Mi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -115,10 +115,10 @@ interceptor:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "1250m"
+      cpu: "500m"
       memory: "1536Mi"
     limits:
-      cpu: "1500m"
+      cpu: "1000m"
       memory: "2048Mi"
   nodeSelector: {}
   affinity: {}
@@ -149,7 +149,7 @@ prometheusAgent:
       memory: "192Mi"
       cpu: "75m"
     limits:
-      memory: "192Mi"
+      memory: "400Mi"
       cpu: "75m"
   nodeSelector: {}
   affinity: {}
