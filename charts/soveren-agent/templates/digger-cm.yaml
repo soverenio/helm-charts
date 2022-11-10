@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "digger.labels" . | nindent 4 }}
 data:
+  SVRN_DIGGER_LOG_LEVEL: "{{ .Values.digger.cfg.log.level }}"
   SVRN_DIGGER_DETECTIONTOOL_URI: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
   {{- if .Values.prometheusAgent.enabled }}
   SVRN_DIGGER_INSTRUMENTATION_METRICSENDER_ENABLED: "true"
@@ -19,3 +20,6 @@ data:
   SVRN_DIGGER_STATSCLIENT_CLIENT_USETLS: "true"
   SVRN_DIGGER_SAMPLER_ENABLED: "true"
   SVRN_DIGGER_SAMPLER_ACTIVECLUSTERING_ENABLED: "true"
+  SVRN_DIGGER_IPLISTPRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
+  SVRN_DIGGER_IPLISTPRODUCER_TOPIC: "{{ .Values.kafka.topics.iplistTopicName }}"
+  SVRN_DIGGER_KUBERNETESFILTERLIST_DEFINITIONS: {{ toJson .Values.digger.cfg.kubernetesfilterlist.definitions | squote }}

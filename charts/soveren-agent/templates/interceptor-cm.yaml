@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "interceptor.labels" . | nindent 4 }}
 data:
+  SVRN_INTERCEPTOR_LOG_LEVEL: "{{ .Values.interceptor.cfg.log.level }}"
   SVRN_INTERCEPTOR_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_INTERCEPTOR_PRODUCER_HEARTBEATTOPIC: "{{ .Values.kafka.topics.heartbeatTopicName }}"
   SVRN_INTERCEPTOR_PRODUCER_TOPIC: "{{ .Values.kafka.topics.eventsTopicName }}"
@@ -19,4 +20,5 @@ data:
   SVRN_INTERCEPTOR_PRODUCER_SENDERQUEUEWORKERPOOLCOUNT: "5"
   SVRN_INTERCEPTOR_RPCAPD_ENABLE: "true"
   SVRN_INTERCEPTOR_RPCAPD_PATH: "/opt/pcap/sbin/rpcapd"
-  
+  SVRN_INTERCEPTOR_IPLISTCONSUMER_BROKERS: "{{ include "kafka.brokersStr" . }}"
+  SVRN_INTERCEPTOR_IPLISTCONSUMER_TOPIC: "{{ .Values.kafka.topics.iplistTopicName }}"

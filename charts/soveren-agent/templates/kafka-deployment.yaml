@@ -67,7 +67,7 @@ spec:
         - containerPort: 9092
         env:
         - name: "KAFKA_CREATE_TOPICS"
-          value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1"
+          value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1,{{ .Values.kafka.topics.iplistTopicName }}:1:1::20000000"
         - name: MY_POD_IP
           valueFrom:
             fieldRef:
