@@ -2,9 +2,11 @@ name: Release Charts
 
 on:
   push:
-    tags:
-    - '[0-9]+.[0-9]+.[0-9]+'
-    - '[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
+    branches:
+    - master
+    # tags:
+    # - '[0-9]+.[0-9]+.[0-9]+'
+    # - '[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
 
 jobs:
   release:
@@ -15,19 +17,19 @@ jobs:
       with:
         fetch-depth: 0
     
-    - name: Check that the git tag matches the chart version
-      run: |
-        CHART_VERSION=$(yq .version charts/soveren-agent/Chart.yaml)
-        if [[ "${GITHUB_REF_NAME}" == "${CHART_VERSION}" ]]; then
-          echo "Git tag: ${GITHUB_REF_NAME}"
-          echo "Chart version: ${CHART_VERSION}"
-          echo "OK: Git tag matches chart version"
-        else
-          echo "Git tag: ${GITHUB_REF_NAME}"
-          echo "Chart version: ${CHART_VERSION}"
-          echo "ERROR: Git tag and chart version are different"
-          exit 1
-        fi
+    # - name: Check that the git tag matches the chart version
+    #   run: |
+    #     CHART_VERSION=$(yq .version charts/soveren-agent/Chart.yaml)
+    #     if [[ "${GITHUB_REF_NAME}" == "${CHART_VERSION}" ]]; then
+    #       echo "Git tag: ${GITHUB_REF_NAME}"
+    #       echo "Chart version: ${CHART_VERSION}"
+    #       echo "OK: Git tag matches chart version"
+    #     else
+    #       echo "Git tag: ${GITHUB_REF_NAME}"
+    #       echo "Chart version: ${CHART_VERSION}"
+    #       echo "ERROR: Git tag and chart version are different"
+    #       exit 1
+    #     fi
 
     - name: Configure Git
       run: |
