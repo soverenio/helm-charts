@@ -86,11 +86,11 @@ detectionTool:
   priorityClassName: ""
   resources:
     requests:
-      memory: "3072Mi"
       cpu: "1000m"
+      memory: "1792Mi"
     limits:
-      memory: "3584Mi"
       cpu: "1100m"
+      memory: "2304Mi"
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -115,10 +115,10 @@ interceptor:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "1250m"
+      cpu: "500m"
       memory: "1536Mi"
     limits:
-      cpu: "1500m"
+      cpu: "1000m"
       memory: "2048Mi"
   nodeSelector: {}
   affinity: {}
