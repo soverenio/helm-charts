@@ -19,8 +19,8 @@ kafka:
     priorityClassName: ""
     resources:
       requests:
-        cpu: "150m"
-        memory: "768Mi"
+        cpu: "100m"
+        memory: "650Mi"
       limits:
         cpu: "200m"
         memory: "1024Mi"
@@ -52,8 +52,8 @@ digger:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "1250m"
-      memory: "512Mi"
+      cpu: "100m"
+      memory: "100Mi"
     limits:
       cpu: "1500m"
       memory: "768Mi"
@@ -86,8 +86,8 @@ detectionTool:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "1000m"
-      memory: "1792Mi"
+      cpu: "100m"
+      memory: "1680Mi"
     limits:
       cpu: "1100m"
       memory: "2304Mi"
@@ -115,8 +115,8 @@ interceptor:
   priorityClassName: ""
   resources:
     requests:
-      cpu: "500m"
-      memory: "1536Mi"
+      cpu: "100m"
+      memory: "128Mi"
     limits:
       cpu: "1000m"
       memory: "2048Mi"
