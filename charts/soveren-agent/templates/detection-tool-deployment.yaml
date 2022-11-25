@@ -19,9 +19,9 @@ spec:
       {{- include "detectionTool.matchLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- if .Values.detectionTool.podAnnotations }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/detection-tool-cm.yaml") . | sha256sum }}
+      {{- if .Values.detectionTool.podAnnotations }}
         {{- toYaml .Values.detectionTool.podAnnotations | nindent 8 }}
       {{- end }}
       labels:
