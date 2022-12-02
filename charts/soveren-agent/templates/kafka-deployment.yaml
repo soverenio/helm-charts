@@ -65,6 +65,11 @@ spec:
         - "log.segment.bytes=67108864"
         ports:
         - containerPort: 9092
+        startupProbe:
+          exec:
+            command: [ "test", "-f", "/tmp/topics.created"]
+          periodSeconds: 10
+          failureThreshold: 30
         env:
         - name: "KAFKA_CREATE_TOPICS"
           value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1,{{ .Values.kafka.topics.iplistTopicName }}:1:1::20000000"
