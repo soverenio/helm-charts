@@ -73,8 +73,12 @@ digger:
     kubernetesfilterlist:
       # filter by kubernetes namespace definitions. Empty list allows everything. You can set it like this:
       # - namespace: default
+      #   action: allow
       # - namespace: kube-system
-      definitions: []
+      #   action: deny
+      definitions:
+        - namespace: "*"
+          action: allow
 
 detectionTool:
   deploymentAnnotations: {}
