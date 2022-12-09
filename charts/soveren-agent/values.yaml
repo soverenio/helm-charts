@@ -3,6 +3,8 @@ kafka:
     eventsTopicName: events
     heartbeatTopicName: heartbeat
     iplistTopicName: iplist
+    controlRequestTopicName: control_request
+    controlResponseTopicName: control_response
   embedded:
     enabled: true
     deploymentAnnotations: {}
