@@ -53,6 +53,8 @@ spec:
         args:
         - --config.file=/etc/prometheus/prometheus.yml
         - --enable-feature=agent
+        - --log.format=json
+        - --log.level={{ .Values.prometheusAgent.cfg.log.level }}
         {{- if .Values.prometheusAgent.env }}
         env:
         {{- toYaml .Values.prometheusAgent.env | nindent 8 }}

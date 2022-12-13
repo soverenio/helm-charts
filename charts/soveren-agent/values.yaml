@@ -164,3 +164,6 @@ prometheusAgent:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  cfg:
+    log:
+      level: error
