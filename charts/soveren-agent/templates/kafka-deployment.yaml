@@ -63,6 +63,10 @@ spec:
         - "log.roll.ms=900000"
         - "--override"
         - "log.segment.bytes=67108864"
+        - "--override"
+        - "log.retention.check.interval.ms=30000"
+        - "--override"
+        - "log.segment.delete.delay.ms=10000"
         ports:
         - containerPort: 9092
         startupProbe:
