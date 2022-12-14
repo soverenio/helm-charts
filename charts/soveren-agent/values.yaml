@@ -140,6 +140,8 @@ interceptor:
   cfg:
     log:
       level: error
+    memory:
+      limit: 1073741824
 
 prometheusAgent:
   enabled: true

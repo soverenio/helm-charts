@@ -22,3 +22,4 @@ data:
   SVRN_INTERCEPTOR_RPCAPD_PATH: "/opt/pcap/sbin/rpcapd"
   SVRN_INTERCEPTOR_IPLISTCONSUMER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_INTERCEPTOR_IPLISTCONSUMER_TOPIC: "{{ .Values.kafka.topics.iplistTopicName }}"
+  SVRN_INTERCEPTOR_MEMORY_LIMIT: "{{ .Values.interceptor.cfg.memory.limit | int }}"
