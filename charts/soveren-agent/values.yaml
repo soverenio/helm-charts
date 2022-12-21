@@ -109,7 +109,7 @@ detectionTool:
     labels: {}
     port: 8000
   cfg:
-    logging:
+    log:
       level: error
 
 interceptor:

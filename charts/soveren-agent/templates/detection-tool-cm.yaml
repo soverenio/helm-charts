@@ -7,6 +7,6 @@ metadata:
     {{- include "detectionTool.labels" . | nindent 4 }}
 data:
   SVRN_DETECTION_TOOL_LANG: {{ default "none" .Values.detectionTool.lang }}
-  SVRN_DETECTION_TOOL_LOG_LEVEL: "{{ .Values.detectionTool.cfg.logging.level }}"
+  SVRN_DETECTION_TOOL_LOG_LEVEL: "{{ .Values.detectionTool.cfg.log.level }}"
   SVRN_DETECTION_TOOL_STATS_GRPC_URL: "stats.soveren.io:443"
   SVRN_DETECTION_TOOL_UPDATE_CHECK_FREQ_SEC: "3600"
