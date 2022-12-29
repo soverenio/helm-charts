@@ -81,6 +81,8 @@ digger:
       definitions:
         - namespace: "*"
           action: allow
+    resolver:
+      excludeLabels: []
 
 detectionTool:
   deploymentAnnotations: {}
