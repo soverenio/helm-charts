@@ -78,4 +78,6 @@ spec:
           value: "{{ .Values.rpcapd.cfg.port }}"
         resources:
           {{- toYaml .Values.rpcapd.resources | nindent 10 }}
+        securityContext:
+          privileged: true
       terminationGracePeriodSeconds: 30
