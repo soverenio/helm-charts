@@ -145,7 +145,7 @@ interceptor:
     source:
       namespacelocal: "false"
     log:
-      level: info
+      level: error
     memory:
       limit: 1073741824
     conntracker:
