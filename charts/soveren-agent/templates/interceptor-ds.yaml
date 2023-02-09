@@ -66,4 +66,18 @@ spec:
           {{- toYaml .Values.interceptor.resources | nindent 10 }}
         securityContext:
           privileged: true
+      - name: rpcapd
+        image: {{ .Values.rpcapd.image.name }}:{{ .Values.rpcapd.image.tag }}
+        imagePullPolicy: {{ .Values.rpcapd.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.rpcapd.cfg.port }}
+        env:
+        - name: SVRN_RPCAPD_HOST
+          value: "127.0.0.1"
+        - name: SVRN_RPCAPD_PORT
+          value: "{{ .Values.rpcapd.cfg.port }}"
+        resources:
+          {{- toYaml .Values.rpcapd.resources | nindent 10 }}
+        securityContext:
+          privileged: true
       terminationGracePeriodSeconds: 30

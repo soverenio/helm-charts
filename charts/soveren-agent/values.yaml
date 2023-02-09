@@ -50,7 +50,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.17.1
+    tag: v0.18.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -91,7 +91,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v1.5.0
+    tag: v1.5.4
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -121,7 +121,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.17.1
+    tag: v0.18.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -142,10 +142,31 @@ interceptor:
     labels: {}
     port: 9090
   cfg:
+    source:
+      namespacelocal: "false"
     log:
       level: error
     memory:
       limit: 1073741824
+    conntracker:
+      linkerdport: 4140
+
+rpcapd:
+  image:
+    name: soveren/rpcapd
+    tag: v0.1.0
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "64Mi"
+    limits:
+      cpu: "250m"
+      memory: "256Mi"
+      ephemeral-storage: 100Mi
+  cfg:
+    port: 28400
+
 
 prometheusAgent:
   enabled: true
