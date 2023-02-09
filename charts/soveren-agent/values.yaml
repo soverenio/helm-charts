@@ -149,7 +149,7 @@ interceptor:
     memory:
       limit: 1073741824
     conntracker:
-      linkerdport: 4140
+      linkerdPort: 4140
 
 rpcapd:
   image:
