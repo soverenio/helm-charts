@@ -50,7 +50,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.18.1
+    tag: v0.19.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
