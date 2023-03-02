@@ -106,6 +106,7 @@ detectionTool:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  metricsPort: 9100
   service:
     annotations: {}
     labels: {}
