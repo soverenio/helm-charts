@@ -15,6 +15,10 @@ metadata:
 spec:
   ports:
   - port: {{ .Values.detectionTool.service.port }}
+    name: server
     targetPort: 8000
+  - port: { { .Values.detectionTool.metricsPort } }
+    name: metrics
+    targetPort: { { .Values.detectionTool.metricsPort } }
   selector:
     {{- include "detectionTool.matchLabels" . | nindent 4 }}
