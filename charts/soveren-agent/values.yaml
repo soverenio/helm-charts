@@ -50,7 +50,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.18.1
+    tag: v0.19.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -91,7 +91,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v1.5.4
+    tag: v1.6.2
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -106,6 +106,7 @@ detectionTool:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  metricsPort: 9100
   service:
     annotations: {}
     labels: {}
