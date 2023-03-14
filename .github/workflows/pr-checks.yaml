@@ -20,3 +20,7 @@ jobs:
     - name: Validate helm chart template
       run: |
         helm template ./charts/${CHART_NAME}
+
+    - name: Run linter
+      run: |
+        helm lint ./charts/${CHART_NAME}
