@@ -143,14 +143,13 @@ interceptor:
     labels: {}
     port: 9090
   cfg:
-    source:
-      namespacelocal: "false"
     log:
       level: error
     memory:
       limit: 1073741824
     conntracker:
       linkerdPort: 4140
+      envoyPort: 15001
 
 rpcapd:
   image:
