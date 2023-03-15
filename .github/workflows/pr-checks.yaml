@@ -1,0 +1,26 @@
+name: PR Checks
+
+on:
+  pull_request:
+
+env:
+  CHART_NAME: soveren-agent
+
+jobs:
+  template-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Helm
+      uses: azure/setup-helm@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Validate helm chart template
+      run: |
+        helm template ./charts/${CHART_NAME}
+
+    - name: Run linter
+      run: |
+        helm lint ./charts/${CHART_NAME}
