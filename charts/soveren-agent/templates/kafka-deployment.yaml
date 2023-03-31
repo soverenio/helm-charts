@@ -106,7 +106,7 @@ spec:
             memory: 64Mi
             ephemeral-storage: 100Mi
           requests:
-            cpu: 300m
+            cpu: 200m
             memory: 64Mi
         {{- end }}
 {{- end }}
