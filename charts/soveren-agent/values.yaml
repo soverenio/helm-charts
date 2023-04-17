@@ -1,3 +1,6 @@
+# HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
+httpsProxy: ""
+
 kafka:
   topics:
     eventsTopicName: events
