@@ -174,6 +174,10 @@ prometheusAgent:
   deploymentLabels: {}
   podAnnotations: {}
   podLabels: {}
+  additionalMetrics:
+    enabled: false
+    name: client
+    url: http://prometheus.prometheus:9100/metrics/send
   image:
     name: prom/prometheus
     tag: v2.37.0
