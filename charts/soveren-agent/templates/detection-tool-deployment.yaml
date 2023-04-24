@@ -59,7 +59,12 @@ spec:
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-token
-              key: token 
+              key: token
+        {{- if .Values.httpsProxy }}
+        # HTTPS Proxy Settings
+        - name: HTTPS_PROXY
+          value: {{ .Values.httpsProxy }}
+        {{- end }}
         {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
         {{- end }}

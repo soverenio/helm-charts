@@ -19,6 +19,75 @@ subjects:
   name: {{ .Release.Name }}-digger
   namespace: {{ .Release.Namespace }}
 roleRef:
-  apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: view
+  name: {{ .Release.Name }}-digger-cr
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ .Release.Name }}-digger-cr
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - pods
+  - replicationcontrollers
+  - services
+  - services/status
+  - events
+  - namespaces/status
+  - pods/status
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - controllerrevisions
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - statefulsets
+  - statefulsets/scale
+  - statefulsets/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - cronjobs/status
+  - jobs
+  - jobs/status
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  resources:
+  - daemonsets
+  - daemonsets/status
+  - deployments
+  - deployments/scale
+  - deployments/status
+  - ingresses
+  - ingresses/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  verbs:
+  - get
+  - list
+  - watch
