@@ -53,7 +53,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.22.0-alpha.6
+    tag: v0.22.0-alpha.8
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -125,7 +125,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.22.0-alpha.6
+    tag: v0.22.0-alpha.8
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
