@@ -1,3 +1,6 @@
+# HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
+httpsProxy: ""
+
 kafka:
   topics:
     eventsTopicName: events
@@ -50,7 +53,7 @@ digger:
   token: ""
   image:
     name: soveren/digger
-    tag: v0.21.0
+    tag: v0.22.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -122,7 +125,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.21.0
+    tag: v0.22.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -174,6 +177,10 @@ prometheusAgent:
   deploymentLabels: {}
   podAnnotations: {}
   podLabels: {}
+  additionalMetrics:
+    enabled: false
+    name: client
+    url: http://prometheus.prometheus:9100/metrics/send
   image:
     name: prom/prometheus
     tag: v2.37.0
