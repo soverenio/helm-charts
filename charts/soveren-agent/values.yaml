@@ -125,7 +125,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.22.0
+    tag: v0.20.2
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
