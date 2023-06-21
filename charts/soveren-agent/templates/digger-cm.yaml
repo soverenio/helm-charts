@@ -15,6 +15,7 @@ data:
   SVRN_DIGGER_KAFKA_CONSUMERHEARTBEAT_TOPIC: "{{ .Values.kafka.topics.heartbeatTopicName }}"
   SVRN_DIGGER_KAFKA_CONSUMER_TOPIC: "{{ .Values.kafka.topics.eventsTopicName }}"
   SVRN_DIGGER_KAFKA_CONSUMERCONTROLRESPONSE_TOPIC: "{{ .Values.kafka.topics.controlResponseTopicName }}"
+  SVRN_DIGGER_KAFKA_CONSUMERLOGS_TOPIC: "{{ .Values.kafka.topics.logsTopicName }}"
   SVRN_DIGGER_RESOLVER_KUBERNETES_ENABLED: "true"
   SVRN_DIGGER_RESOLVER_EXCLUDELABELS: "{{ join "," .Values.digger.cfg.resolver.excludeLabels }}"
   SVRN_DIGGER_STATSCLIENT_CLIENT_ADDRESS: "stats.soveren.io:443"
@@ -27,3 +28,4 @@ data:
   SVRN_DIGGER_KUBERNETESFILTERLIST_DEFINITIONS: {{ toJson .Values.digger.cfg.kubernetesfilterlist.definitions | squote }}
   SVRN_DIGGER_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_DIGGER_PRODUCER_TOPICCONTROLREQUEST: "{{ .Values.kafka.topics.controlRequestTopicName }}"
+  SVRN_DIGGER_PRODUCER_TOPICLOGS: "{{ .Values.kafka.topics.logsTopicName }}"
