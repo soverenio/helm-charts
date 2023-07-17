@@ -51,6 +51,7 @@ digger:
   podAnnotations: {}
   podLabels: {}
   token: ""
+  clusterName: ""
   image:
     name: soveren/digger
     tag: v0.24.5
