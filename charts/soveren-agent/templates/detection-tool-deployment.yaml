@@ -70,6 +70,10 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.detectionTool.resources | nindent 10 }}
+        {{- if .Values.detectionTool.securityContext }}
+        securityContext:
+          {{- toYaml .Values.detectionTool.securityContext | nindent 10 }}
+        {{- end }}
         readinessProbe:
           tcpSocket:
             port: 8000

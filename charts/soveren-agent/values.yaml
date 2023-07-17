@@ -17,7 +17,7 @@ kafka:
     podLabels: {}
     image:
       name: soveren/kafka
-      tag: 11_2.13-3.2.3-1
+      tag: 11_2.13-3.4.1
       pullPolicy: IfNotPresent
     env:
     - name: KAFKA_HEAP_OPTS
@@ -32,6 +32,11 @@ kafka:
         cpu: "400m"
         memory: "1024Mi"
         ephemeral-storage: 10Gi
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
     nodeSelector: {}
     affinity: {}
     tolerations: []
@@ -66,6 +71,12 @@ digger:
       cpu: "1500m"
       memory: "768Mi"
       ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -107,6 +118,11 @@ detectionTool:
       cpu: "1100m"
       memory: "2304Mi"
       ephemeral-storage: 200Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -141,6 +157,8 @@ interceptor:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  securityContext:
+    privileged: true
   metricsPort: 9090
   service:
     annotations: {}
@@ -168,6 +186,8 @@ rpcapd:
       cpu: "250m"
       memory: "256Mi"
       ephemeral-storage: 100Mi
+  securityContext:
+    privileged: true
   cfg:
     port: 28400
 
@@ -196,9 +216,21 @@ prometheusAgent:
       memory: "400Mi"
       cpu: "75m"
       ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 65534
+    runAsNonRoot: true
+    runAsGroup: 65534
+    allowPrivilegeEscalation: false
   nodeSelector: {}
   affinity: {}
   tolerations: []
   cfg:
     log:
       level: error
+
+networkPolicy:
+  # -- Specifies whether Network Policies should be created
+  enabled: false
+  k8sApi:
+    # -- Specify the k8s API endpoint port
+    port: 8443
