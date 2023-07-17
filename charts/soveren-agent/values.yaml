@@ -8,6 +8,7 @@ kafka:
     iplistTopicName: iplist
     controlRequestTopicName: control_request
     controlResponseTopicName: control_response
+    logsTopicName: logs
   embedded:
     enabled: true
     deploymentAnnotations: {}
