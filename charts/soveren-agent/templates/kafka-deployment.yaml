@@ -68,7 +68,7 @@ spec:
         - "--override"
         - "log.segment.delete.delay.ms=10000"
         ports:
-        - containerPort: 9092
+        - containerPort: {{ .Values.kafka.embedded.service.port }}
         startupProbe:
           exec:
             command: [ "test", "-f", "/tmp/topics.created"]
@@ -86,27 +86,29 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.kafka.embedded.resources | nindent 10 }}
+        {{- if .Values.kafka.embedded.securityContext }}
+        securityContext:
+          {{- toYaml .Values.kafka.embedded.securityContext | nindent 10 }}
+        {{- end }}
         lifecycle:
           preStop:
             exec:
               command: [ "sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done" ]
       {{- if .Values.kafka.embedded.metrics.enabled }}
       - name: kafka-exporter
-        image: soveren/kafka-exporter:v1.7.0
-        command: [ 'sh', '-c', 'while sleep 5; do nc -vzw1 localhost 9092 && exec /bin/kafka_exporter --kafka.server=localhost:9092; done' ]
+        image: {{ .Values.kafka.embedded.metrics.image.name }}:{{ .Values.kafka.embedded.metrics.image.tag }}
+        command: [ 'sh', '-c', 'while sleep 5; do nc -vzw1 localhost {{ .Values.kafka.embedded.service.port }} && exec /bin/kafka_exporter --kafka.server=localhost:{{ .Values.kafka.embedded.service.port }}; done' ]
         ports:
-        - containerPort: 9308
+        - containerPort: {{ .Values.kafka.embedded.metrics.port }}
         readinessProbe:
           tcpSocket:
-            port: 9308
+            port: {{ .Values.kafka.embedded.metrics.port }}
           timeoutSeconds: 3
         resources:
-          limits:
-            cpu: 300m
-            memory: 64Mi
-            ephemeral-storage: 100Mi
-          requests:
-            cpu: 100m
-            memory: 64Mi
+          {{- toYaml .Values.kafka.embedded.metrics.resources | nindent 10 }}
+        {{- if .Values.kafka.embedded.metrics.securityContext }}
+        securityContext:
+          {{- toYaml .Values.kafka.embedded.metrics.securityContext | nindent 10 }}
+        {{- end }}
         {{- end }}
 {{- end }}

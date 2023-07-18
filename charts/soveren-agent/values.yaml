@@ -47,6 +47,23 @@ kafka:
     metrics:
       enabled: true
       port: 9308
+      image:
+        name: soveren/kafka-exporter
+        tag: v1.7.0
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "650Mi"
+          ephemeral-storage: 5Gi
+        limits:
+          cpu: "400m"
+          memory: "1024Mi"
+          ephemeral-storage: 10Gi
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
   external:
     # kafka.external.brokers used only if kafka.embedded.enabled=false
     brokers: []
