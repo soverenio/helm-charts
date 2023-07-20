@@ -74,6 +74,10 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.digger.resources | nindent 10 }}
+        {{- if .Values.digger.securityContext }}
+        securityContext:
+          {{- toYaml .Values.digger.securityContext | nindent 10 }}
+        {{- end }}
         readinessProbe:
           tcpSocket:
             port: 9000
