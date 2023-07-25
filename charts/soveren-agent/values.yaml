@@ -1,5 +1,6 @@
 # HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
 httpsProxy: ""
+httpsProxyNoProxy: ""
 
 kafka:
   topics:
@@ -249,6 +250,8 @@ prometheusAgent:
 networkPolicy:
   # -- Specifies whether Network Policies should be created
   enabled: false
+  # -- Specify when the httpsProxy is enabled
+  proxyIp: ""
   k8sApi:
     # -- Specify the k8s API endpoint port
-    port: 8443
+    port: 443
