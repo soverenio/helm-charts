@@ -69,6 +69,10 @@ spec:
         - name: HTTPS_PROXY
           value: {{ .Values.httpsProxy }}
         {{- end }}
+        {{- if .Values.httpsProxyNoProxy }}
+        - name: NO_PROXY
+          value: {{ .Values.httpsProxyNoProxy }}
+        {{- end }}
         {{- if .Values.digger.env }}
         {{- toYaml .Values.digger.env | nindent 8 }}
         {{- end }}

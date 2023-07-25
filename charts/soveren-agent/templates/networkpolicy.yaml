@@ -70,11 +70,25 @@ spec:
   policyTypes:
     - Egress
   egress:
+    {{- if .Values.networkPolicy.proxyIp }}
+    - to:
+        - ipBlock:
+            cidr: {{ .Values.networkPolicy.proxyIp }}
+    {{- if .Values.networkPolicy.k8sApi.port }}
+    - ports:
+        - port: {{ .Values.networkPolicy.k8sApi.port }}
+          protocol: TCP
+    {{- end }}
+    {{- else }}
     - ports:
         - port: 443
           protocol: TCP
+    {{- if (and .Values.networkPolicy.k8sApi.port (ne (int .Values.networkPolicy.k8sApi.port) 443)) }}
+    - ports:
         - port: {{ .Values.networkPolicy.k8sApi.port }}
           protocol: TCP
+    {{- end }}
+    {{- end }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -90,7 +104,13 @@ spec:
   policyTypes:
     - Egress
   egress:
+    {{- if .Values.networkPolicy.proxyIp }}
+    - to:
+      - ipBlock:
+          cidr: {{ .Values.networkPolicy.proxyIp }}
+    {{- else }}
     - ports:
         - port: 443
           protocol: TCP
+    {{- end }}
 {{- end }}
