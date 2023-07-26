@@ -61,6 +61,10 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.prometheusAgent.resources | nindent 10 }}
+        {{- if .Values.prometheusAgent.securityContext }}
+        securityContext:
+          {{- toYaml .Values.prometheusAgent.securityContext | nindent 10 }}
+        {{- end }}
         ports:
         - containerPort: 9090
         volumeMounts:

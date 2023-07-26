@@ -1,5 +1,6 @@
 # HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
 httpsProxy: ""
+httpsProxyNoProxy: ""
 
 kafka:
   topics:
@@ -17,7 +18,7 @@ kafka:
     podLabels: {}
     image:
       name: soveren/kafka
-      tag: 11_2.13-3.2.3-1
+      tag: 11_2.13-3.4.1
       pullPolicy: IfNotPresent
     env:
     - name: KAFKA_HEAP_OPTS
@@ -32,6 +33,11 @@ kafka:
         cpu: "400m"
         memory: "1024Mi"
         ephemeral-storage: 10Gi
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      allowPrivilegeEscalation: false
+      runAsNonRoot: true
     nodeSelector: {}
     affinity: {}
     tolerations: []
@@ -42,6 +48,23 @@ kafka:
     metrics:
       enabled: true
       port: 9308
+      image:
+        name: soveren/kafka-exporter
+        tag: v1.7.0
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "650Mi"
+          ephemeral-storage: 5Gi
+        limits:
+          cpu: "400m"
+          memory: "1024Mi"
+          ephemeral-storage: 10Gi
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
   external:
     # kafka.external.brokers used only if kafka.embedded.enabled=false
     brokers: []
@@ -55,7 +78,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.24.5
+    tag: v0.25.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -67,6 +90,12 @@ digger:
       cpu: "1500m"
       memory: "768Mi"
       ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -108,6 +137,11 @@ detectionTool:
       cpu: "1100m"
       memory: "2304Mi"
       ephemeral-storage: 200Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -127,7 +161,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.24.5
+    tag: v0.25.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -142,6 +176,8 @@ interceptor:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  securityContext:
+    privileged: true
   metricsPort: 9090
   service:
     annotations: {}
@@ -159,7 +195,7 @@ interceptor:
 rpcapd:
   image:
     name: soveren/rpcapd
-    tag: v0.1.1
+    tag: v0.1.2
     pullPolicy: IfNotPresent
   resources:
     requests:
@@ -169,6 +205,8 @@ rpcapd:
       cpu: "250m"
       memory: "256Mi"
       ephemeral-storage: 100Mi
+  securityContext:
+    privileged: true
   cfg:
     port: 28400
 
@@ -197,9 +235,23 @@ prometheusAgent:
       memory: "400Mi"
       cpu: "75m"
       ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 65534
+    runAsNonRoot: true
+    runAsGroup: 65534
+    allowPrivilegeEscalation: false
   nodeSelector: {}
   affinity: {}
   tolerations: []
   cfg:
     log:
       level: error
+
+networkPolicy:
+  # -- Specifies whether Network Policies should be created
+  enabled: false
+  # -- Specify when the httpsProxy is enabled
+  proxyIp: ""
+  k8sApi:
+    # -- Specify the k8s API endpoint port
+    port: 443

@@ -64,8 +64,10 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.interceptor.resources | nindent 10 }}
+        {{- if .Values.interceptor.securityContext }}
         securityContext:
-          privileged: true
+          {{- toYaml .Values.interceptor.securityContext | nindent 10 }}
+        {{- end }}
       - name: rpcapd
         image: {{ .Values.rpcapd.image.name }}:{{ .Values.rpcapd.image.tag }}
         imagePullPolicy: {{ .Values.rpcapd.image.pullPolicy }}
@@ -78,6 +80,8 @@ spec:
           value: "{{ .Values.rpcapd.cfg.port }}"
         resources:
           {{- toYaml .Values.rpcapd.resources | nindent 10 }}
+        {{- if .Values.rpcapd.securityContext }}
         securityContext:
-          privileged: true
+          {{- toYaml .Values.rpcapd.securityContext | nindent 10 }}
+        {{- end }}
       terminationGracePeriodSeconds: 30

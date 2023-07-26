@@ -18,6 +18,10 @@ data:
       url: {{ .Values.prometheusAgent.additionalMetrics.url }}
     {{- end }}
     scrape_configs:
+    - job_name: prometheus-agent
+      static_configs:
+      - targets:
+        - localhost:9090
     - job_name: digger
       static_configs:
       - targets:

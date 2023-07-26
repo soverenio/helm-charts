@@ -62,14 +62,22 @@ spec:
               key: token
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
-        - name: HTTPS_PROXY
+        - name: https_proxy
           value: {{ .Values.httpsProxy }}
+        {{- end }}
+        {{- if .Values.httpsProxyNoProxy }}
+        - name: no_proxy
+          value: {{ .Values.httpsProxyNoProxy }}
         {{- end }}
         {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
         {{- end }}
         resources:
           {{- toYaml .Values.detectionTool.resources | nindent 10 }}
+        {{- if .Values.detectionTool.securityContext }}
+        securityContext:
+          {{- toYaml .Values.detectionTool.securityContext | nindent 10 }}
+        {{- end }}
         readinessProbe:
           tcpSocket:
             port: 8000

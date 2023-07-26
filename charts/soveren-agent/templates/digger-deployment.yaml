@@ -69,11 +69,19 @@ spec:
         - name: HTTPS_PROXY
           value: {{ .Values.httpsProxy }}
         {{- end }}
+        {{- if .Values.httpsProxyNoProxy }}
+        - name: NO_PROXY
+          value: {{ .Values.httpsProxyNoProxy }}
+        {{- end }}
         {{- if .Values.digger.env }}
         {{- toYaml .Values.digger.env | nindent 8 }}
         {{- end }}
         resources:
           {{- toYaml .Values.digger.resources | nindent 10 }}
+        {{- if .Values.digger.securityContext }}
+        securityContext:
+          {{- toYaml .Values.digger.securityContext | nindent 10 }}
+        {{- end }}
         readinessProbe:
           tcpSocket:
             port: 9000
