@@ -187,7 +187,7 @@ interceptor:
     log:
       level: error
     memory:
-      limit: 1073741824
+      limit: 1800000000
     conntracker:
       linkerdPort: 4140
       envoyPort: 15001
