@@ -27,5 +27,6 @@ data:
   SVRN_INTERCEPTOR_IPLISTCONSUMER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_INTERCEPTOR_IPLISTCONSUMER_TOPIC: "{{ .Values.kafka.topics.iplistTopicName }}"
   SVRN_INTERCEPTOR_MEMORY_LIMIT: "{{ .Values.interceptor.cfg.memory.limit | int }}"
+  SVRN_INTERCEPTOR_MEMORY_SOFTMEMORYLIMITPERCENT: "{{ .Values.interceptor.cfg.memory.softLimitPercent | int }}"
   SVRN_INTERCEPTOR_CONTROLREQUESTCONSUMER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_INTERCEPTOR_CONTROLREQUESTCONSUMER_TOPIC: "{{ .Values.kafka.topics.controlRequestTopicName }}"
