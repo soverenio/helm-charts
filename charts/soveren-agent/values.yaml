@@ -188,7 +188,7 @@ interceptor:
       level: error
     memory:
       limit: 1800000000
-      softLimit: 135
+      softLimitPercent: 135
     conntracker:
       linkerdPort: 4140
       envoyPort: 15001
