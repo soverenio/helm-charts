@@ -58,8 +58,12 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-interceptor
-        {{- if .Values.interceptor.env }}
         env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        {{- if .Values.interceptor.env }}
         {{- toYaml .Values.interceptor.env | nindent 8 }}
         {{- end }}
         resources:
