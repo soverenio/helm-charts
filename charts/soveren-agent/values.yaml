@@ -78,7 +78,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.25.1
+    tag: v0.25.2-alpha.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -125,16 +125,16 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v1.6.3
+    tag: v2.2.4
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
     requests:
-      cpu: "100m"
+      cpu: "200m"
       memory: "1680Mi"
     limits:
-      cpu: "1100m"
+      cpu: "2200m"
       memory: "2304Mi"
       ephemeral-storage: 200Mi
   securityContext:
@@ -161,7 +161,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.25.1
+    tag: v0.25.2-alpha.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
