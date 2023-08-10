@@ -50,10 +50,7 @@ spec:
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         ports:
-        - name: api
-          containerPort: {{ .Values.detectionTool.service.port }}
-        - name: metrics
-          containerPort: {{ .Values.detectionTool.metricsPort }}
+        - containerPort: 8000
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
