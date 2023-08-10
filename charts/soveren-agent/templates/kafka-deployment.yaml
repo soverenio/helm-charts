@@ -87,12 +87,6 @@ spec:
         - "log.dirs=/var/lib/kafka/data"
         ports:
         - containerPort: {{ .Values.kafka.embedded.service.port }}
-        readinessProbe:
-          exec:
-           command: [ "sh", "-c", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server=localhost:9092"]
-          periodSeconds: 10
-          failureThreshold: 30
-          timeoutSeconds: 30
         startupProbe:
           exec:
             command: [ "test", "-f", "/var/lib/kafka/topics.created"]
