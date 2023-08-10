@@ -15,6 +15,10 @@ metadata:
     {{- end }}
 spec:
   replicas: 1
+  {{- if .Values.kafka.embedded.persistentVolume.enabled }}
+  strategy:
+    type: Recreate
+  {{- end }}
   selector:
     matchLabels:
       {{- include "kafka.matchLabels" . | nindent 6 }}
@@ -45,6 +49,18 @@ spec:
       tolerations:
       {{- toYaml .Values.kafka.embedded.tolerations | nindent 8 }}
       {{- end }}
+      {{- if .Values.kafka.embedded.securityContext }}
+      securityContext:
+      {{- toYaml .Values.kafka.embedded.securityContext | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: kafka-volume
+        {{- if .Values.kafka.embedded.persistentVolume.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-kafka-pvc
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka
@@ -67,13 +83,22 @@ spec:
         - "log.retention.check.interval.ms=30000"
         - "--override"
         - "log.segment.delete.delay.ms=10000"
+        - "--override"
+        - "log.dirs=/var/lib/kafka/data"
         ports:
         - containerPort: {{ .Values.kafka.embedded.service.port }}
-        startupProbe:
+        readinessProbe:
           exec:
-            command: [ "test", "-f", "/tmp/topics.created"]
+           command: [ "sh", "-c", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server=localhost:9092"]
           periodSeconds: 10
           failureThreshold: 30
+          timeoutSeconds: 30
+        startupProbe:
+          exec:
+            command: [ "test", "-f", "/var/lib/kafka/topics.created"]
+          periodSeconds: 10
+          failureThreshold: 30
+          timeoutSeconds: 30
         env:
         - name: "KAFKA_CREATE_TOPICS"
           value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1,{{ .Values.kafka.topics.iplistTopicName }}:1:1::20000000,{{ .Values.kafka.topics.controlRequestTopicName }}:1:1,{{ .Values.kafka.topics.controlResponseTopicName }}:1:1,{{ .Values.kafka.topics.logsTopicName }}:1:1::104857600"
@@ -86,10 +111,9 @@ spec:
         {{- end }}
         resources:
           {{- toYaml .Values.kafka.embedded.resources | nindent 10 }}
-        {{- if .Values.kafka.embedded.securityContext }}
-        securityContext:
-          {{- toYaml .Values.kafka.embedded.securityContext | nindent 10 }}
-        {{- end }}
+        volumeMounts:
+          - name: kafka-volume
+            mountPath: "/var/lib/kafka"
         lifecycle:
           preStop:
             exec:
@@ -106,9 +130,5 @@ spec:
           timeoutSeconds: 3
         resources:
           {{- toYaml .Values.kafka.embedded.metrics.resources | nindent 10 }}
-        {{- if .Values.kafka.embedded.metrics.securityContext }}
-        securityContext:
-          {{- toYaml .Values.kafka.embedded.metrics.securityContext | nindent 10 }}
-        {{- end }}
         {{- end }}
 {{- end }}
