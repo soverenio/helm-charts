@@ -50,12 +50,15 @@ spec:
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         ports:
-        - containerPort: 8000
+        - name: api
+          containerPort: {{ .Values.detectionTool.service.port }}
+        - name: metrics
+          containerPort: {{ .Values.detectionTool.metricsPort }}
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
         env:
-        - name: SVRN_DETECTION_TOOL_STATS_AUTH_TOKEN
+        - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-token
