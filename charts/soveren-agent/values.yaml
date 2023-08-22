@@ -92,7 +92,7 @@ digger:
   image:
     name: soveren/digger
     tag: v0.25.3-alpha.2
-    pullPolicy: always
+    pullPolicy: Always
   env: []
   priorityClassName: ""
   resources:
