@@ -175,7 +175,7 @@ interceptor:
   image:
     name: soveren/interceptor
     tag: v0.25.3-alpha.2
-    pullPolicy: always
+    pullPolicy: Always
   env: []
   priorityClassName: ""
   resources:
