@@ -91,8 +91,8 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.25.3-alpha.2
-    pullPolicy: Always
+    tag: v0.25.3-alpha.3
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
@@ -174,8 +174,8 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.25.3-alpha.2
-    pullPolicy: Always
+    tag: v0.25.3-alpha.3
+    pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
