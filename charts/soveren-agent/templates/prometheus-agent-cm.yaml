@@ -32,6 +32,7 @@ data:
         names:
         - {{ .Release.Name }}-interceptor
         port: {{ .Values.interceptor.metricsPort }}
+      honor_labels: true # Metrics field "instance" will be overridden with interceptor ID (node name)
     - job_name: detection-tool
       dns_sd_configs:
       - type: A

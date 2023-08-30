@@ -91,7 +91,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.25.2
+    tag: v0.25.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -174,7 +174,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.25.2
+    tag: v0.25.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -200,8 +200,8 @@ interceptor:
     log:
       level: error
     memory:
-      limit: 1800000000
-      softLimitPercent: 135
+      limit: 1610612736
+      softLimitPercent: 125
     conntracker:
       linkerdPort: 4140
       envoyPort: 15001
