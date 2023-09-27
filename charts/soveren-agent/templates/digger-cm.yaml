@@ -25,7 +25,7 @@ data:
   SVRN_DIGGER_STATSCLIENT_CLUSTERNAME: "{{ .Values.digger.clusterName }}"
   SVRN_DIGGER_SAMPLER_ENABLED: "true"
   SVRN_DIGGER_SAMPLER_ACTIVECLUSTERING_ENABLED: "true"
-  SVRN_DIGGER_SAMPLER_ACTIVECLUSTERINGUPDATER_ENABLED: "false"
+  SVRN_DIGGER_SAMPLER_ACTIVECLUSTERINGUPDATER_ENABLED: "{{ .Values.digger.cfg.sampler.activeClusteringUpdaterEnabled }}"
   SVRN_DIGGER_IPLISTPRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_DIGGER_IPLISTPRODUCER_TOPIC: "{{ .Values.kafka.topics.iplistTopicName }}"
   SVRN_DIGGER_KUBERNETESFILTERLIST_DEFINITIONS: {{ toJson .Values.digger.cfg.kubernetesfilterlist.definitions | squote }}
