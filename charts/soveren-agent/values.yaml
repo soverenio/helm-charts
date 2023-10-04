@@ -18,7 +18,7 @@ kafka:
     podLabels: {}
     image:
       name: soveren/kafka
-      tag: 11_2.13-3.4.1_1
+      tag: 2.13-3.5.1
       pullPolicy: IfNotPresent
     env:
     - name: KAFKA_HEAP_OPTS
