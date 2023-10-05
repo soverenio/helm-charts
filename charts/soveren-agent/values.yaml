@@ -149,7 +149,7 @@ detectionTool:
       cpu: "200m"
       memory: "768Mi"
     limits:
-      cpu: "1500m"
+      cpu: "2200m"
       memory: "2048Mi"
       ephemeral-storage: 200Mi
   securityContext:
