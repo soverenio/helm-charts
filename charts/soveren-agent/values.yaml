@@ -18,7 +18,7 @@ kafka:
     podLabels: {}
     image:
       name: soveren/kafka
-      tag: 11_2.13-3.4.1_1
+      tag: 2.13-3.5.1
       pullPolicy: IfNotPresent
     env:
     - name: KAFKA_HEAP_OPTS
@@ -140,17 +140,17 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.4.1
+    tag: v2.6.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
   resources:
     requests:
       cpu: "200m"
-      memory: "1680Mi"
+      memory: "768Mi"
     limits:
       cpu: "2200m"
-      memory: "2304Mi"
+      memory: "2048Mi"
       ephemeral-storage: 200Mi
   securityContext:
     runAsUser: 1000
