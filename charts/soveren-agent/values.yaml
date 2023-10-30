@@ -137,12 +137,8 @@ digger:
       enabled: false # bool
       # URL of detection corrector service
       url: http://localhost:8080/validate # string
-      # Authentication for detection corrector service
-      authentication:
-        # Enable or disable authentication
-        enabled: false # bool
-        # Authentication token for service
-        token:  # string
+      # Authentication for detection corrector service. If empty, authentication is disabled.
+      token:  # string
       # List of data types keywords to be sent to service. For example: EMAIL, PHONE.
       types: # <array> of string
 
