@@ -35,5 +35,5 @@ data:
   SVRN_DIGGER_DETECTIONCORRECTOR_ENABLED: "{{ .Values.digger.cfg.detectioncorrector.enabled }}"
   SVRN_DIGGER_DETECTIONCORRECTOR_URL: "{{ .Values.digger.cfg.detectioncorrector.url }}"
   SVRN_DIGGER_DETECTIONCORRECTOR_TOKEN: "{{ .Values.digger.cfg.detectioncorrector.token }}"
-  SVRN_DIGGER_DETECTIONCORRECTOR_TYPES: "{{ toJson .Values.digger.cfg.detectioncorrector.types | squote }}"
+  SVRN_DIGGER_DETECTIONCORRECTOR_TYPES: "{{ join "," .Values.digger.cfg.detectioncorrector.types }}"
 
