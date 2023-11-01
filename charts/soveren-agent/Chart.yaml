@@ -1,6 +1,6 @@
 apiVersion: v2
 name: soveren-agent
 description: Data flow monitoring and analytics platform
-version: 1.33.1-alpha.1
+version: 1.33.1
 appVersion: "23.10.2"
 home: https://soveren.io
