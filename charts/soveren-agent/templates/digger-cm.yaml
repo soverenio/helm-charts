@@ -32,3 +32,8 @@ data:
   SVRN_DIGGER_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_DIGGER_PRODUCER_TOPICCONTROLREQUEST: "{{ .Values.kafka.topics.controlRequestTopicName }}"
   SVRN_DIGGER_PRODUCER_TOPICLOGS: "{{ .Values.kafka.topics.logsTopicName }}"
+  SVRN_DIGGER_DETECTIONCORRECTOR_ENABLED: "{{ .Values.digger.cfg.detectioncorrector.enabled }}"
+  SVRN_DIGGER_DETECTIONCORRECTOR_URL: "{{ .Values.digger.cfg.detectioncorrector.url }}"
+  SVRN_DIGGER_DETECTIONCORRECTOR_TOKEN: "{{ .Values.digger.cfg.detectioncorrector.token }}"
+  SVRN_DIGGER_DETECTIONCORRECTOR_TYPES: "{{ .Values.digger.cfg.detectioncorrector.types }}"
+
