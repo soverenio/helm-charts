@@ -1,0 +1,29 @@
+{{- if .Values.prometheusAgent.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-prometheus-agent
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "prometheusAgent.labels" . | nindent 4 }}
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    remote_write:
+    - name: crawler
+      url: http://{{ .Release.Name }}-crawler.{{ .Release.Namespace }}:9100/metrics/send
+    {{- if .Values.prometheusAgent.additionalMetrics.enabled }}
+    - name: {{ .Values.prometheusAgent.additionalMetrics.name }}
+      url: {{ .Values.prometheusAgent.additionalMetrics.url }}
+    {{- end }}
+    scrape_configs:
+    - job_name: prometheus-agent
+      static_configs:
+      - targets:
+        - localhost:9090
+    - job_name: crawler
+      static_configs:
+      - targets:
+        - {{ .Release.Name }}-crawler:{{ .Values.crawler.service.port }}
+{{- end }}

@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-crawler
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.crawler.service.annotations }}
+  annotations:
+    {{- toYaml .Values.crawler.service.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "crawler.labels" . | nindent 4 }}
+    {{- if .Values.crawler.service.labels }}
+    {{- toYaml .Values.crawler.service.labels | nindent 4 }}
+    {{- end }}
+spec:
+  ports:
+  - name: server
+    port: {{ .Values.crawler.service.port }}
+    targetPort: 9000
+  {{- if .Values.prometheusAgent.enabled }}
+  - name: metricsender
+    port: 9100
+    targetPort: 9100
+  {{- end }}
+  selector:
+    {{- include "crawler.matchLabels" . | nindent 4 }}

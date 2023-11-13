@@ -1,0 +1,81 @@
+crawler:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
+  token: ""
+  image:
+    name: soveren/crawler
+    tag: v0.1.0
+    pullPolicy: IfNotPresent
+  env: []
+  priorityClassName: ""
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "100Mi"
+    limits:
+      cpu: "1500m"
+      memory: "768Mi"
+      ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  service:
+    annotations: {}
+    labels: {}
+    port: 9000
+  cfg:
+    log:
+      level: error
+
+prometheusAgent:
+  enabled: true
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
+  additionalMetrics:
+    enabled: false
+    name: client
+    url: http://prometheus.prometheus:9100/metrics/send
+  image:
+    name: prom/prometheus
+    tag: v2.37.0
+    pullPolicy: IfNotPresent
+  env: []
+  priorityClassName: ""
+  resources: 
+    requests:
+      memory: "192Mi"
+      cpu: "75m"
+    limits:
+      memory: "400Mi"
+      cpu: "75m"
+      ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 65534
+    runAsNonRoot: true
+    runAsGroup: 65534
+    allowPrivilegeEscalation: false
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  cfg:
+    log:
+      level: error
+
+networkPolicy:
+  # -- Specifies whether Network Policies should be created
+  enabled: false
+  # -- Specify when the httpsProxy is enabled
+  proxyIp: ""
+  k8sApi:
+    # -- Specify the k8s API endpoint port
+    port: 443

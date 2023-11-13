@@ -1,0 +1,78 @@
+{{- if .Values.prometheusAgent.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-prometheus-agent
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.prometheusAgent.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.prometheusAgent.deploymentAnnotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "prometheusAgent.labels" . | nindent 4 }}
+    {{- if .Values.prometheusAgent.deploymentLabels }}
+    {{- toYaml .Values.prometheusAgent.deploymentLabels | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "prometheusAgent.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/prometheus-agent-cm.yaml") . | sha256sum }}
+      {{- if .Values.prometheusAgent.podAnnotations }}
+        {{- toYaml .Values.prometheusAgent.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "prometheusAgent.matchLabels" . | nindent 8 }}
+        {{- if .Values.prometheusAgent.podLabels }}
+        {{- toYaml .Values.prometheusAgent.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.prometheusAgent.priorityClassName }}
+      priorityClassName: {{ .Values.prometheusAgent.priorityClassName }}
+      {{- end }}
+      {{- if .Values.prometheusAgent.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.prometheusAgent.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.prometheusAgent.affinity }}
+      affinity:
+      {{- toYaml .Values.prometheusAgent.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.prometheusAgent.tolerations }}
+      tolerations:
+      {{- toYaml .Values.prometheusAgent.tolerations | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: prometheus
+        image: {{ .Values.prometheusAgent.image.name }}:{{ .Values.prometheusAgent.image.tag }}
+        imagePullPolicy: {{ .Values.prometheusAgent.image.pullPolicy }}
+        args:
+        - --config.file=/etc/prometheus/prometheus.yml
+        - --enable-feature=agent
+        - --log.format=json
+        - --log.level={{ .Values.prometheusAgent.cfg.log.level }}
+        {{- if .Values.prometheusAgent.env }}
+        env:
+        {{- toYaml .Values.prometheusAgent.env | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.prometheusAgent.resources | nindent 10 }}
+        {{- if .Values.prometheusAgent.securityContext }}
+        securityContext:
+          {{- toYaml .Values.prometheusAgent.securityContext | nindent 10 }}
+        {{- end }}
+        ports:
+        - containerPort: 9090
+        volumeMounts:
+        - name: config
+          mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Release.Name }}-prometheus-agent
+{{- end }}
