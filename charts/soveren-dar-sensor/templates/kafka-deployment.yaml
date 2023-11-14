@@ -1,0 +1,128 @@
+{{- if .Values.kafka.embedded.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-kafka
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.kafka.embedded.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.kafka.embedded.deploymentAnnotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "kafka.labels" . | nindent 4 }}
+    {{- if .Values.kafka.embedded.deploymentLabels }}
+    {{- toYaml .Values.kafka.embedded.deploymentLabels | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  {{- if .Values.kafka.embedded.persistentVolume.enabled }}
+  strategy:
+    type: Recreate
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "kafka.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- if .Values.kafka.embedded.podAnnotations }}
+      annotations:
+        {{- toYaml .Values.kafka.embedded.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "kafka.matchLabels" . | nindent 8 }}
+        {{- if .Values.kafka.embedded.podLabels }}
+        {{- toYaml .Values.kafka.embedded.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.kafka.embedded.priorityClassName }}
+      priorityClassName: {{ .Values.kafka.embedded.priorityClassName }}
+      {{- end }}
+      {{- if .Values.kafka.embedded.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.kafka.embedded.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.kafka.embedded.affinity }}
+      affinity:
+      {{- toYaml .Values.kafka.embedded.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.kafka.embedded.tolerations }}
+      tolerations:
+      {{- toYaml .Values.kafka.embedded.tolerations | nindent 8 }}
+      {{- end }}
+      {{- if .Values.kafka.embedded.securityContext }}
+      securityContext:
+      {{- toYaml .Values.kafka.embedded.securityContext | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: kafka-volume
+        {{- if .Values.kafka.embedded.persistentVolume.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-kafka-pvc
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: kafka
+        image: {{ .Values.kafka.embedded.image.name }}:{{ .Values.kafka.embedded.image.tag }}
+        imagePullPolicy: {{ .Values.kafka.embedded.image.pullPolicy }}
+        args:
+        - "--override"
+        - "advertised.listeners=PLAINTEXT://$(MY_POD_IP):9092"
+        - "--override"
+        - "auto.create.topics.enable=false"
+        - "--override"
+        - "log.retention.bytes=268435456"
+        - "--override"
+        - "log.retention.hours=1"
+        - "--override"
+        - "log.roll.ms=900000"
+        - "--override"
+        - "log.segment.bytes=67108864"
+        - "--override"
+        - "log.retention.check.interval.ms=30000"
+        - "--override"
+        - "log.segment.delete.delay.ms=10000"
+        - "--override"
+        - "log.dirs=/var/lib/kafka/data"
+        ports:
+        - containerPort: {{ .Values.kafka.embedded.service.port }}
+        startupProbe:
+          exec:
+            command: [ "test", "-f", "/var/lib/kafka/topics.created"]
+          periodSeconds: 10
+          failureThreshold: 30
+          timeoutSeconds: 30
+        env:
+        - name: "KAFKA_CREATE_TOPICS"
+          value: "{{ .Values.kafka.topics.logsTopicName }}:1:1::104857600"
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        {{- if .Values.kafka.embedded.env }}
+        {{- toYaml .Values.kafka.embedded.env | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.kafka.embedded.resources | nindent 10 }}
+        volumeMounts:
+          - name: kafka-volume
+            mountPath: "/var/lib/kafka"
+        lifecycle:
+          preStop:
+            exec:
+              command: [ "sh", "-ce", "kill -s TERM 1; while $(kill -0 1 2>/dev/null); do sleep 1; done" ]
+      {{- if .Values.kafka.embedded.metrics.enabled }}
+      - name: kafka-exporter
+        image: {{ .Values.kafka.embedded.metrics.image.name }}:{{ .Values.kafka.embedded.metrics.image.tag }}
+        command: [ 'sh', '-c', 'while sleep 5; do nc -vzw1 localhost {{ .Values.kafka.embedded.service.port }} && exec /bin/kafka_exporter --kafka.server=localhost:{{ .Values.kafka.embedded.service.port }}; done' ]
+        ports:
+        - containerPort: {{ .Values.kafka.embedded.metrics.port }}
+        readinessProbe:
+          tcpSocket:
+            port: {{ .Values.kafka.embedded.metrics.port }}
+          timeoutSeconds: 3
+        resources:
+          {{- toYaml .Values.kafka.embedded.metrics.resources | nindent 10 }}
+        {{- end }}
+{{- end }}

@@ -26,4 +26,10 @@ data:
       static_configs:
       - targets:
         - {{ .Release.Name }}-crawler:{{ .Values.crawler.service.port }}
+    {{- if .Values.kafka.embedded.metrics.enabled }}
+    - job_name: kafka
+      static_configs:
+        - targets:
+            - {{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.metrics.port }}
+    {{- end }}
 {{- end }}

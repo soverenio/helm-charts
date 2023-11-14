@@ -1,0 +1,29 @@
+{{- if .Values.kafka.embedded.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-kafka
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.kafka.embedded.service.annotations }}
+  annotations:
+    {{- toYaml .Values.kafka.embedded.service.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "kafka.labels" . | nindent 4 }}
+    {{- if .Values.kafka.embedded.service.labels }}
+    {{- toYaml .Values.kafka.embedded.service.labels | nindent 4 }}
+    {{- end }}
+spec:
+  clusterIP: None
+  ports:
+  - name: kafka
+    port: {{ .Values.kafka.embedded.service.port }}
+    targetPort: 9092
+  {{- if .Values.kafka.embedded.metrics.enabled }}
+  - name: metrics
+    port: {{ .Values.kafka.embedded.metrics.port }}
+    targetPort: 9308
+  {{- end }}
+  selector:
+    {{- include "kafka.matchLabels" . | nindent 4 }}
+{{- end }}
