@@ -75,6 +75,82 @@ prometheusAgent:
     log:
       level: error
 
+kafka:
+  topics:
+#    controlRequestTopicName: control_request
+    logsTopicName: logs
+  embedded:
+    enabled: true
+    deploymentAnnotations: {}
+    deploymentLabels: {}
+    podAnnotations: {}
+    podLabels: {}
+    image:
+      name: soveren/kafka
+      tag: 2.13-3.5.1
+      pullPolicy: IfNotPresent
+    env:
+      - name: KAFKA_HEAP_OPTS
+        value: -Xmx512m -Xms512m
+    priorityClassName: ""
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "650Mi"
+        ephemeral-storage: 5Gi
+      limits:
+        cpu: "400m"
+        memory: "1024Mi"
+        ephemeral-storage: 10Gi
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+      fsGroup: 1000
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    persistentVolume:
+      # -- Create/use Persistent Volume Claim for server component. Empty dir if false
+      enabled: false
+      # -- Array of access modes. Must match those of existing PV or dynamic provisioner. Ref: [http://kubernetes.io/docs/user-guide/persistent-volumes/](http://kubernetes.io/docs/user-guide/persistent-volumes/)
+      accessModes:
+        - ReadWriteOnce
+      annotations: {}
+      # -- StorageClass to use for persistent volume.
+      storageClass: ""
+      # -- Bind Persistent Volume by labels. Must match all labels of targeted PV.
+      matchLabels: {}
+      # -- Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
+      size: 10Gi
+    service:
+      annotations: {}
+      labels: {}
+      port: 9092
+    metrics:
+      enabled: true
+      port: 9308
+      image:
+        name: soveren/kafka-exporter
+        tag: v1.7.0
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "650Mi"
+          ephemeral-storage: 5Gi
+        limits:
+          cpu: "400m"
+          memory: "1024Mi"
+          ephemeral-storage: 10Gi
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+  external:
+    # kafka.external.brokers used only if kafka.embedded.enabled=false
+    brokers: []
+
 networkPolicy:
   # -- Specifies whether Network Policies should be created
   enabled: false

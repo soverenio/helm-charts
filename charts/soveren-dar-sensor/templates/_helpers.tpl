@@ -31,3 +31,21 @@ app.kubernetes.io/component: prometheus-agent
 {{ include "prometheusAgent.matchLabels" . }}
 {{ include "common.metaLabels" . }}
 {{- end -}}
+
+{{- define "kafka.matchLabels" -}}
+app.kubernetes.io/component: kafka
+{{ include "common.matchLabels" . }}
+{{- end -}}
+
+{{- define "kafka.labels" -}}
+{{ include "kafka.matchLabels" . }}
+{{ include "common.metaLabels" . }}
+{{- end -}}
+
+{{- define "kafka.brokersStr" -}}
+{{- if .Values.kafka.embedded.enabled -}}
+{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}
+{{- else -}}
+{{ join "," .Values.kafka.external.brokers }}
+{{- end -}}
+{{- end -}}
