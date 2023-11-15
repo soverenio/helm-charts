@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-crawler
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.crawler.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.crawler.deploymentAnnotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "crawler.labels" . | nindent 4 }}
+    {{- if .Values.crawler.deploymentLabels }}
+    {{- toYaml .Values.crawler.deploymentLabels | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "crawler.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/crawler-cm.yaml") . | sha256sum }}
+      {{- if .Values.crawler.podAnnotations }}
+        {{- toYaml .Values.crawler.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "crawler.matchLabels" . | nindent 8 }}
+        {{- if .Values.crawler.podLabels }}
+        {{- toYaml .Values.crawler.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.crawler.priorityClassName }}
+      priorityClassName: {{ .Values.crawler.priorityClassName }}
+      {{- end }}
+      {{- if .Values.crawler.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.crawler.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.crawler.affinity }}
+      affinity:
+      {{- toYaml .Values.crawler.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.crawler.tolerations }}
+      tolerations:
+      {{- toYaml .Values.crawler.tolerations | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: crawler
+        image: {{ .Values.crawler.image.name }}:{{ .Values.crawler.image.tag }}
+        imagePullPolicy: {{ .Values.crawler.image.pullPolicy }}
+        ports:
+        - name: server
+          containerPort: 9000
+        - name: metricsender
+          containerPort: 9100
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-crawler
+        env:
+        - name: SVRN_CRAWLER_STATSCLIENT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-token
+              key: token
+        {{- if .Values.httpsProxy }}
+        # HTTPS Proxy Settings
+        - name: HTTPS_PROXY
+          value: {{ .Values.httpsProxy }}
+        {{- end }}
+        {{- if .Values.httpsProxyNoProxy }}
+        - name: NO_PROXY
+          value: {{ .Values.httpsProxyNoProxy }}
+        {{- end }}
+        {{- if .Values.crawler.env }}
+        {{- toYaml .Values.crawler.env | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.crawler.resources | nindent 10 }}
+        {{- if .Values.crawler.securityContext }}
+        securityContext:
+          {{- toYaml .Values.crawler.securityContext | nindent 10 }}
+        {{- end }}
+        readinessProbe:
+          tcpSocket:
+            port: 9000
+          timeoutSeconds: 3
+      restartPolicy: Always

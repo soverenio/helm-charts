@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-token
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "crawler.labels" . | nindent 4 }}
+data:
+  token: {{ .Values.crawler.token | b64enc }}
+type: Opaque
