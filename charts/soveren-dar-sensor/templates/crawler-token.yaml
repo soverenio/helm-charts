@@ -1,10 +1,12 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ .Release.Name }}-token
+  name: {{ .Release.Name }}-tokens
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "crawler.labels" . | nindent 4 }}
 data:
   token: {{ .Values.crawler.token | b64enc }}
+  awsAccessKeyId: {{ .Values.crawler.awsAccessKeyId | b64enc }}
+  awsSecretAccessKey: {{ .Values.crawler.secretAccessKey | b64enc }}
 type: Opaque
