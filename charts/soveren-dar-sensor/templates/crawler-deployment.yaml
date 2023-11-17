@@ -61,8 +61,18 @@ spec:
         - name: SVRN_CRAWLER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:
-              name: {{ .Release.Name }}-token
+              name: {{ .Release.Name }}-tokens
               key: token
+        - name: SVRN_CRAWLER_S3_ACCESSKEYID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-tokens
+              key: awsAccessKeyId
+        - name: SVRN_CRAWLER_S3_SECRETACCESSKEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-tokens
+              key: awsSecretAccessKey
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
         - name: HTTPS_PROXY
