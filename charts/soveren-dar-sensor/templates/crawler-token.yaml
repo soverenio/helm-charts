@@ -8,5 +8,5 @@ metadata:
 data:
   token: {{ .Values.crawler.token | b64enc }}
   awsAccessKeyId: {{ .Values.crawler.awsAccessKeyId | b64enc }}
-  awsSecretAccessKey: {{ .Values.crawler.secretAccessKey | b64enc }}
+  awsSecretAccessKey: {{ .Values.crawler.awsSecretAccessKey | b64enc }}
 type: Opaque
