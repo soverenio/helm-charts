@@ -1461,4 +1461,15 @@ entries:
     urls:
     - https://github.com/soverenio/helm-charts/releases/download/soveren-agent-0.1.0/soveren-agent-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-01T16:01:32.351295511Z"
+  soveren-dar-sensor:
+  - apiVersion: v2
+    appVersion: 23.11.1
+    created: "2023-11-22T08:59:01.789500277Z"
+    description: Data at rest monitoring and analytics platform
+    digest: 668534e42ae660394d4b5b538b7ca18855d206b5191af8646a59e19b453bcd9a
+    home: https://soveren.io
+    name: soveren-dar-sensor
+    urls:
+    - https://github.com/soverenio/helm-charts/releases/download/soveren-dar-sensor-0.9.1/soveren-dar-sensor-0.9.1.tgz
+    version: 0.9.1
+generated: "2023-11-22T08:59:01.789859615Z"
