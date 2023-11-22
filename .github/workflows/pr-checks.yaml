@@ -3,12 +3,15 @@ name: PR Checks
 on:
   pull_request:
 
-env:
-  CHART_NAME: soveren-agent
-
 jobs:
   template-check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chart_name: [
+          "soveren-agent",
+          "soveren-dar-sensor"
+        ]
     steps:
     - name: Install Helm
       uses: azure/setup-helm@v3
@@ -16,11 +19,9 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    
-    - name: Validate helm chart template
+    - name: Validate helm chart ${{ matrix.chart_name }} template
       run: |
-        helm template ./charts/${CHART_NAME}
-
-    - name: Run linter
+        helm template ./charts/${{ matrix.chart_name }}
+    - name: Run chart ${{ matrix.chart_name }} linter
       run: |
-        helm lint ./charts/${CHART_NAME}
+        helm lint ./charts/${{ matrix.chart_name }}

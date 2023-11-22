@@ -1,13 +1,13 @@
-name: Release Chart soveren-agent
+name: Release Chart soveren-dar-sensor
 
 on:
   push:
     tags:
-    - 'soveren-agent-[0-9]+.[0-9]+.[0-9]+'
-    - 'soveren-agent-[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
+    - 'soveren-dar-sensor-[0-9]+.[0-9]+.[0-9]+'
+    - 'soveren-dar-sensor-[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
 
 env:
-  CHART_NAME: soveren-agent
+  CHART_NAME: soveren-dar-sensor
   CR_OWNER: ${{ github.repository_owner }}
   CR_GIT_REPO: ${{ github.event.repository.name }}
   CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
