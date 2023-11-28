@@ -31,7 +31,7 @@ crawler:
   awsSecretAccessKey: "<YOUR S3 ACCESS KEY>"
 ```
 
-    helm install -n soverenio soveren-agent soveren/soveren-dar-sensor -f values.yaml"
+    helm install -n soverenio-dar-sensor soveren-dar-sensor soveren/soveren-dar-sensor -f values.yaml"
 
 
 For further details, please refer to the [soveren-agent](https://docs.soveren.io/en/stable/getting-started/quick-start/) documentation.
