@@ -88,4 +88,4 @@ spec:
         securityContext:
           {{- toYaml .Values.rpcapd.securityContext | nindent 10 }}
         {{- end }}
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 60
