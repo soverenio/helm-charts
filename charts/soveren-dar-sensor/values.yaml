@@ -77,6 +77,42 @@ prometheusAgent:
     log:
       level: error
 
+detectionTool:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
+  image:
+    name: soveren/detection-tool
+    tag: v2.7.1
+    pullPolicy: IfNotPresent
+  env: []
+  priorityClassName: ""
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "768Mi"
+    limits:
+      cpu: "2200m"
+      memory: "2048Mi"
+      ephemeral-storage: 200Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  metricsPort: 9100
+  service:
+    annotations: {}
+    labels: {}
+    port: 8000
+  cfg:
+    log:
+      level: error
+
 kafka:
   topics:
 #    controlRequestTopicName: control_request

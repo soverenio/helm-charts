@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-detection-tool
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.detectionTool.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.detectionTool.deploymentAnnotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "detectionTool.labels" . | nindent 4 }}
+    {{- if .Values.detectionTool.deploymentLabels }}
+    {{- toYaml .Values.detectionTool.deploymentLabels | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "detectionTool.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/detection-tool-cm.yaml") . | sha256sum }}
+      {{- if .Values.detectionTool.podAnnotations }}
+        {{- toYaml .Values.detectionTool.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "detectionTool.matchLabels" . | nindent 8 }}
+        {{- if .Values.detectionTool.podLabels }}
+        {{- toYaml .Values.detectionTool.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.detectionTool.priorityClassName }}
+      priorityClassName: {{ .Values.detectionTool.priorityClassName }}
+      {{- end }}
+      {{- if .Values.detectionTool.nodeSelector }}
+      nodeSelector:
+      {{- toYaml .Values.detectionTool.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.detectionTool.affinity }}
+      affinity:
+      {{- toYaml .Values.detectionTool.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.detectionTool.tolerations }}
+      tolerations:
+      {{- toYaml .Values.detectionTool.tolerations | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: detection-tool
+        image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
+        imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
+        ports:
+        - name: api
+          containerPort: {{ .Values.detectionTool.service.port }}
+        - name: metrics
+          containerPort: {{ .Values.detectionTool.metricsPort }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-detection-tool
+        env:
+        - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-token
+              key: token
+        {{- if .Values.httpsProxy }}
+        # HTTPS Proxy Settings
+        - name: https_proxy
+          value: {{ .Values.httpsProxy }}
+        {{- end }}
+        {{- if .Values.httpsProxyNoProxy }}
+        - name: no_proxy
+          value: {{ .Values.httpsProxyNoProxy }}
+        {{- end }}
+        {{- if .Values.detectionTool.env }}
+        {{- toYaml .Values.detectionTool.env | nindent 8 }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.detectionTool.resources | nindent 10 }}
+        {{- if .Values.detectionTool.securityContext }}
+        securityContext:
+          {{- toYaml .Values.detectionTool.securityContext | nindent 10 }}
+        {{- end }}
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          timeoutSeconds: 3
+        livenessProbe:
+          httpGet:
+            port: 8000
+            path: /api/v2/alive
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          timeoutSeconds: 3
+      restartPolicy: Always
