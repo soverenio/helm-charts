@@ -42,6 +42,16 @@ app.kubernetes.io/component: kafka
 {{ include "common.metaLabels" . }}
 {{- end -}}
 
+{{- define "detectionTool.matchLabels" -}}
+app.kubernetes.io/component: detection-tool
+{{ include "common.matchLabels" . }}
+{{- end -}}
+
+{{- define "detectionTool.labels" -}}
+{{ include "detectionTool.matchLabels" . }}
+{{ include "common.metaLabels" . }}
+{{- end -}}
+
 {{- define "kafka.brokersStr" -}}
 {{- if .Values.kafka.embedded.enabled -}}
 {{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}
