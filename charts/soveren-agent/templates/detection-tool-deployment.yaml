@@ -91,5 +91,6 @@ spec:
             path: /api/v2/alive
           initialDelaySeconds: 30
           periodSeconds: 60
-          timeoutSeconds: 3
+          timeoutSeconds: 30
+          failureThreshold: 10
       restartPolicy: Always
