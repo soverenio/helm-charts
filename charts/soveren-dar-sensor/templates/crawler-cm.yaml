@@ -7,7 +7,7 @@ metadata:
     {{- include "crawler.labels" . | nindent 4 }}
 data:
   SVRN_CRAWLER_LOG_LEVEL: "{{ .Values.crawler.cfg.log.level }}"
-  SVRN_CRAWLER_DETECTIONTOOL_URI: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
+  SVRN_CRAWLER_DETECTIONTOOL_URL: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
   {{- if .Values.prometheusAgent.enabled }}
   SVRN_CRAWLER_INSTRUMENTATION_METRICSENDER_ENABLED: "true"
   {{- end }}
