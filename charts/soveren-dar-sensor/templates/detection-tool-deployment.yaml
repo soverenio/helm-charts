@@ -59,6 +59,7 @@ spec:
             name: {{ .Release.Name }}-detection-tool
         env:
         - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
+          value: null
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
