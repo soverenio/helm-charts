@@ -10,7 +10,7 @@ data:
   SVRN_DETECTION_TOOL_LOG_LEVEL: "{{ .Values.detectionTool.cfg.log.level }}"
   SVRN_DETECTION_TOOL_OTAREGISTRY_CLIENT_ADDRESS: "updates.soveren.io:443"
   SVRN_DETECTION_TOOL_UPDATE_CHECK_FREQ_SEC: "3600"
-  {{- if .Values.detectionTool.kafkaEnabled}}
-  SVRN_DETECTION_TOOL_LOG_KAFKA: {{ .Release.Name }}-kafka
+  {{- if eq .Values.detectionTool.kafkaEnabled "true" }}
+  SVRN_DETECTION_TOOL_LOG_KAFKA: "{{ .Release.Name }}-kafka"
   {{- end }}
 
