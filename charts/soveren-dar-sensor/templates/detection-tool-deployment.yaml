@@ -61,7 +61,7 @@ spec:
         - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
-              name: {{ .Release.Name }}-token
+              name: {{ .Release.Name }}-tokens
               key: token
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
