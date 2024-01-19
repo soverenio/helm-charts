@@ -84,7 +84,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.8.2
+    tag: v2.8.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -111,6 +111,7 @@ detectionTool:
     port: 8000
   cfg:
     log:
+      kafkaEnabled: true
       level: error
 
 kafka:
