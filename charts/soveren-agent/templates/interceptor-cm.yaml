@@ -33,3 +33,4 @@ data:
   SVRN_INTERCEPTOR_MEMORY_SOFTMEMORYLIMITPERCENT: "{{ .Values.interceptor.cfg.memory.softLimitPercent | int }}"
   SVRN_INTERCEPTOR_CONTROLREQUESTCONSUMER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_INTERCEPTOR_CONTROLREQUESTCONSUMER_TOPIC: "{{ .Values.kafka.topics.controlRequestTopicName }}"
+  SVRN_INTERCEPTOR_DEBUG_USECAPSTER: "false"
