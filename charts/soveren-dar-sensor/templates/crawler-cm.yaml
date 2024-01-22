@@ -7,6 +7,7 @@ metadata:
     {{- include "crawler.labels" . | nindent 4 }}
 data:
   SVRN_CRAWLER_LOG_LEVEL: "{{ .Values.crawler.cfg.log.level }}"
+  SVRN_CRAWLER_DETECTIONTOOL_URL: "http://{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
   {{- if .Values.prometheusAgent.enabled }}
   SVRN_CRAWLER_INSTRUMENTATION_METRICSENDER_ENABLED: "true"
   {{- end }}
@@ -16,3 +17,5 @@ data:
   SVRN_CRAWLER_STATSCLIENT_CLIENT_USETLS: "true"
   SVRN_CRAWLER_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_CRAWLER_PRODUCER_TOPICLOGS: "logs"
+  SVRN_CRAWLER_S3_S3ROLE_ENABLED: "false"
+  SVRN_CRAWLER_S3_S3ROLE_ROLEARN: ""
