@@ -131,6 +131,7 @@ digger:
     resolver:
       excludeLabels: []
     sampler:
+      activeClusteringEnabled: true
       activeClusteringUpdaterEnabled: true
     detectioncorrector:
       # Enable or disable detection corrector
