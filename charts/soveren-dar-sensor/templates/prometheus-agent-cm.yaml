@@ -26,6 +26,12 @@ data:
       static_configs:
       - targets:
         - {{ .Release.Name }}-crawler:{{ .Values.crawler.service.port }}
+    - job_name: detection-tool
+      dns_sd_configs:
+      - type: A
+        names:
+        - {{ .Release.Name }}-detection-tool
+        port: {{ .Values.detectionTool.metricsPort }}    
     {{- if .Values.kafka.embedded.metrics.enabled }}
     - job_name: kafka
       static_configs:
