@@ -218,6 +218,8 @@ interceptor:
     conntracker:
       linkerdPort: 4140
       envoyPort: 15001
+    capster:
+      useCapster: true
 
 rpcapd:
   image:
