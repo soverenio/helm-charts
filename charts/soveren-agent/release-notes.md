@@ -16,6 +16,31 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.1.3
+
+Release date: Jan 31, 2024
+
+### Versions
+
+* **Digger**: 0.31.5
+* **Interceptors**: 0.31.5
+* **Detection**: 2.8.3
+* **Helm chart**: 1.39.0
+
+### Changes
+
+#### Interceptors v0.31.5
+
+1. Completely refactored traffic sampling mechanism, codenamed `capster`. It is enabled by default but can be turned off if needed. The interceptor monitors traffic on each discovered virtual interface for a predefined period before proceeding to the next interface. `capster` was introduced to further reduce the resources required for representative traffic capturing. 
+2. Bugfixes
+3. Helm configuration:
+    1. CPU and MEM `requests` reduced in half
+    2. MEM `limits` reduced by 25%
+    3. `capster` configuration:
+        1. `useCapster: true` by default, can be set to `false` to turn `capster` off
+        2. `listenIterationDuration` controls the duration for which capster listens on an interface, thereby effectively determining the frequency of interface switching. Default value is `5m0s`
+
+
 ## DIM-24.1.2
 
 Release date: Jan 24, 2024
