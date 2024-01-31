@@ -38,7 +38,7 @@ Release date: Jan 31, 2024
     2. MEM `limits` reduced by 25%
     3. `capster` configuration:
         1. `useCapster: true` by default, can be set to `false` to turn `capster` off
-        2. `listenIterationDuration` controls the duration for which capster listens on an interface, thereby effectively determining the frequency of interface switching. Default value is `5m0s`
+        2. `listenIterationDuration` controls the duration for which `capster` listens on an interface, thereby effectively determining the frequency of interface switching. Default value is `5m0s`
 
 
 ## DIM-24.1.2
