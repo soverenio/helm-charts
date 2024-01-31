@@ -218,6 +218,9 @@ interceptor:
     conntracker:
       linkerdPort: 4140
       envoyPort: 15001
+    source:
+      observer:
+        listenIterationDuration: "5m0s"
     capster:
       useCapster: true
 
