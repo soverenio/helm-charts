@@ -103,7 +103,7 @@ Release date: Dec 27, 2023
 
 #### Interceptors v0.29.0
 
-1. Default metrics port changed to `18954` avoid collisions with other pods due to `HostNetwork` usage
+1. Default metrics port changed to `18954` to avoid collisions with other pods due to `HostNetwork` usage
 2. Improved stopping mechanism to prevent breaking of rolling updates
 3. Helm configuration:
     1. Stop timeout set to 55 sec
