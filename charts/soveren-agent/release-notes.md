@@ -35,7 +35,7 @@ Release date: Jan 31, 2024
     * When `capster` is enabled, the interceptor does not use `rpcapd`, but the container remains deployed for the time being. 
 2. Bugfixes
 3. Helm configuration:
-    1. CPU and MEM `requests` reduced in half
+    1. CPU and MEM `requests` reduced by half
     2. MEM `limits` reduced by 25%
     3. `capster` configuration:
         1. `useCapster: true` by default, can be set to `false` to turn `capster` off
