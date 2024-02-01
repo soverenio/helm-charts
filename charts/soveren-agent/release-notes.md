@@ -32,7 +32,7 @@ Release date: Jan 31, 2024
 #### Interceptors v0.31.5
 
 1. Completely refactored traffic sampling mechanism, codenamed `capster`. It is enabled by default but can be turned off if needed. The interceptor monitors traffic on each discovered virtual interface for a predefined period before proceeding to the next interface. `capster` was introduced to further reduce the resources required for representative traffic capturing.
-    * When `capster` is enabled, the interceptor does not use `rpcapd`, but the container is still deployed for the time being. 
+    * When `capster` is enabled, the interceptor does not use `rpcapd`, but the container remains deployed for the time being. 
 2. Bugfixes
 3. Helm configuration:
     1. CPU and MEM `requests` reduced in half
