@@ -223,6 +223,8 @@ interceptor:
         listenIterationDuration: "5m0s"
     capster:
       useCapster: true
+    privilegeChecker:
+      packetTimeout: "30s"
 
 rpcapd:
   image:
