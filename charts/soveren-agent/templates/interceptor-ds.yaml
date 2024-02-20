@@ -17,6 +17,10 @@ spec:
   selector:
     matchLabels:
       {{- include "interceptor.matchLabels" . | nindent 6 }}
+  {{- with .Values.interceptor.updateStrategy }}
+  updateStrategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       annotations:
