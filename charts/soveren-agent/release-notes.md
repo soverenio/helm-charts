@@ -188,3 +188,4 @@ Release date: Nov 28, 2023
 
 1. New retrained version of the ML model
 2. Fixed version metrics
+
