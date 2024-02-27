@@ -12,7 +12,7 @@ crawler:
   awsSecretAccessKey: ""
   image:
     name: soveren/crawler
-    tag: v0.4.0-alpha.3
+    tag: v0.4.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -94,7 +94,7 @@ detectionTool:
       memory: "2252Mi"
     limits:
       cpu: "2200m"
-      memory: "2764Mi"
+      memory: "4000Mi"
       ephemeral-storage: 200Mi
   securityContext:
     runAsUser: 1000
