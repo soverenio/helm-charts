@@ -90,7 +90,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.9.1
+    tag: v2.9.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -100,7 +100,7 @@ detectionTool:
       memory: "2252Mi"
     limits:
       cpu: "2200m"
-      memory: "4000Mi"
+      memory: "2764Mi"
       ephemeral-storage: 200Mi
   securityContext:
     runAsUser: 1000
