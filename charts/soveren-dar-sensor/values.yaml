@@ -40,6 +40,12 @@ crawler:
   cfg:
     log:
       level: error
+    s3:
+      s3role:
+        # Assume role to access S3 storage
+        enabled: false # bool
+        # The Amazon Resource Name (ARN) of the role to assume.
+        rolearn: "" # string
 
 prometheusAgent:
   enabled: true
