@@ -100,7 +100,7 @@ detectionTool:
       memory: "2252Mi"
     limits:
       cpu: "2200m"
-      memory: "2764Mi"
+      memory: "4000Mi"
       ephemeral-storage: 200Mi
   securityContext:
     runAsUser: 1000
