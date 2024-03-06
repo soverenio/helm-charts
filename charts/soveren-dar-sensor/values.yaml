@@ -12,7 +12,7 @@ crawler:
   awsSecretAccessKey: ""
   image:
     name: soveren/crawler
-    tag: v0.4.0
+    tag: v0.4.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -40,6 +40,12 @@ crawler:
   cfg:
     log:
       level: error
+    s3:
+      s3role:
+        # Assume role to access S3 storage
+        enabled: false # bool
+        # The Amazon Resource Name (ARN) of the role to assume.
+        rolearn: "" # string
 
 prometheusAgent:
   enabled: true
@@ -84,7 +90,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.9.1
+    tag: v2.9.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
