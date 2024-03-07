@@ -36,3 +36,4 @@ data:
   SVRN_INTERCEPTOR_DEBUG_USECAPSTER: "{{ .Values.interceptor.cfg.capster.useCapster }}"
   SVRN_INTERCEPTOR_SOURCE_OBSERVER_LISTENITERATIONDURATION: "{{ .Values.interceptor.cfg.source.observer.listenIterationDuration }}"
   SVRN_INTERCEPTOR_PRIVILEGECHECKER_PACKETTIMEOUT: "{{ .Values.interceptor.cfg.privilegeChecker.packetTimeout }}"
+  SVRN_INTERCEPTOR_DIGGERCLIENT_ADDRESS: "{{ .Release.Name }}-digger:{{ .Values.digger.service.port }}"
