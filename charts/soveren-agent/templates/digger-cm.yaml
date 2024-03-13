@@ -36,4 +36,7 @@ data:
   SVRN_DIGGER_DETECTIONCORRECTOR_URL: "{{ .Values.digger.cfg.detectioncorrector.url }}"
   SVRN_DIGGER_DETECTIONCORRECTOR_TOKEN: "{{ .Values.digger.cfg.detectioncorrector.token }}"
   SVRN_DIGGER_DETECTIONCORRECTOR_TYPES: "{{ join "," .Values.digger.cfg.detectioncorrector.types }}"
+  SVRN_DIGGER_DETECTIONCORRECTOR_INTERVAL: "{{ .Values.digger.cfg.detectioncorrector.interval }}"
+  SVRN_DIGGER_GRPC_ADDRESS: 0.0.0.0: {{ .Values.digger.grpcPort }}
+
 
