@@ -112,7 +112,6 @@ digger:
   nodeSelector: {}
   affinity: {}
   tolerations: []
-  grpcPort: 10350
   service:
     annotations: {}
     labels: {}

@@ -20,7 +20,7 @@ spec:
     targetPort: 9000
   - name: grpc
     port: {{ .Values.digger.service.grpcPort }}
-    targetPort: {{ .Values.digger.grpcPort }}
+    targetPort: {{ .Values.digger.service.grpcPort }}
   {{- if .Values.prometheusAgent.enabled }}
   - name: metricsender
     port: 9100
