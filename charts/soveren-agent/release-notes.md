@@ -16,6 +16,33 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.3.1
+
+Release date: Mar 15, 2024
+
+### Versions
+
+* **Digger**: 0.33.0
+* **Interceptors**: 0.33.0
+* **Detection**: 2.9.6
+* **Helm chart**: 1.41.0
+
+### Changes
+
+#### Interceptors v0.33.0
+
+1. Reduced memory consumption
+2. Bugfixes
+
+#### Digger v0.33.0
+
+* Reduced memory consumption when collecting metadata on Kubernetes pods
+
+#### Detection v.2.9.6
+
+1. Improved model
+2. Reduced memory consumption (Kubernetes settings stay the same for now)
+
 ## DIM-24.2.1
 
 Release date: Feb 15, 2024
@@ -37,7 +64,6 @@ Release date: Feb 15, 2024
 #### Detection v2.9.0
 
 1. Improved model
-
 2. Kubernetes memory `requests` increased to `2252Mi`, `limits` to `2764Mi`  
 
 
