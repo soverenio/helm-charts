@@ -222,6 +222,7 @@ interceptor:
     source:
       observer:
         listenIterationDuration: "5m0s"
+        interfaceCount: 1
     capster:
       useCapster: true
     privilegeChecker:
