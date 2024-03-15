@@ -13,7 +13,7 @@ data:
   SVRN_INTERCEPTOR_SOURCE_EXCLUDEDIFACE: "nflog,bluetooth-monitor,nfqueue,tunl0,ip6tnl0,lo,docker0,services1,eth0,cni0"
   SVRN_INTERCEPTOR_SOURCE_FILTER_URLFILTER: "/metrics,/healthz,/api/health,/api/v2/alive,/api/v2/detect"
   SVRN_INTERCEPTOR_STOPTIMEOUT: "55s"
-  SVRN_INTERCEPTOR_INSTRUMENTATION_LISTENADDRESS: 0.0.0.0:{{ .Values.interceptor.metricsPort }}
+  SVRN_INTERCEPTOR_INSTRUMENTATION_LISTENADDRESS: "0.0.0.0:{{ .Values.interceptor.metricsPort }}"
   SVRN_INTERCEPTOR_INSTRUMENTATION_LOGGER_ENABLED: "true"
   SVRN_INTERCEPTOR_ASSEMBLER_STREAMMEMORYCONFIGURATION_TIMEOUT: "1s"
   SVRN_INTERCEPTOR_ASSEMBLER_STREAMMEMORYCONFIGURATION_MAXBUFFEREDPAGESTOTAL: "100000"
@@ -35,4 +35,6 @@ data:
   SVRN_INTERCEPTOR_CONTROLREQUESTCONSUMER_TOPIC: "{{ .Values.kafka.topics.controlRequestTopicName }}"
   SVRN_INTERCEPTOR_DEBUG_USECAPSTER: "{{ .Values.interceptor.cfg.capster.useCapster }}"
   SVRN_INTERCEPTOR_SOURCE_OBSERVER_LISTENITERATIONDURATION: "{{ .Values.interceptor.cfg.source.observer.listenIterationDuration }}"
+  SVRN_INTERCEPTOR_SOURCE_OBSERVER_INTERFACECOUNT: "{{ .Values.interceptor.cfg.source.observer.interfaceCount }}"
   SVRN_INTERCEPTOR_PRIVILEGECHECKER_PACKETTIMEOUT: "{{ .Values.interceptor.cfg.privilegeChecker.packetTimeout }}"
+  SVRN_INTERCEPTOR_DIGGERCLIENT_ADDRESS: "{{ .Release.Name }}-digger:{{ .Values.digger.service.grpcPort }}"
