@@ -59,3 +59,11 @@ app.kubernetes.io/component: detection-tool
 {{ join "," .Values.kafka.external.brokers }}
 {{- end -}}
 {{- end -}}
+
+{{- define "crawl.kafka" -}}
+{{- range $key, $value := .Values.crawler.cfg.kafka -}}
+{{- $pwd := print "$(KAFKA_PASSWORDS_" $key ")" -}}
+{{- $_ := set $value "password" $pwd -}}
+{{- end -}}
+{{ toJson .Values.crawler.cfg.kafka | quote }}
+{{- end -}}

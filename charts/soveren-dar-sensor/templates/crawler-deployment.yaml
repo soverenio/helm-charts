@@ -63,16 +63,29 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: token
-        - name: SVRN_CRAWLER_S3_ACCESSKEYID
+        - name: S3_ACCESSKEYID
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: awsAccessKeyId
-        - name: SVRN_CRAWLER_S3_SECRETACCESSKEY
+        - name: S3_SECRETACCESSKEY
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: awsSecretAccessKey
+        {{- range $key, $value := .Values.crawler.cfg.kafka }}
+        - name: KAFKA_PASSWORDS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Release.Name }}-tokens
+              key: kafkaPasswords-{{ $key }}
+        {{- end }}
+        {{- if .Values.crawler.cfg.kafka }}
+        - name: SVRN_CRAWLER_CRAWL_KAFKA
+          value: {{ include "crawl.kafka" . }}
+        {{- end }}
+        - name: SVRN_CRAWLER_CRAWL_S3
+          value: "[{\"accesskeyid\":\"$(S3_ACCESSKEYID)\",\"secretaccesskey\":\"$(S3_SECRETACCESSKEY)\",\"checkinterval\":\"12h\",\"retrymaxattempts\":\"5\",\"retrymaxbackoffdelay\":\"20s\",\"s3role\":$(CRAWL_S3ROLE)}]"
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
         - name: HTTPS_PROXY

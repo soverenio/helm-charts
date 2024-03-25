@@ -9,4 +9,7 @@ data:
   token: {{ .Values.crawler.token | b64enc }}
   awsAccessKeyId: {{ .Values.crawler.awsAccessKeyId | b64enc }}
   awsSecretAccessKey: {{ .Values.crawler.awsSecretAccessKey | b64enc }}
+  {{- range $key, $val := .Values.crawler.cfg.kafka }}
+  kafkaPasswords-{{ $key }}: {{ $val.password | b64enc }}
+  {{- end }}
 type: Opaque

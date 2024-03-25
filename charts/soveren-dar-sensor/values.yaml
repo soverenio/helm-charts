@@ -46,6 +46,10 @@ crawler:
         enabled: false # bool
         # The Amazon Resource Name (ARN) of the role to assume.
         rolearn: "" # string
+        # An identifier for the assumed role session.
+        rolesessionname: SoverenCrawlerSession # string
+        # The duration, in seconds, of the role session. Min: 15 minutes. Max: max session duration set for the role. If you specify a value higher than this setting, the operation fails.
+        duration: 15m0s # Duration
 
 prometheusAgent:
   enabled: true
