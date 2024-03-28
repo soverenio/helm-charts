@@ -52,6 +52,8 @@ crawler:
         rolesessionname: SoverenCrawlerSession # string
         # The duration, in seconds, of the role session. Min: 15 minutes. Max: max session duration set for the role. If you specify a value higher than this setting, the operation fails.
         duration: 15m0s # Duration
+    kafka:
+      enabled: false
 
 prometheusAgent:
   enabled: true
