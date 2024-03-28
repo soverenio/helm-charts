@@ -8,8 +8,6 @@ crawler:
   podAnnotations: {}
   podLabels: {}
   token: ""
-  awsAccessKeyId: ""
-  awsSecretAccessKey: ""
   image:
     name: soveren/crawler
     tag: v0.4.1
@@ -41,11 +39,21 @@ crawler:
     log:
       level: error
     s3:
+      enabled: false
+      checkinterval: "12h"
+      retrymaxattempts: 5
+      retrymaxbackoffdelay: "20s"
       s3role:
         # Assume role to access S3 storage
         enabled: false # bool
         # The Amazon Resource Name (ARN) of the role to assume.
         rolearn: "" # string
+        # An identifier for the assumed role session.
+        rolesessionname: SoverenCrawlerSession # string
+        # The duration, in seconds, of the role session. Min: 15 minutes. Max: max session duration set for the role. If you specify a value higher than this setting, the operation fails.
+        duration: 15m0s # Duration
+    kafka:
+      enabled: false
 
 prometheusAgent:
   enabled: true
