@@ -8,8 +8,6 @@ crawler:
   podAnnotations: {}
   podLabels: {}
   token: ""
-  awsAccessKeyId: ""
-  awsSecretAccessKey: ""
   image:
     name: soveren/crawler
     tag: v0.4.1
@@ -41,6 +39,10 @@ crawler:
     log:
       level: error
     s3:
+      enabled: false
+      checkinterval: "12h"
+      retrymaxattempts: 5
+      retrymaxbackoffdelay: "20s"
       s3role:
         # Assume role to access S3 storage
         enabled: false # bool

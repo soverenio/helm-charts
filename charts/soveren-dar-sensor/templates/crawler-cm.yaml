@@ -19,4 +19,3 @@ data:
   SVRN_CRAWLER_STATSCLIENT_CLIENT_USETLS: "true"
   SVRN_CRAWLER_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_CRAWLER_PRODUCER_TOPICLOGS: "logs"
-  CRAWL_S3ROLE: {{ toJson .Values.crawler.cfg.s3.s3role | squote }}
