@@ -40,6 +40,8 @@ crawler:
       level: error
     s3:
       enabled: false
+      accessKeyId: ""
+      secretAccessKey: ""
       checkinterval: "12h"
       retrymaxattempts: 5
       retrymaxbackoffdelay: "20s"
