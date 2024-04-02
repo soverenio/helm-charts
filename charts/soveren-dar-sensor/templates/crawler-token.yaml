@@ -7,6 +7,15 @@ metadata:
     {{- include "crawler.labels" . | nindent 4 }}
 data:
   token: {{ .Values.crawler.token | b64enc }}
-  awsAccessKeyId: {{ .Values.crawler.awsAccessKeyId | b64enc }}
-  awsSecretAccessKey: {{ .Values.crawler.awsSecretAccessKey | b64enc }}
+  {{- if .Values.crawler.cfg.s3.enabled }}
+  awsAccessKeyId: {{ .Values.crawler.cfg.s3.accessKeyId | b64enc }}
+  awsSecretAccessKey: {{ .Values.crawler.cfg.s3.secretAccessKey | b64enc }}
+  {{- end }}
+  {{- if .Values.crawler.cfg.kafka.enabled }}
+  {{- range $key, $val := .Values.crawler.cfg.kafka.elements }}
+  {{- if $val.password }}
+  kafkaPasswords-{{ $key }}: {{ $val.password | b64enc }}
+  {{- end }}
+  {{- end }}
+  {{- end }}
 type: Opaque

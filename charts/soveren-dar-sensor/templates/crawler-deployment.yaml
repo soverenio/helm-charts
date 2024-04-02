@@ -63,16 +63,33 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: token
-        - name: SVRN_CRAWLER_S3_ACCESSKEYID
+        {{- if .Values.crawler.cfg.kafka.enabled }}
+        {{- range $key, $value := .Values.crawler.cfg.kafka.elements }}
+        {{- if $value.password }}
+        - name: KAFKA_PASSWORDS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Release.Name }}-tokens
+              key: kafkaPasswords-{{ $key }}
+        {{- end }}
+        {{- end }}
+        - name: SVRN_CRAWLER_CRAWL_KAFKA
+          value: {{ include "crawl.kafka" . }}
+        {{- end }}
+        {{- if .Values.crawler.cfg.s3.enabled }}
+        - name: S3_ACCESSKEYID
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: awsAccessKeyId
-        - name: SVRN_CRAWLER_S3_SECRETACCESSKEY
+        - name: S3_SECRETACCESSKEY
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: awsSecretAccessKey
+        - name: SVRN_CRAWLER_CRAWL_S3
+          value: {{ include "crawl.s3" . }}
+        {{- end }}
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
         - name: HTTPS_PROXY

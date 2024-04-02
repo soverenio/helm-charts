@@ -59,3 +59,22 @@ app.kubernetes.io/component: detection-tool
 {{ join "," .Values.kafka.external.brokers }}
 {{- end -}}
 {{- end -}}
+
+{{- define "crawl.kafka" -}}
+{{- range $key, $value := .Values.crawler.cfg.kafka.elements -}}
+{{- if $value.password }}
+{{- $pwd := print "$(KAFKA_PASSWORDS_" $key ")" -}}
+{{- $_ := set $value "password" $pwd -}}
+{{- end -}}
+{{- end -}}
+{{ toJson .Values.crawler.cfg.kafka.elements | quote }}
+{{- end -}}
+
+{{- define "crawl.s3" -}}
+{{- $enabled := .Values.crawler.cfg.s3.enabled -}}
+{{- $_ := unset .Values.crawler.cfg.s3 "enabled" -}}
+{{- $_ := set .Values.crawler.cfg.s3 "accessKeyId" "$(S3_ACCESSKEYID)" -}}
+{{- $_ := set .Values.crawler.cfg.s3 "secretAccessKey" "$(S3_SECRETACCESSKEY)" -}}
+"[{{ toJson .Values.crawler.cfg.s3 | quote | trimPrefix "\"" | trimSuffix "\"" }}]"
+{{- $_ := set .Values.crawler.cfg.s3 "enabled" $enabled -}}
+{{- end -}}
