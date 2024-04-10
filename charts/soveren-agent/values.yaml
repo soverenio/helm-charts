@@ -10,6 +10,7 @@ kafka:
     controlRequestTopicName: control_request
     controlResponseTopicName: control_response
     logsTopicName: logs
+    monitoredConnectionsTopicName: monitored_connections
   embedded:
     enabled: true
     deploymentAnnotations: {}
@@ -227,6 +228,8 @@ interceptor:
       useCapster: true
     privilegeChecker:
       packetTimeout: "30s"
+    connectionmonitor:
+      enabled: true
 
 rpcapd:
   image:

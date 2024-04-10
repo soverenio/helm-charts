@@ -17,6 +17,7 @@ data:
   SVRN_DIGGER_KAFKA_CONSUMER_TOPIC: "{{ .Values.kafka.topics.eventsTopicName }}"
   SVRN_DIGGER_KAFKA_CONSUMERCONTROLRESPONSE_TOPIC: "{{ .Values.kafka.topics.controlResponseTopicName }}"
   SVRN_DIGGER_KAFKA_CONSUMERLOGS_TOPIC: "{{ .Values.kafka.topics.logsTopicName }}"
+  SVRN_DIGGER_KAFKA_CONSUMERCONNECTIONMONITOR: "{{ .Values.kafka.topics.monitoredConnectionsTopicName }}"
   SVRN_DIGGER_RESOLVER_KUBERNETES_ENABLED: "true"
   SVRN_DIGGER_RESOLVER_EXCLUDELABELS: "{{ join "," .Values.digger.cfg.resolver.excludeLabels }}"
   SVRN_DIGGER_STATSCLIENT_CLIENT_ADDRESS: "stats.soveren.io:443"
