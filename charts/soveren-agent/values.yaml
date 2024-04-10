@@ -229,7 +229,7 @@ interceptor:
     privilegeChecker:
       packetTimeout: "30s"
     connectionMonitor:
-      enabled: true
+      enabled: false
 
 rpcapd:
   image:
