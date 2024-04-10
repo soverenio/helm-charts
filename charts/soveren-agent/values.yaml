@@ -228,7 +228,7 @@ interceptor:
       useCapster: true
     privilegeChecker:
       packetTimeout: "30s"
-    connectionmonitor:
+    connectionMonitor:
       enabled: true
 
 rpcapd:
