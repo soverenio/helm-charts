@@ -10,7 +10,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.4.1
+    tag: v0.5.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -40,6 +40,8 @@ crawler:
       level: error
     s3:
       enabled: false
+      accessKeyId: ""
+      secretAccessKey: ""
       checkinterval: "12h"
       retrymaxattempts: 5
       retrymaxbackoffdelay: "20s"
@@ -98,7 +100,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.9.3
+    tag: v2.10.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
