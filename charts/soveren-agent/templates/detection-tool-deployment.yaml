@@ -45,10 +45,25 @@ spec:
       tolerations:
       {{- toYaml .Values.detectionTool.tolerations | nindent 8 }}
       {{- end }}
+      {{- if .Values.digger.useVault }}
+      serviceAccountName: {{ .Release.Name }}-digger
+      {{- end }}
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
+        {{- if .Values.detectionTool.image.command }}
+        command:
+        {{- range .Values.detectionTool.image.command }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- end }}
+        {{- if .Values.detectionTool.image.args }}
+        args:
+        {{- range .Values.detectionTool.image.args }}
+        - {{ . | quote }}
+        {{- end }}
+        {{- end }}
         ports:
         - name: api
           containerPort: {{ .Values.detectionTool.service.port }}
@@ -58,11 +73,13 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
         env:
+        {{- if not .Values.digger.useVault }}
         - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-token
               key: token
+        {{- end }}
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
         - name: https_proxy

@@ -89,10 +89,15 @@ digger:
   podLabels: {}
   token: ""
   clusterName: ""
+  useVault: false
   image:
     name: soveren/digger
     tag: v0.33.0
     pullPolicy: IfNotPresent
+    # Default entrypoint for digger: '/usr/local/bin/digger --config /etc/config.yaml'
+    # Example for hashcorp/vault:
+    #command: [ '/bin/bash', '-c' ]
+    #args: [ 'source /vault/secrets/soverentokens && /usr/local/bin/digger --config /etc/config.yaml' ]
   env: []
   priorityClassName: ""
   resources:
@@ -153,6 +158,10 @@ detectionTool:
     name: soveren/detection-tool
     tag: v2.9.6
     pullPolicy: IfNotPresent
+    # Default entrypoint for detection-tool: './entrypoint.sh'
+    # Example for hashcorp/vault:
+    #command: [ '/bin/bash', '-c' ]
+    #args: [ 'source /vault/secrets/soverentokens && ./entrypoint.sh' ]
   env: []
   priorityClassName: ""
   resources:
