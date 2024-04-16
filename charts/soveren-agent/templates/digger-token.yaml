@@ -1,4 +1,4 @@
-{{- if not .Values.digger.useVault }}
+{{- if not .Values.useVault }}
 apiVersion: v1
 kind: Secret
 metadata:

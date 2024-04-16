@@ -45,13 +45,14 @@ spec:
       tolerations:
       {{- toYaml .Values.detectionTool.tolerations | nindent 8 }}
       {{- end }}
-      {{- if .Values.digger.useVault }}
+      {{- if .Values.useVault }}
       serviceAccountName: {{ .Release.Name }}-digger
       {{- end }}
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
+        {{- if .Values.useVault }}
         {{- if .Values.detectionTool.image.command }}
         command:
         {{- range .Values.detectionTool.image.command }}
@@ -64,6 +65,7 @@ spec:
         - {{ . | quote }}
         {{- end }}
         {{- end }}
+        {{- end }}
         ports:
         - name: api
           containerPort: {{ .Values.detectionTool.service.port }}
@@ -73,7 +75,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
         env:
-        {{- if not .Values.digger.useVault }}
+        {{- if not .Values.useVault }}
         - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
           valueFrom:
             secretKeyRef:

@@ -50,6 +50,7 @@ spec:
       - name: digger
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
         imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
+        {{- if .Values.useVault }}
         {{- if .Values.digger.image.command }}
         command:
         {{- range .Values.digger.image.command }}
@@ -62,6 +63,7 @@ spec:
         - {{ . | quote }}
         {{- end }}
         {{- end }}
+        {{- end }}
         ports:
         - name: server
           containerPort: 9000
@@ -71,7 +73,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-digger
         env:
-        {{- if not .Values.digger.useVault }}
+        {{- if not .Values.useVault }}
         - name: SVRN_DIGGER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:
