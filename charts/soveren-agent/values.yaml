@@ -201,6 +201,10 @@ interceptor:
     name: soveren/interceptor
     tag: v0.33.0
     pullPolicy: IfNotPresent
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   env: []
   priorityClassName: ""
   resources:
