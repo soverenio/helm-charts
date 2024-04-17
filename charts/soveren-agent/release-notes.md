@@ -18,7 +18,7 @@ Versions of Digger and Interceptors are synchronized, but sometimes there are ch
 
 ## DIM-24.4.1
 
-Release date: Apr 11, 2024
+Release date: Apr 17, 2024
 
 ### Versions
 
