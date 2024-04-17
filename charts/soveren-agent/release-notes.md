@@ -16,6 +16,24 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.4.1
+
+Release date: Apr 11, 2024
+
+### Versions
+
+* **Digger**: 0.33.0
+* **Interceptors**: 0.33.0
+* **Detection**: 2.9.6
+* **Helm chart**: 1.41.1
+
+### Changes
+
+#### Helm chart v1.41.1
+
+1. Support for `updateStrategy` for Interceptors
+2. Support for getting tokens from HashiCorp Vault
+
 ## DIM-24.3.1
 
 Release date: Mar 15, 2024
