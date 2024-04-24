@@ -1,6 +1,7 @@
 # HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
 httpsProxy: ""
 httpsProxyNoProxy: ""
+useVault: false
 
 kafka:
   topics:
@@ -94,6 +95,11 @@ digger:
     name: soveren/digger
     tag: v0.34.0-alpha.9
     pullPolicy: IfNotPresent
+    # Default entrypoint for digger: '/usr/local/bin/digger --config /etc/config.yaml'
+    # The use of these parameters is now tied to the use on the useVault: true
+    # Example for hashcorp/vault:
+    #command: [ '/bin/bash', '-c' ]
+    #args: [ 'source /vault/secrets/soverentokens && /usr/local/bin/digger --config /etc/config.yaml' ]
   env: []
   priorityClassName: ""
   resources:
@@ -154,6 +160,11 @@ detectionTool:
     name: soveren/detection-tool
     tag: v2.10.3
     pullPolicy: IfNotPresent
+    # Default entrypoint for detection-tool: './entrypoint.sh'
+    # The use of these parameters is now tied to the use on the useVault: true
+    # Example for hashcorp/vault:
+    #command: [ '/bin/bash', '-c' ]
+    #args: [ 'source /vault/secrets/soverentokens && ./entrypoint.sh' ]
   env: []
   priorityClassName: ""
   resources:
@@ -191,6 +202,10 @@ interceptor:
     name: soveren/interceptor
     tag: v0.34.0-alpha.9
     pullPolicy: IfNotPresent
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   env: []
   priorityClassName: ""
   resources:
