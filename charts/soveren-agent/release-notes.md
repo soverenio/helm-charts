@@ -16,6 +16,36 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.5.1
+
+Release date: May 07, 2024
+
+### Versions
+
+* **Digger**: 0.34.0
+* **Interceptors**: 0.34.0
+* **Detection**: 2.11.2
+* **Helm chart**: 1.42.0
+
+### Changes
+
+#### Interceptors v0.34.0
+
+1. TLS discovery
+2. Extended TCP analysis
+
+#### Interceptors v0.34.0
+
+1. TLS discovery
+2. Extended TCP analysis
+3. S3 connectivity from services to buckets
+
+#### Detection v.2.11.2
+
+1. Upgrade to Python 3.11
+2. Improved retrained model
+3. Alpha release of customer data types support
+
 ## DIM-24.4.2
 
 Release date: Apr 26, 2024
@@ -34,6 +64,7 @@ Release date: Apr 26, 2024
 1. Improved detection quality
 2. Fix of the update procedure
 
+
 ## DIM-24.4.1
 
 Release date: Apr 16, 2024
@@ -51,6 +82,7 @@ Release date: Apr 16, 2024
 
 1. Support for `updateStrategy` for Interceptors
 2. Support for getting tokens from HashiCorp Vault
+
 
 ## DIM-24.3.1
 
@@ -78,6 +110,7 @@ Release date: Mar 15, 2024
 
 1. Improved model
 2. Reduced memory consumption (Kubernetes settings stay the same for now)
+
 
 ## DIM-24.2.1
 
