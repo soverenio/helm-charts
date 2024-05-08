@@ -29,6 +29,10 @@ Release date: May 07, 2024
 
 ### Changes
 
+In this release, we've introduced the discovery of connections between services in your Kubernetes cluster and S3 buckets in AWS. Both DIM and DAR sensors must be deployed for this functionality to work. You do not need to update the configuration settings; everything should work out of the box.
+
+Additionally, we've updated the Python version in Detection to 3.11 and introduced support for custom types (not yet available in the product UI).
+
 #### Interceptors v0.34.0
 
 1. TLS discovery
