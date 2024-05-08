@@ -38,7 +38,7 @@ Additionally, we've updated the Python version in Detection to 3.11 and introduc
 1. TLS discovery
 2. Extended TCP analysis
 
-#### Interceptors v0.34.0
+#### Digger v0.34.0
 
 1. TLS discovery
 2. Extended TCP analysis
