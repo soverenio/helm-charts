@@ -39,4 +39,5 @@ data:
   SVRN_INTERCEPTOR_PRIVILEGECHECKER_PACKETTIMEOUT: "{{ .Values.interceptor.cfg.privilegeChecker.packetTimeout }}"
   SVRN_INTERCEPTOR_DIGGERCLIENT_ADDRESS: "{{ .Release.Name }}-digger:{{ .Values.digger.service.grpcPort }}"
   SVRN_INTERCEPTOR_PRODUCER_MONITOREDCONNECTIONSTOPIC: "{{ .Values.kafka.topics.monitoredConnectionsTopicName }}"
-  SVRN_INTERCEPTOR_CONNECTIONMONITOR_ENABLED: "{{ .Values.interceptor.cfg.connectionMonitor.enabled }}"
+  SVRN_INTERCEPTOR_CONNECTIONMONITOR_TRACKER_ENABLED: "{{ .Values.interceptor.cfg.connectionMonitor.tracker.enabled }}"
+  SVRN_INTERCEPTOR_CONNECTIONMONITOR_STORER_ENABLED: "{{ .Values.interceptor.cfg.connectionMonitor.storer.enabled }}"

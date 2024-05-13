@@ -244,8 +244,10 @@ interceptor:
     privilegeChecker:
       packetTimeout: "30s"
     connectionMonitor:
-      enabled: false
-
+      tracker:
+        enabled: false
+      storer:
+        enabled: true
 rpcapd:
   image:
     name: soveren/rpcapd
