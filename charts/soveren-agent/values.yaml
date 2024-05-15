@@ -243,11 +243,6 @@ interceptor:
       useCapster: true
     privilegeChecker:
       packetTimeout: "30s"
-    connectionMonitor:
-      tracker:
-        enabled: false
-      storer:
-        enabled: true
 rpcapd:
   image:
     name: soveren/rpcapd
