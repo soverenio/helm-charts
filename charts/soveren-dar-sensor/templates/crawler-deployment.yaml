@@ -63,6 +63,7 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: token
+        # Kafka Settings
         {{- if .Values.crawler.cfg.kafka.enabled }}
         {{- range $key, $value := .Values.crawler.cfg.kafka.elements }}
         {{- if $value.password }}
@@ -76,6 +77,28 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_KAFKA
           value: {{ include "crawl.kafka" . }}
         {{- end }}
+        # Database settings
+        {{- if .Values.crawler.cfg.database.enabled }}
+        {{- range $key, $value := .Values.crawler.cfg.database.elements }}
+        {{- if $value.usr }}
+        - name: DATABASE_USERS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Release.Name }}-tokens
+              key: databaseUsers-{{ $key }}
+        {{- end }}
+        {{- if $value.password }}
+        - name: DATABASE_PASSWORDS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Release.Name }}-tokens
+              key: databasePasswords-{{ $key }}
+        {{- end }}
+        {{- end }}
+        - name: SVRN_CRAWLER_CRAWL_DATABASE
+          value: {{ include "crawl.database" . }}
+        {{- end }}
+        # S3 Settings
         {{- if .Values.crawler.cfg.s3.enabled }}
         - name: S3_ACCESSKEYID
           valueFrom:

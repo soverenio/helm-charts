@@ -15,6 +15,19 @@ data:
   {{- range $key, $val := .Values.crawler.cfg.kafka.elements }}
   {{- if $val.password }}
   kafkaPasswords-{{ $key }}: {{ $val.password | b64enc }}
+  Passwords-{{ $key }}: {{ $val.password | b64enc }}
+  {{- end }}
+  {{- end }}
+  {{- if .Values.crawler.cfg.database.enabled }}
+  {{- range $key, $val := .Values.crawler.cfg.database.elements }}
+  {{- if $val.password }}
+  databasePasswords-{{ $key }}: {{ $val.password | b64enc }}
+  Passwords-{{ $key }}: {{ $val.password | b64enc }}
+  {{- end }}
+  {{- if $val.user }}
+  databaseUsers-{{ $key }}: {{ $val.user | b64enc }}
+  Users-{{ $key }}: {{ $val.user | b64enc }}
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- end }}

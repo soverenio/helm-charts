@@ -56,6 +56,8 @@ crawler:
         duration: 15m0s # Duration
     kafka:
       enabled: false
+    database:
+      enabled: false
 
 prometheusAgent:
   enabled: true
