@@ -77,26 +77,17 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_KAFKA
           value: {{ include "crawl.kafka" . }}
         {{- end }}
-        # Database settings
-        {{- if .Values.crawler.cfg.database.enabled }}
-        {{- range $key, $value := .Values.crawler.cfg.database.elements }}
-        {{- if $value.usr }}
-        - name: DATABASE_USERS_{{ $key }}
+        # Postgres settings
+        {{- if .Values.crawler.cfg.database.postgres.enabled }}
+        {{- range $key, $value := .Values.crawler.cfg.database.postgres.elements }}
+        - name: DATABASE_POSTGRES_CONN_STRINGS_{{ $key }}
           valueFrom:
             secretKeyRef:
               name: {{ $.Release.Name }}-tokens
-              key: databaseUsers-{{ $key }}
+              key: databasePostgresConnStrings-{{ $key }}
         {{- end }}
-        {{- if $value.password }}
-        - name: DATABASE_PASSWORDS_{{ $key }}
-          valueFrom:
-            secretKeyRef:
-              name: {{ $.Release.Name }}-tokens
-              key: databasePasswords-{{ $key }}
-        {{- end }}
-        {{- end }}
-        - name: SVRN_CRAWLER_CRAWL_DATABASE
-          value: {{ include "crawl.database" . }}
+        - name: SVRN_CRAWLER_CRAWL_DATABASE_POSTGRES
+          value: {{ include "crawl.database.postgres" . }}
         {{- end }}
         # S3 Settings
         {{- if .Values.crawler.cfg.s3.enabled }}

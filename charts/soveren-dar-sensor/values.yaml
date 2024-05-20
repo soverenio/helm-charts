@@ -57,7 +57,9 @@ crawler:
     kafka:
       enabled: false
     database:
-      enabled: false
+      checkinterval: "24h"
+      postgres:
+        enabled: false
 
 prometheusAgent:
   enabled: true

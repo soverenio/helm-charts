@@ -70,18 +70,12 @@ app.kubernetes.io/component: detection-tool
 {{ toJson .Values.crawler.cfg.kafka.elements | quote }}
 {{- end -}}
 
-{{- define "crawl.database" -}}
-{{- range $key, $value := .Values.crawler.cfg.database.elements -}}
-{{- if $value.password }}
-{{- $pwd := print "$(DATABASE_PASSWORDS_" $key ")" -}}
-{{- $_ := set $value "password" $pwd -}}
+{{- define "crawl.database.postgres" -}}
+{{- range $key, $value := .Values.crawler.cfg.database.postgres.elements -}}
+{{- $connString := print "$(DATABASE_POSTGRES_CONN_STRINGS_" $key ")" -}}
+{{- $_ := set $value "connectionString" $connString -}}
 {{- end -}}
-{{- if $value.user }}
-{{- $usr := print "$(DATABASE_USERS_" $key ")" -}}
-{{- $_ := set $value "user" $usr -}}
-{{- end -}}
-{{- end -}}
-{{ toJson .Values.crawler.cfg.database.elements | quote }}
+{{ toJson .Values.crawler.cfg.database.postgres.elements | quote }}
 {{- end -}}
 
 {{- define "crawl.s3" -}}
