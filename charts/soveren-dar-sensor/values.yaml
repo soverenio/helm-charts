@@ -10,7 +10,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.5.0
+    tag: v0.6.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -56,6 +56,10 @@ crawler:
         duration: 15m0s # Duration
     kafka:
       enabled: false
+    database:
+      checkinterval: "24h"
+      postgres:
+        enabled: false
 
 prometheusAgent:
   enabled: true
@@ -100,7 +104,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.10.3
+    tag: v2.11.4
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
