@@ -39,6 +39,12 @@ crawler:
           brokers: ["<YOUR KAFKA INSTANCE BROKER 1>", "<YOUR KAFKA INSTANCE BROKER 2>", ..., "<YOUR KAFKA INSTANCE BROKER N>"]
           user: "<YOUR KAFKA INSTANCE USER>"
           password: "<YOUR KAFKA INSTANCE PASSWORD>"
+    database:
+      postgres:
+          enabled: true
+          elements:
+            - name: "<YOUR POSTGRES INSTANCE NAME>"
+              connectionString: "<YOUR POSTGRES INSTANCE CONNECTION STRING>"
 ```
 
     helm install -n soverenio-dar-sensor soveren-dar-sensor soveren/soveren-dar-sensor -f values.yaml
