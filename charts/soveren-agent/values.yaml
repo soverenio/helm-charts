@@ -93,7 +93,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.34.0
+    tag: v0.35.0
     pullPolicy: IfNotPresent
     # Default entrypoint for digger: '/usr/local/bin/digger --config /etc/config.yaml'
     # The use of these parameters is now tied to the use on the useVault: true
@@ -158,7 +158,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.11.2
+    tag: v2.11.4
     pullPolicy: IfNotPresent
     # Default entrypoint for detection-tool: './entrypoint.sh'
     # The use of these parameters is now tied to the use on the useVault: true
@@ -200,7 +200,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.34.0
+    tag: v0.35.0
     pullPolicy: IfNotPresent
   updateStrategy:
     type: RollingUpdate
@@ -243,9 +243,6 @@ interceptor:
       useCapster: true
     privilegeChecker:
       packetTimeout: "30s"
-    connectionMonitor:
-      enabled: false
-
 rpcapd:
   image:
     name: soveren/rpcapd
