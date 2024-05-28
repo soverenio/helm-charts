@@ -16,6 +16,39 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.5.2
+
+Release date: May 27, 2024
+
+### Versions
+
+* **Digger**: 0.35.0
+* **Interceptors**: 0.35.0
+* **Detection**: 2.11.4
+* **Helm chart**: 1.43.0
+
+### Changes
+
+Connections between Kubernetes services and S3 buckets in AWS are now monitored by default. Both DIM and DAR sensors must be deployed for this to work. Everything should work out of the box, no configuration changes required.
+
+#### Interceptors v0.35.0
+
+* Bugfixes
+
+#### Digger v0.35.0
+
+* Reduced memory consumption when handling Kubernetes metadata
+
+#### Detection v.2.11.4
+
+1. Improved retrained model
+2. Bugfixes
+
+#### Helm chart v1.43.0
+
+* S3 connections monitoring enabled by default.
+
+
 ## DIM-24.5.1
 
 Release date: May 07, 2024
