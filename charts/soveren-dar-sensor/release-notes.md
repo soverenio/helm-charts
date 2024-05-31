@@ -31,7 +31,7 @@ The Soveren DAR Sensor is designed to uncover sensitive data in data sources suc
 
 * **S3 buckets**
   * Currently, only AWS is supported.
-  * Upon startup, the sensor assumes the AWS Role configured by you in IAM.
+  * Upon startup, the sensor assumes the AWS Role configured by you in IAM to access the buckets.
   * The sensor automatically discovers available S3 buckets, scans them periodically for object listings, and performs sensitive data detection on selected samples.
   * Sensitive data detection is available for the following formats:
     * JSON
@@ -41,7 +41,7 @@ The Soveren DAR Sensor is designed to uncover sensitive data in data sources suc
     * XML
     * Text-based logs
   * GZipped JSON and logs are also supported.
-  * If the DAR sensor is complemented by the DIM sensor, connections between Kubernetes services and S3 buckets will be shown on the data map.
+  * If the DAR sensor is complemented by the DIM sensor of version [DIM-24.5.2](https://github.com/soverenio/helm-charts/blob/master/charts/soveren-agent/release-notes.md#dim-2452) and newer, connections between Kubernetes services and S3 buckets will be shown on the data map.
 
 * **Kafka**
   * The sensor is configured to access specified Kafka brokers with supplied credentials.
