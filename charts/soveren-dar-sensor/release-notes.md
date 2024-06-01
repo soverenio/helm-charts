@@ -38,7 +38,6 @@ The Soveren DAR Sensor is designed to uncover sensitive data in data sources suc
     * NDJSON
     * CSV
     * YAML
-    * XML
     * Text-based logs
   * GZipped JSON and logs are also supported.
   * If the DAR sensor is complemented by the DIM sensor of version [DIM-24.5.2](https://github.com/soverenio/helm-charts/blob/master/charts/soveren-agent/release-notes.md#dim-2452) and newer, connections between Kubernetes services and S3 buckets will be shown on the data map.
