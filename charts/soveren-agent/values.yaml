@@ -158,7 +158,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.11.4
+    tag: v2.11.5
     pullPolicy: IfNotPresent
     # Default entrypoint for detection-tool: './entrypoint.sh'
     # The use of these parameters is now tied to the use on the useVault: true
