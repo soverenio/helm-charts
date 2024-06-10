@@ -45,6 +45,10 @@ spec:
       tolerations:
       {{- toYaml .Values.crawler.tolerations | nindent 8 }}
       {{- end }}
+      {{- with .Values.crawler.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: crawler
         image: {{ .Values.crawler.image.name }}:{{ .Values.crawler.image.tag }}

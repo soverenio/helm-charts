@@ -31,6 +31,7 @@ crawler:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   service:
     annotations: {}
     labels: {}
@@ -93,6 +94,7 @@ prometheusAgent:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   cfg:
     log:
       level: error
@@ -124,6 +126,7 @@ detectionTool:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   metricsPort: 9100
   service:
     annotations: {}
@@ -169,6 +172,7 @@ kafka:
     nodeSelector: {}
     affinity: {}
     tolerations: []
+    imagePullSecrets: []
     persistentVolume:
       # -- Create/use Persistent Volume Claim for server component. Empty dir if false
       enabled: false
@@ -215,3 +219,10 @@ networkPolicy:
   enabled: false
   # -- Specify when the httpsProxy is enabled
   proxyIp: ""
+  # -- Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
+  #  crawlerAdditionalEgress:
+  #      - name: postgres
+  #        host: 192.168.1.1/32
+  #        port: 5432
+  #        protocol: TCP
+  crawlerAdditionalEgress: []
