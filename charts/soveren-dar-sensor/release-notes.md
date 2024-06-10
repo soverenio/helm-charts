@@ -13,6 +13,23 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.5.1-hotfix
+
+Release date: Jun 10, 2024
+
+### Versions
+
+* **Crawler**: 0.6.3
+* **Detection**: 2.11.4
+* **Helm chart**: 0.14.2
+
+### Changes
+
+#### Crawler v0.6.3
+
+* Bugfixes
+
+
 ## DAR-24.5.1
 
 Release date: May 21, 2024
