@@ -1,3 +1,4 @@
+{{- if not .Values.crawlerCreateConfigSecret }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -27,3 +28,4 @@ data:
   {{- end }}
 
 type: Opaque
+{{- end }}

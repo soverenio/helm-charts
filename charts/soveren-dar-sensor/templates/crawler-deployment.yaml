@@ -62,6 +62,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-crawler
         env:
+        {{- if .Values.crawlerCreateConfigSecret }}
         - name: SVRN_CRAWLER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:
@@ -107,6 +108,7 @@ spec:
               key: awsSecretAccessKey
         - name: SVRN_CRAWLER_CRAWL_S3
           value: {{ include "crawl.s3" . }}
+        {{- end }}
         {{- end }}
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings

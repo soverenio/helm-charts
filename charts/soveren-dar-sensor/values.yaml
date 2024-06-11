@@ -1,6 +1,7 @@
 # HTTPS Proxy URL
 httpsProxy: ""
 httpsProxyNoProxy: ""
+crawlerCreateConfigSecret: true
 
 crawler:
   deploymentAnnotations: {}
