@@ -1,4 +1,4 @@
-{{- if not .Values.crawlerCreateConfigSecret }}
+{{- if .Values.crawlerCreateConfigSecret }}
 apiVersion: v1
 kind: Secret
 metadata:

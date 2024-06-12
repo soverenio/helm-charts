@@ -21,6 +21,9 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/crawler-cm.yaml") . | sha256sum }}
+        {{- if .Values.crawlerCreateConfigSecret }}
+        checksum/secret: {{ include (print $.Template.BasePath "/crawler-token.yaml") . | sha256sum }}
+        {{- end }}
       {{- if .Values.crawler.podAnnotations }}
         {{- toYaml .Values.crawler.podAnnotations | nindent 8 }}
       {{- end }}
