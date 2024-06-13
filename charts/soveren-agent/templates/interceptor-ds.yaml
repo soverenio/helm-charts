@@ -49,6 +49,10 @@ spec:
       tolerations:
       {{- toYaml .Values.interceptor.tolerations | nindent 8 }}
       {{- end }}
+      {{- with .Values.interceptor.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true

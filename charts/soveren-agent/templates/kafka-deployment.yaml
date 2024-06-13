@@ -49,6 +49,10 @@ spec:
       tolerations:
       {{- toYaml .Values.kafka.embedded.tolerations | nindent 8 }}
       {{- end }}
+      {{- with .Values.kafka.embedded.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- if .Values.kafka.embedded.securityContext }}
       securityContext:
       {{- toYaml .Values.kafka.embedded.securityContext | nindent 8 }}

@@ -45,6 +45,10 @@ spec:
       tolerations:
       {{- toYaml .Values.detectionTool.tolerations | nindent 8 }}
       {{- end }}
+      {{- with .Values.detectionTool.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- if .Values.useVault }}
       serviceAccountName: {{ .Release.Name }}-digger
       {{- end }}

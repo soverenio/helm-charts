@@ -43,6 +43,7 @@ kafka:
     nodeSelector: {}
     affinity: {}
     tolerations: []
+    imagePullSecrets: []
     persistentVolume:
       # -- Create/use Persistent Volume Claim for server component. Empty dir if false
       enabled: false
@@ -119,6 +120,7 @@ digger:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   service:
     annotations: {}
     labels: {}
@@ -183,6 +185,7 @@ detectionTool:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   metricsPort: 9100
   service:
     annotations: {}
@@ -219,6 +222,7 @@ interceptor:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   securityContext:
     privileged: true
   metricsPort: 18954
@@ -294,6 +298,7 @@ prometheusAgent:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  imagePullSecrets: []
   cfg:
     log:
       level: error

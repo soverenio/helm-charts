@@ -21,6 +21,9 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/crawler-cm.yaml") . | sha256sum }}
+        {{- if .Values.crawlerCreateConfigSecret }}
+        checksum/secret: {{ include (print $.Template.BasePath "/crawler-token.yaml") . | sha256sum }}
+        {{- end }}
       {{- if .Values.crawler.podAnnotations }}
         {{- toYaml .Values.crawler.podAnnotations | nindent 8 }}
       {{- end }}
@@ -45,6 +48,10 @@ spec:
       tolerations:
       {{- toYaml .Values.crawler.tolerations | nindent 8 }}
       {{- end }}
+      {{- with .Values.crawler.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: crawler
         image: {{ .Values.crawler.image.name }}:{{ .Values.crawler.image.tag }}
@@ -58,6 +65,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-crawler
         env:
+        {{- if .Values.crawlerCreateConfigSecret }}
         - name: SVRN_CRAWLER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:
@@ -103,6 +111,7 @@ spec:
               key: awsSecretAccessKey
         - name: SVRN_CRAWLER_CRAWL_S3
           value: {{ include "crawl.s3" . }}
+        {{- end }}
         {{- end }}
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
