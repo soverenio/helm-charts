@@ -21,7 +21,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/crawler-cm.yaml") . | sha256sum }}
-        {{- if .Values.crawlerCreateConfigSecret }}
+        {{- if not .Values.useExternalSecrets }}
         checksum/secret: {{ include (print $.Template.BasePath "/crawler-token.yaml") . | sha256sum }}
         {{- end }}
       {{- if .Values.crawler.podAnnotations }}
@@ -65,7 +65,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-crawler
         env:
-        {{- if .Values.crawlerCreateConfigSecret }}
+        {{- if not .Values.useExternalSecrets }}
         - name: SVRN_CRAWLER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:

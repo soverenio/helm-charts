@@ -49,14 +49,14 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.useVault }}
+      {{- if .Values.useExternalSecrets }}
       serviceAccountName: {{ .Release.Name }}-digger
       {{- end }}
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
-        {{- if .Values.useVault }}
+        {{- if .Values.useExternalSecrets }}
         {{- if .Values.detectionTool.image.command }}
         command:
         {{- range .Values.detectionTool.image.command }}
@@ -79,7 +79,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
         env:
-        {{- if not .Values.useVault }}
+        {{- if not .Values.useExternalSecrets }}
         - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
           valueFrom:
             secretKeyRef:

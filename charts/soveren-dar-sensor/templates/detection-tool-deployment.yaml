@@ -21,7 +21,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/detection-tool-cm.yaml") . | sha256sum }}
-      {{- if .Values.crawlerCreateConfigSecret }}
+      {{- if not .Values.useExternalSecrets }}
         checksum/secret: {{ include (print $.Template.BasePath "/crawler-token.yaml") . | sha256sum }}
       {{- end }}
       {{- if .Values.detectionTool.podAnnotations }}
@@ -65,12 +65,14 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-detection-tool
         env:
+        {{- if not .Values.useExternalSecrets }}
         - name: SVRN_DETECTION_TOOL_OTAREGISTRY_AUTH_TOKEN
           value: null
           valueFrom:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: token
+        {{- end }}
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
         - name: https_proxy

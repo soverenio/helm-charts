@@ -1,7 +1,7 @@
 # HTTPS Proxy URL
 httpsProxy: ""
 httpsProxyNoProxy: ""
-crawlerCreateConfigSecret: true
+useExternalSecrets: false
 
 crawler:
   deploymentAnnotations: {}

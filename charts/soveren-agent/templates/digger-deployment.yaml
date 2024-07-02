@@ -54,7 +54,7 @@ spec:
       - name: digger
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
         imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
-        {{- if .Values.useVault }}
+        {{- if .Values.useExternalSecrets }}
         {{- if .Values.digger.image.command }}
         command:
         {{- range .Values.digger.image.command }}
@@ -77,7 +77,7 @@ spec:
         - configMapRef:
             name: {{ .Release.Name }}-digger
         env:
-        {{- if not .Values.useVault }}
+        {{- if not .Values.useExternalSecrets }}
         - name: SVRN_DIGGER_STATSCLIENT_TOKEN
           valueFrom:
             secretKeyRef:
