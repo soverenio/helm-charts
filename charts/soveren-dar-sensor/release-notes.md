@@ -13,6 +13,30 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.7.1
+
+Release date: Jul 04, 2024
+
+### Versions
+
+* **Crawler**: 0.7.0
+* **Detection**: 2.11.5
+* **Helm chart**: 0.15.1
+
+### Changes
+
+This release includes an enhanced detection component and the ability to pass metadata, allowing Kafka clusters and databases to be displayed on the data map and in the data sources UI. For the latter feature to work, you need to configure the autodetection of data sources in the product UI. Please note that this feature is still under development.
+
+#### Crawler v0.7.0
+
+* Improvements for showing discovered Kafka clusters and databases on the data map and in the data sources UI
+
+#### Detection v2.11.5
+
+1. Optimizations
+2. Improved model
+
+
 ## DAR-24.5.1-hotfix
 
 Release date: Jun 10, 2024
