@@ -20,7 +20,7 @@ Release date: Jul 04, 2024
 ### Versions
 
 * **Crawler**: 0.7.0
-* **Detection**: 2.11.5
+* **Detection**: 2.11.8
 * **Helm chart**: 0.15.1
 
 ### Changes
@@ -31,7 +31,7 @@ This release includes an enhanced detection component and the ability to pass me
 
 * Improvements for showing discovered Kafka clusters and databases on the data map and in the data sources UI
 
-#### Detection v2.11.5
+#### Detection v2.11.8
 
 1. Optimizations
 2. Improved model
