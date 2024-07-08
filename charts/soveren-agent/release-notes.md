@@ -16,6 +16,35 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.7.1
+
+Release date: Jul 08, 2024
+
+### Versions
+
+* **Digger**: 0.36.0
+* **Interceptors**: 0.36.0
+* **Detection**: 2.11.8
+* **Helm chart**: 1.44.0
+
+### Changes
+
+This release contains bugfixes and improved detection component. The `useVault` variable in the Helm chart renamed to `useExternalSecrets` for consistency.
+
+#### Interceptors v0.36.0
+
+* Fixed memory leak
+
+#### Detection v.2.11.8
+
+1. Optimizations
+2. Improved model
+
+#### Helm chart v1.44.0
+
+* `useVault` renamed to `useExternalSecrets`
+
+
 ## DIM-24.5.2
 
 Release date: May 27, 2024
