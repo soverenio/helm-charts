@@ -13,6 +13,25 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.7.2
+
+Release date: Jul 16, 2024
+
+### Versions
+
+* **Crawler**: 0.8.0
+* **Detection**: 2.11.5
+* **Helm chart**: 0.16.1
+
+### Changes
+
+This is a bugfix release.
+
+#### Crawler v0.8.0
+
+* Resolved an issue with insufficient permissions for database access: instead of displaying no tables, the appropriate error message is now shown.
+
+
 ## DAR-24.7.1
 
 Release date: Jul 04, 2024
