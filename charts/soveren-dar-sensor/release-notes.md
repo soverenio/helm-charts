@@ -13,6 +13,25 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.7.2-DT
+
+Release date: Jul 18, 2024
+
+### Versions
+
+* **Crawler**: 0.8.0
+* **Detection**: 2.11.8
+* **Helm chart**: 0.16.2
+
+### Changes
+
+This release provides updated detection component.
+
+#### Detection v2.11.8
+
+* Improved detection model.
+
+
 ## DAR-24.7.2
 
 Release date: Jul 16, 2024
