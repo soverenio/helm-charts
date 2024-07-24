@@ -218,7 +218,7 @@ kafka:
 networkPolicy:
   # -- Specifies whether Network Policies should be created
   enabled: false
-  # -- Specify when the httpsProxy is enabled
+  # -- Specify IP or IP/MASK when the httpsProxy is enabled
   proxyIp: ""
   # -- Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
   #  crawlerAdditionalEgress:
