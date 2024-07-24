@@ -306,7 +306,7 @@ prometheusAgent:
 networkPolicy:
   # -- Specifies whether Network Policies should be created
   enabled: false
-  # -- Specify when the httpsProxy is enabled
+  # -- Specify IP and IP/MASK when the httpsProxy is enabled
   proxyIp: ""
   k8sApi:
     # -- Specify the k8s API endpoint port
