@@ -16,6 +16,30 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.8.1
+
+Release date: Aug 15, 2024
+
+### Versions
+
+* **Digger**: 0.37.1
+* **Interceptors**: 0.37.1
+* **Detection**: 2.11.8
+* **Helm chart**: 1.45.0
+
+### Changes
+
+In this release we are starting to support interception of gRPC traffic.
+
+#### Interceptors v0.37.1
+
+* Support of gRPC interception
+
+#### Digger v0.37.1
+
+* Bugfixes
+
+
 ## DIM-24.7.1-hotfix
 
 Release date: Jul 18, 2024
@@ -31,9 +55,10 @@ Release date: Jul 18, 2024
 
 This is a bugfix release.
 
-#### Interceptors v0.36.0
+#### Interceptors v0.36.1
 
 * Fixed the TLS parsing issue that resulted in occasional restarts.
+
 
 ## DIM-24.7.1
 
