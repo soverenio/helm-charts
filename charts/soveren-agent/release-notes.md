@@ -16,6 +16,30 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.8.1-hotfix
+
+Release date: Aug 16, 2024
+
+### Versions
+
+* **Digger**: 0.37.2
+* **Interceptors**: 0.37.2
+* **Detection**: 2.11.8
+* **Helm chart**: 1.45.1
+
+### Changes
+
+In this a hotfix release with improved metrics.
+
+#### Interceptors v0.37.2
+
+* Improved metrics
+
+#### Digger v0.37.2
+
+* Improved metrics
+
+
 ## DIM-24.8.1
 
 Release date: Aug 15, 2024
