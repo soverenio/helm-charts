@@ -97,6 +97,30 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_DATABASE_POSTGRES
           value: {{ include "crawl.database.postgres" . }}
         {{- end }}
+        # MS SQL settings
+        { { - if .Values.crawler.cfg.database.mssql.enabled } }
+        { { - range $key, $value := .Values.crawler.cfg.database.mssql.elements } }
+        - name: DATABASE_MSSQL_CONN_STRINGS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: { { $.Release.Name } }-tokens
+              key: databaseMssqlConnStrings-{{ $key }}
+        { { - end } }
+        - name: SVRN_CRAWLER_CRAWL_DATABASE_MSSQL
+          value: { { include "crawl.database.mssql" . } }
+        { { - end } }
+        # MySQL settings
+        {{- if .Values.crawler.cfg.database.mysql.enabled }}
+        {{- range $key, $value := .Values.crawler.cfg.database.mysql.elements }}
+        - name: DATABASE_MYSQL_CONN_STRINGS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Release.Name }}-tokens
+              key: databaseMysqlConnStrings-{{ $key }}
+        {{- end }}
+        - name: SVRN_CRAWLER_CRAWL_DATABASE_MYSQL
+          value: {{ include "crawl.database.mysql" . }}
+        {{- end }}
         # S3 Settings
         {{- if .Values.crawler.cfg.s3.enabled }}
         - name: S3_ACCESSKEYID
