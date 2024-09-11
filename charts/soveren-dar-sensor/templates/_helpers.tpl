@@ -78,6 +78,24 @@ app.kubernetes.io/component: detection-tool
 {{ toJson .Values.crawler.cfg.database.postgres.elements | quote }}
 {{- end -}}
 
+{{- define "crawl.database.mysql" -}}
+{{- range $key, $value := .Values.crawler.cfg.database.mysql.elements -}}
+{{- $connString := print "$(DATABASE_MYSQL_CONN_STRINGS_" $key ")" -}}
+{{- $_ := set $value "connectionString" $connString -}}
+{{- end -}}
+{{ toJson .Values.crawler.cfg.database.mysql.elements | quote }}
+{{- end -}}
+
+
+{{- define "crawl.database.mssql" -}}
+{{- range $key, $value := .Values.crawler.cfg.database.mssql.elements -}}
+{{- $connString := print "$(DATABASE_MSSQL_CONN_STRINGS_" $key ")" -}}
+{{- $_ := set $value "connectionString" $connString -}}
+{{- end -}}
+{{ toJson .Values.crawler.cfg.database.mssql.elements | quote }}
+{{- end -}}
+
+
 {{- define "crawl.s3" -}}
 {{- $enabled := .Values.crawler.cfg.s3.enabled -}}
 {{- $_ := unset .Values.crawler.cfg.s3 "enabled" -}}

@@ -27,5 +27,17 @@ data:
   {{- end }}
   {{- end }}
 
+  {{- if .Values.crawler.cfg.database.mysql.enabled }}
+  {{- range $key, $val := .Values.crawler.cfg.database.mysql.elements }}
+  databaseMysqlConnStrings-{{ $key }}: {{ $val.connectionString | b64enc }}
+  {{- end }}
+  {{- end }}
+
+  {{- if .Values.crawler.cfg.database.mssql.enabled }}
+  {{- range $key, $val := .Values.crawler.cfg.database.mssql.elements }}
+  databaseMssqlConnStrings-{{ $key }}: {{ $val.connectionString | b64enc }}
+  {{- end }}
+  {{- end }}
+
 type: Opaque
 {{- end }}
