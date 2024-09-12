@@ -13,6 +13,35 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.9.1
+
+Release date: Sep 11, 2024
+
+### Versions
+
+* **Crawler**: 0.9.0
+* **Detection**: 2.12.4
+* **Helm chart**: 0.17.0
+
+### Changes
+
+This release includes an updated detection model, support for MS SQL (SQL Server) and MySQL, and support for non-public database schemas. Additionally, the sensor will scan only the specified `dbname`, if [provided in the configuration](https://docs.soveren.io/en/stable/administration/configuring-sensor/#databases).
+
+The [Object API](https://docs.soveren.io/en/stable/integration/api/ref/) has been updated in the data sources section, including S3, Kafka, and databases.
+
+#### Crawler v0.9.0
+
+1. MS SQL (SQL Server) support.
+2. MySQL support.
+3. Non-public/default database schemas support.
+4. Scan only `dbname` if it is specified.
+5. Updated Object API.
+
+#### Detection v2.12.4
+
+* Improved detection model.
+
+
 ## DAR-24.7.2-DT
 
 Release date: Jul 18, 2024
