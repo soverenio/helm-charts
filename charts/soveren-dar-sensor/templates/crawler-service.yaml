@@ -22,6 +22,9 @@ spec:
   - name: metricsender
     port: 9100
     targetPort: 9100
+  - name: grpc
+    port: 10350
+    targetPort: 10350
   {{- end }}
   selector:
     {{- include "crawler.matchLabels" . | nindent 4 }}

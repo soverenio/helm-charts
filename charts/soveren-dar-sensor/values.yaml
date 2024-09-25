@@ -41,7 +41,6 @@ crawler:
     log:
       level: error
     grpc:
-      address: 0.0.0.0:10350
       usetls: false
       key:
       certificate:
