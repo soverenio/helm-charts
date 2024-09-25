@@ -1,0 +1,71 @@
+name: Release Charts
+
+on:
+  push:
+    tags:
+    - 'soveren-agent-[0-9]+.[0-9]+.[0-9]+'
+    - 'soveren-agent-[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
+    - 'soveren-dar-sensor-[0-9]+.[0-9]+.[0-9]+'
+    - 'soveren-dar-sensor-[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
+    - 'soveren-dar-ranger-[0-9]+.[0-9]+.[0-9]+'
+    - 'soveren-dar-ranger-[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+'
+
+env:
+  CR_OWNER: ${{ github.repository_owner }}
+  CR_GIT_REPO: ${{ github.event.repository.name }}
+  CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    container: quay.io/helmpack/chart-releaser:v1.4.1
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Configure Git
+      run: |
+        git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+        git config --global user.name "${GITHUB_ACTOR}"
+        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+    - name: Determine chart name from tag
+      id: chart_info
+      run: |
+        if [[ "${GITHUB_REF_NAME}" =~ ^soveren-agent-[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+          echo "chart_name=soveren-agent" >> $GITHUB_ENV
+        elif [[ "${GITHUB_REF_NAME}" =~ ^soveren-dar-sensor-[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+          echo "chart_name=soveren-dar-sensor" >> $GITHUB_ENV
+        elif [[ "${GITHUB_REF_NAME}" =~ ^soveren-dar-ranger-[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+          echo "chart_name=soveren-dar-ranger" >> $GITHUB_ENV
+        else
+          echo "ERROR: Tag does not match any known chart patterns."
+          exit 1
+        fi
+
+    - name: Check that the git tag matches the chart version
+      run: |
+        apk -u add yq
+        chart_version=$(yq .version charts/${{ env.chart_name }}/Chart.yaml)
+        if [[ "${GITHUB_REF_NAME}" == "${{ env.chart_name }}-${chart_version}" ]]; then
+          echo "Git tag: ${GITHUB_REF_NAME}"
+          echo "Chart version: ${chart_version}"
+          echo "OK: Git tag matches chart version"
+        else
+          echo "Git tag: ${GITHUB_REF_NAME}"
+          echo "Chart version: ${chart_version}"
+          echo "ERROR: Git tag and chart version are different"
+          exit 1
+        fi
+
+    - name: Pack and release chart
+      run: |
+        cr package "charts/${{ env.chart_name }}"
+        cr upload "charts/${{ env.chart_name }}"
+
+    - name: Update Helm Repo Index
+      run: |
+        mkdir .cr-index
+        cr index "charts/${{ env.chart_name }}" --push
