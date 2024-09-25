@@ -160,4 +160,16 @@ spec:
           tcpSocket:
             port: 9000
           timeoutSeconds: 3
+        {{- if .Values.crawler.cfg.grpc.usetls }}
+        volumeMounts:
+          - name: crawler-certs
+            mountPath: /etc/certs/
+            readOnly: true
+        {{- end }}
       restartPolicy: Always
+    {{- if .Values.crawler.cfg.grpc.usetls }}
+    volumes:
+    - name: crawler-certs
+      secret:
+        secretName: {{ .Release.Name }}-crawler-certs
+    {{- end }}

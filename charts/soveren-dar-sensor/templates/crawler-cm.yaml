@@ -20,3 +20,12 @@ data:
   SVRN_CRAWLER_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_CRAWLER_PRODUCER_TOPICLOGS: "logs"
   SVRN_CRAWLER_CRAWL_DATABASE_CHECKINTERVAL: "{{ .Values.crawler.cfg.database.checkinterval }}"
+  {{- if .Values.crawler.cfg.grpc.address }}
+  SVRN_CRAWLER_STATSCLIENT_GRPC_ADDRESS: "{{ .Values.crawler.cfg.grpc.address }}"
+  {{- end }}
+  SVRN_CRAWLER_STATSCLIENT_GRPC_USETLS: "{{ .Values.crawler.cfg.grpc.usetls }}"
+  {{- if .Values.crawler.cfg.grpc.usetls }}
+  SVRN_CRAWLER_STATSCLIENT_GRPC_CACERTIFICATE: "/etc/certs/ca.crt"
+  SVRN_CRAWLER_STATSCLIENT_GRPC_CERTIFICATEH: "/etc/certs/tls.crt"
+  SVRN_CRAWLER_STATSCLIENT_GRPC_KEYPATH: "/etc/certs/tls.key"
+  {{- end }}
