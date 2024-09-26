@@ -10,7 +10,7 @@ ranger:
   podLabels: {}
   # Token for crawler, use if useExternalSecrets: false
   token: ""
-  # Empty value to use lookup by namespace, otherwise specify an address e.g. - crawler:9000
+  # Should always be specified
   crawler_address:
   image:
     name: soveren/ranger

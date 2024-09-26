@@ -14,15 +14,7 @@ data:
   SVRN_RANGER_CRAWLERCLIENT_CLIENT_CLIENTCERTIFICATEPATH: "/etc/certs/tls.crt"
   SVRN_RANGER_CRAWLERCLIENT_CLIENT_CLIENTKEYPATH: "/etc/certs/tls.key"
   {{- end }}
-  {{- if not .Values.ranger.crawler_address }}
-  {{- range $index, $service := (lookup "v1" "Service" .Release.Namespace "").items }}
-  {{- if eq (index $service.metadata.labels "app.kubernetes.io/component") "crawler" }}
-  SVRN_RANGER_CRAWLERCLIENT_CLIENT_ADDRESS: "{{ $service.metadata.name }}:10350"
-  {{- end }}
-  {{- end }}
-  {{- else }}
   SVRN_RANGER_CRAWLERCLIENT_CLIENT_ADDRESS: "{{ .Values.ranger.crawler_address }}"
-  {{- end }}
   {{- range $index, $service := (lookup "v1" "Service" .Release.Namespace "").items }}
   {{- if eq (index $service.metadata.labels "app.kubernetes.io/component") "kafka" }}
   SVRN_RANGER_PRODUCER_BROKERS: "{{ $service.metadata.name }}:9092"
