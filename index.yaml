@@ -1993,6 +1993,16 @@ entries:
     version: 0.1.0
   soveren-dar-ranger:
   - apiVersion: v2
+    appVersion: 24.9.2
+    created: "2024-09-30T08:32:45.806204533Z"
+    description: Soveren data at rest component for DB instances
+    digest: df9f91a930df339a4c6d351a8d6497a721fbb38624f2dcf08b1c59741750da52
+    home: https://soveren.io
+    name: soveren-dar-ranger
+    urls:
+    - https://github.com/soverenio/helm-charts/releases/download/soveren-dar-ranger-0.18.0-alpha.2/soveren-dar-ranger-0.18.0-alpha.2.tgz
+    version: 0.18.0-alpha.2
+  - apiVersion: v2
     appVersion: 24.9.20
     created: "2024-09-26T09:47:01.992822629Z"
     description: Soveren data at rest component for DB instances
@@ -2373,4 +2383,4 @@ entries:
     urls:
     - https://github.com/soverenio/helm-charts/releases/download/soveren-dar-sensor-0.9.1/soveren-dar-sensor-0.9.1.tgz
     version: 0.9.1
-generated: "2024-09-26T09:47:01.993604932Z"
+generated: "2024-09-30T08:32:45.807067783Z"
