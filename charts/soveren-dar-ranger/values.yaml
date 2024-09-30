@@ -14,7 +14,7 @@ ranger:
   crawler_address:
   image:
     name: soveren/ranger
-    tag: latest
+    tag: v0.10.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
