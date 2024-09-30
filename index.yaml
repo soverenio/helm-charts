@@ -2025,6 +2025,16 @@ entries:
   soveren-dar-sensor:
   - apiVersion: v2
     appVersion: 24.9.1
+    created: "2024-09-30T08:39:03.218399858Z"
+    description: Data at rest monitoring and analytics platform
+    digest: 3679c0f76d4a85f810d07f157a1d9ccc555af03bd201417065f454c039e81de8
+    home: https://soveren.io
+    name: soveren-dar-sensor
+    urls:
+    - https://github.com/soverenio/helm-charts/releases/download/soveren-dar-sensor-0.18.0-alpha.4/soveren-dar-sensor-0.18.0-alpha.4.tgz
+    version: 0.18.0-alpha.4
+  - apiVersion: v2
+    appVersion: 24.9.1
     created: "2024-09-30T08:33:15.727300175Z"
     description: Data at rest monitoring and analytics platform
     digest: 98a3ec4202cc5951e2aa8316eb7b701a14cc8875ce093f7eb3decde53340d6c1
@@ -2393,4 +2403,4 @@ entries:
     urls:
     - https://github.com/soverenio/helm-charts/releases/download/soveren-dar-sensor-0.9.1/soveren-dar-sensor-0.9.1.tgz
     version: 0.9.1
-generated: "2024-09-30T08:33:15.728117106Z"
+generated: "2024-09-30T08:39:03.219189333Z"
