@@ -27,7 +27,6 @@ spec:
     spec:
       containers:
       {{- include "ranger.container" . | nindent 6 }}
-      restartPolicy: Always
       readinessProbe:
         tcpSocket:
           port: 9000
@@ -36,6 +35,7 @@ spec:
         timeoutSeconds: 3
         failureThreshold: 3
         successThreshold: 1
+      restartPolicy: Always
       {{- if .Values.ranger.cfg.crawlerclient.usetls }}
       volumes:
       - name: ranger-certs
