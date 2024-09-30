@@ -1,0 +1,112 @@
+{{- if not .Values.ranger.cronjob.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-ranger
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ranger.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "ranger.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/ranger-cm.yaml") . | sha256sum }}
+        {{- if not .Values.useExternalSecrets }}
+        checksum/secret: {{ include (print $.Template.BasePath "/ranger-token.yaml") . | sha256sum }}
+        {{- if .Values.ranger.cfg.crawlerclient.usetls }}
+        checksum/secret: {{ include (print $.Template.BasePath "/ranger-cert.yaml") . | sha256sum }}
+        {{- end }}
+        {{- end }}
+      labels:
+        {{- include "ranger.matchLabels" . | nindent 8 }}
+    spec:
+      containers:
+      {{- include "ranger.container" . | nindent 6 }}
+      restartPolicy: Always
+      readinessProbe:
+        tcpSocket:
+          port: 9000
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        timeoutSeconds: 3
+        failureThreshold: 3
+        successThreshold: 1
+      {{- if .Values.ranger.cfg.crawlerclient.usetls }}
+      volumes:
+      - name: ranger-certs
+        secret:
+          secretName: {{ .Release.Name }}-ranger-certs
+      {{- end }}
+{{- else if and .Values.ranger.cronjob.enabled (not (empty .Values.ranger.cronjob.schedule)) }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}-ranger-cronjob
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ranger.labels" . | nindent 4 }}
+spec:
+  schedule: "{{ .Values.ranger.cronjob.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            checksum/config: {{ include (print $.Template.BasePath "/ranger-cm.yaml") . | sha256sum }}
+            {{- if not .Values.useExternalSecrets }}
+            checksum/secret: {{ include (print $.Template.BasePath "/ranger-token.yaml") . | sha256sum }}
+            {{- if .Values.ranger.cfg.crawlerclient.usetls }}
+            checksum/secret: {{ include (print $.Template.BasePath "/ranger-cert.yaml") . | sha256sum }}
+            {{- end }}
+            {{- end }}
+          labels:
+            {{- include "ranger.matchLabels" . | nindent 8 }}
+        spec:
+          containers:
+          {{- include "ranger.container" . | nindent 10 }}
+          restartPolicy: OnFailure
+          {{- if .Values.ranger.cfg.crawlerclient.usetls }}
+          volumes:
+          - name: ranger-certs
+            secret:
+              secretName: {{ .Release.Name }}-ranger-certs
+          {{- end }}
+{{- else }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-ranger-job
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ranger.labels" . | nindent 4 }}
+spec:
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/ranger-cm.yaml") . | sha256sum }}
+        {{- if not .Values.useExternalSecrets }}
+        checksum/secret: {{ include (print $.Template.BasePath "/ranger-token.yaml") . | sha256sum }}
+        {{- if .Values.ranger.cfg.crawlerclient.usetls }}
+        checksum/secret: {{ include (print $.Template.BasePath "/ranger-cert.yaml") . | sha256sum }}
+        {{- end }}
+        {{- end }}
+      labels:
+        {{- include "ranger.matchLabels" . | nindent 8 }}
+    spec:
+      containers:
+      {{- include "ranger.container" . | nindent 6 }}
+      restartPolicy: OnFailure
+      {{- if .Values.ranger.cfg.crawlerclient.usetls }}
+      volumes:
+      - name: ranger-certs
+        secret:
+          secretName: {{ .Release.Name }}-ranger-certs
+      {{- end }}
+{{- end }}

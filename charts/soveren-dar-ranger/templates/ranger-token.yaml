@@ -1,0 +1,14 @@
+{{- if not .Values.useExternalSecrets }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-ranger-tokens
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ranger.labels" . | nindent 4 }}
+data:
+  token: {{ .Values.ranger.token | b64enc }}
+  connectionstring-{{ .Values.ranger.cfg.crawl.database.name }}: {{ .Values.ranger.cfg.crawl.database.connectionstring | b64enc }}
+type: Opaque
+{{- end }}

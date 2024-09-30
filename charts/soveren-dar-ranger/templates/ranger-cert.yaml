@@ -1,0 +1,19 @@
+{{- if not .Values.useExternalSecrets }}
+{{- if .Values.ranger.cfg.crawlerclient.usetls }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-ranger-certs
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ranger.labels" . | nindent 4 }}
+type: kubernetes.io/tls
+data:
+  {{- if .Values.ranger.cfg.crawlerclient.cacertificate }}
+  ca.crt: {{ .Values.ranger.cfg.crawlerclient.cacertificate | b64enc | quote }}
+  {{- end }}
+  tls.crt: {{ .Values.ranger.cfg.crawlerclient.clientcertificate | b64enc | quote }}
+  tls.key: {{ .Values.ranger.cfg.crawlerclient.clientkey | b64enc | quote }}
+{{- end }}
+{{- end }}
