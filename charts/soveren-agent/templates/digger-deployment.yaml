@@ -84,7 +84,7 @@ spec:
               name: {{ .Release.Name }}-token
               key: token
         {{- end }}
-        - name: SVRN_DIGGER_K8SNAMESPACE
+        - name: SVRN_DIGGER_INSTRUMENTATION_COMMANDS_DEFAULTNAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
