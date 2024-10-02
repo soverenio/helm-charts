@@ -84,6 +84,10 @@ spec:
               name: {{ .Release.Name }}-token
               key: token
         {{- end }}
+        - name: SVRN_DIGGER_K8SNAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         {{- if .Values.httpsProxy }}
         # HTTPS Proxy Settings
         - name: HTTPS_PROXY
