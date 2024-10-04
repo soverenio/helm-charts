@@ -8,7 +8,10 @@ ranger:
   deploymentLabels: {}
   podAnnotations: {}
   podLabels: {}
-  # Token for crawler, use if useExternalSecrets: false
+  # Token for the Crawler
+  # Use if useExternalSecrets: false
+  # If useExternalSecrets: true then define the env var
+  #    SVRN_RANGER_CRAWLERCLIENT_TOKEN instead
   token: ""
   # Should always be specified
   crawler_address:
@@ -62,8 +65,8 @@ ranger:
 #        -----BEGIN PRIVATE KEY-----
 #        MIIEv...
 #        -----END PRIVATE KEY-----
-#    If you use your secret vault with useExternalSecrets: false, you mount the secret in the:
-#    {{ .Release.Name }}-ranger-certs
+#    If you use your secret vault with useExternalSecrets: true,
+#    you mount the secret in the: {{ .Release.Name }}-ranger-certs
 #    data:
 #      ca.crt:
 #      tls.crt:
