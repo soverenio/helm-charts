@@ -3,6 +3,16 @@ entries:
   soveren-agent:
   - apiVersion: v2
     appVersion: 24.9.1
+    created: "2024-10-07T13:05:38.894049625Z"
+    description: Data flow monitoring and analytics platform
+    digest: 99258ad8017a0d4847bd0d65991d33c1f621e3474cefd691ab8812bec4a21451
+    home: https://soveren.io
+    name: soveren-agent
+    urls:
+    - https://github.com/soverenio/helm-charts/releases/download/soveren-agent-1.46.0/soveren-agent-1.46.0.tgz
+    version: 1.46.0
+  - apiVersion: v2
+    appVersion: 24.9.1
     created: "2024-10-03T08:14:19.924254203Z"
     description: Data flow monitoring and analytics platform
     digest: f27cf82f5b047940809e23e588ae9dc9778b4d4c02748944635333d265448ae1
@@ -2483,4 +2493,4 @@ entries:
     urls:
     - https://github.com/soverenio/helm-charts/releases/download/soveren-dar-sensor-0.9.1/soveren-dar-sensor-0.9.1.tgz
     version: 0.9.1
-generated: "2024-10-03T08:14:19.925262736Z"
+generated: "2024-10-07T13:05:38.894844694Z"
