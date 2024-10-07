@@ -80,4 +80,18 @@ spec:
         securityContext:
           {{- toYaml .Values.interceptor.securityContext | nindent 10 }}
         {{- end }}
+        volumeMounts:
+          - name: debugfs
+            mountPath: /sys/kernel/debug
+          - name: tracefs
+            mountPath: /sys/kernel/tracing
       terminationGracePeriodSeconds: 60
+      volumes:
+        - name: debugfs
+          hostPath:
+            path: /sys/kernel/debug
+            type: Directory
+        - name: tracefs
+          hostPath:
+            path: /sys/kernel/tracing
+            type: Directory
