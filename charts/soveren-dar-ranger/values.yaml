@@ -1,0 +1,92 @@
+# HTTPS Proxy URL
+httpsProxy: ""
+httpsProxyNoProxy: ""
+useExternalSecrets: false
+
+ranger:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
+  # Token for crawler, use if useExternalSecrets: false
+  token: ""
+  # Should always be specified
+  crawler_address:
+  image:
+    name: soveren/ranger
+    tag: v0.10.0
+    pullPolicy: IfNotPresent
+  env: []
+  priorityClassName: ""
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "100Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+      ephemeral-storage: 100Mi
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  imagePullSecrets: []
+  service: {}
+  cronjob:
+    enabled: false  # Use ranger as CronJob or Job not Deployment
+    schedule: ""  # Schedule for CronJob, for example — 0 2 * * * every day at 2:00, leave empty if you need run as Job
+  cfg:
+    log:
+      level: error
+    crawlerclient:
+      usetls: false
+      insecure: true
+      cacertificate:
+      clientcertificate:
+      clientkey:
+#      Example:
+#      cacertificate: |-
+#        -----BEGIN CERTIFICATE-----
+#        MIIS...
+#        -----END CERTIFICATE-----
+#      clientcertificate: |-
+#        -----BEGIN CERTIFICATE-----
+#        MIIC...
+#        -----END CERTIFICATE-----
+#      clientkey: |-
+#        -----BEGIN PRIVATE KEY-----
+#        MIIEv...
+#        -----END PRIVATE KEY-----
+#    If you use your secret vault with useExternalSecrets: false, you mount the secret in the:
+#    {{ .Release.Name }}-ranger-certs
+#    data:
+#      ca.crt:
+#      tls.crt:
+#      tls.key:
+    crawl:
+      database:
+        name:
+        type:
+        connectionstring:
+#        Example:
+#        name: test_db
+#        type: postgres
+#        connectionstring: postgres://postgres:@localhost/test_db
+
+networkPolicy:
+  # -- Specifies whether Network Policies should be created
+  enabled: false
+  # -- Specify IP or IP/MASK when the httpsProxy is enabled
+  proxyIp: ""
+  # -- Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
+  #  rangerAdditionalEgress:
+  #      - name: postgres
+  #        host: 192.168.1.1/32
+  #        port: 5432
+  #        protocol: TCP
+  rangerAdditionalEgress: []
