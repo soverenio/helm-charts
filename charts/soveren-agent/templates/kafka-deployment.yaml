@@ -88,6 +88,8 @@ spec:
         - "--override"
         - "log.segment.delete.delay.ms=10000"
         - "--override"
+        - "message.max.bytes=5242880"
+        - "--override"
         - "log.dirs=/var/lib/kafka/data"
         ports:
         - containerPort: {{ .Values.kafka.embedded.service.port }}
