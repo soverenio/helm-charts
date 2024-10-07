@@ -16,6 +16,39 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.9.1
+
+Release date: Oct 07, 2024
+
+### Versions
+
+* **Digger**: 0.38.0
+* **Interceptors**: 0.38.0
+* **Detection**: 2.12.4
+* **Helm chart**: 1.46.0
+
+### Changes
+
+In this version, we have removed `rpcapd`, as it is no longer in use. Additionally, this release includes multiplexed gRPC support, stability fixes, and an improved detection model.
+
+#### Interceptors v0.38.0
+
+* Multiplexed gRPC support
+
+#### Digger v0.38.0
+
+1. Improved gRPC support
+2. Stability fixes
+
+#### Detection v2.12.4
+
+* Improved detection model
+
+#### Helm chart v1.46.0
+
+* Removed obsolete `rpcapd`, we don't use it anymore
+
+
 ## DIM-24.8.1-hotfix
 
 Release date: Aug 16, 2024
