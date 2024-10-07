@@ -13,6 +13,27 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.9.2
+
+Release date: Sep 30, 2024
+
+### Versions
+
+* **Crawler**: 0.10.0
+* **Detection**: 2.12.4
+* **Helm chart**: 0.18.0
+
+### Changes
+
+In this release, we've introduced a new approach to working with databases. The new [Ranger](https://github.com/soverenio/helm-charts/tree/master/charts/soveren-dar-ranger) component can be launched and granted access to the database. Once initialized, it establishes communication with the Crawler, allowing the Crawler to delegate database processing tasks to Ranger without requiring access credentials for the database.   
+
+#### Crawler v0.10.0
+
+1. Support for XLSX spreadsheets in S3.
+2. Databases that have not been seen for over a month are removed from the inventory.
+3. Support for the new [Ranger](https://github.com/soverenio/helm-charts/tree/master/charts/soveren-dar-ranger) component to proxy database queries.
+
+
 ## DAR-24.9.1
 
 Release date: Sep 11, 2024
