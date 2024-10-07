@@ -247,23 +247,6 @@ interceptor:
       useCapster: true
     privilegeChecker:
       packetTimeout: "30s"
-rpcapd:
-  image:
-    name: soveren/rpcapd
-    tag: v0.1.7
-    pullPolicy: IfNotPresent
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "64Mi"
-    limits:
-      cpu: "250m"
-      memory: "256Mi"
-      ephemeral-storage: 100Mi
-  securityContext:
-    privileged: true
-  cfg:
-    port: 28400
 
 
 prometheusAgent:
