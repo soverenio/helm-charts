@@ -1,0 +1,19 @@
+{{- if not .Values.useExternalSecrets }}
+{{- if .Values.crawler.cfg.grpc.usetls }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-crawler-certs
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "crawler.labels" . | nindent 4 }}
+type: kubernetes.io/tls
+data:
+  {{- if .Values.crawler.cfg.grpc.cacertificate }}
+  ca.crt: {{ .Values.crawler.cfg.grpc.cacertificate | b64enc | quote }}
+  {{- end }}
+  tls.crt: {{ .Values.crawler.cfg.grpc.certificate | b64enc | quote }}
+  tls.key: {{ .Values.crawler.cfg.grpc.key | b64enc | quote }}
+{{- end }}
+{{- end }}
