@@ -13,6 +13,25 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.10.1
+
+Release date: Oct 10, 2024
+
+### Versions
+
+* **Crawler**: 0.10.0
+* **Detection**: 2.12.5
+* **Helm chart**: 0.18.1
+
+### Changes
+
+This release includes improved detection model and a stability fix for Detection on RedHat-based systems.
+
+#### Detection v2.12.5
+
+* Improved detection model
+
+
 ## DAR-24.9.2
 
 Release date: Sep 30, 2024
@@ -29,9 +48,9 @@ In this release, we've introduced a new approach to working with databases. The 
 
 #### Crawler v0.10.0
 
-1. Support for XLSX spreadsheets in S3.
-2. Databases that have not been seen for over a month are removed from the inventory.
-3. Support for the new [Ranger](https://github.com/soverenio/helm-charts/tree/master/charts/soveren-dar-ranger) component to proxy database queries.
+1. Support for XLSX spreadsheets in S3
+2. Databases that have not been seen for over a month are removed from the inventory
+3. Support for the new [Ranger](https://github.com/soverenio/helm-charts/tree/master/charts/soveren-dar-ranger) component to proxy database queries
 
 
 ## DAR-24.9.1
@@ -52,15 +71,15 @@ The [Object API](https://docs.soveren.io/en/stable/integration/api/ref/) has bee
 
 #### Crawler v0.9.0
 
-1. MS SQL (SQL Server) support.
-2. MySQL support.
-3. Non-public/default database schemas support.
-4. Scan only `dbname` if it is specified.
-5. Updated Object API.
+1. MS SQL (SQL Server) support
+2. MySQL support
+3. Non-public/default database schemas support
+4. Scan only `dbname` if it is specified
+5. Updated Object API
 
 #### Detection v2.12.4
 
-* Improved detection model.
+* Improved detection model
 
 
 ## DAR-24.7.2-DT
@@ -79,7 +98,7 @@ This release provides updated detection component.
 
 #### Detection v2.11.8
 
-* Improved detection model.
+* Improved detection model
 
 
 ## DAR-24.7.2
@@ -98,7 +117,7 @@ This is a bugfix release.
 
 #### Crawler v0.8.0
 
-* Resolved an issue with insufficient permissions for database access: instead of displaying no tables, the appropriate error message is now shown.
+* Resolved an issue with insufficient permissions for database access: instead of displaying no tables, the appropriate error message is now shown
 
 
 ## DAR-24.7.1
