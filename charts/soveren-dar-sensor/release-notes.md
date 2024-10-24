@@ -13,6 +13,30 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.10.2
+
+Release date: Oct 24, 2024
+
+### Versions
+
+* **Crawler**: 0.11.0
+* **Detection**: 2.12.6
+* **Helm chart**: 0.19.0
+
+### Changes
+
+This release includes support for Parquet and Yandex Object Storage in S3, along with metric fixes for Detection.
+
+#### Crawler v0.11.0
+
+1. Support for Parquet in S3
+2. Yandex Object Storage support in S3
+
+#### Detection v2.12.5
+
+* Fixed metrics
+
+
 ## DAR-24.10.1
 
 Release date: Oct 10, 2024
