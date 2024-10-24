@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.10.0
+    tag: v0.11.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -42,11 +42,23 @@ crawler:
       level: error
     s3:
       enabled: false
+      # S3 storage URL, leave empty if AWS is used
+      url: ""
+      # S3 security token service URL, leave empty if AWS is used
+      stsurl: ""
+      # S3 storage type, possible values: aws, yandexcloud
+      type: "aws"
+      # Access key ID
       accessKeyId: ""
+      # Secret access key
       secretAccessKey: ""
       checkinterval: "12h"
       retrymaxattempts: 5
       retrymaxbackoffdelay: "20s"
+      # Yandex Cloud folder ID
+      folderid: ""
+      # Set false if AWS is used, otherwise true
+      getbucketownerfromlist: false # bool
       s3role:
         # Assume role to access S3 storage
         enabled: false # bool
@@ -56,6 +68,22 @@ crawler:
         rolesessionname: SoverenCrawlerSession # string
         # The duration, in seconds, of the role session. Min: 15 minutes. Max: max session duration set for the role. If you specify a value higher than this setting, the operation fails.
         duration: 15m0s # Duration
+        # Access policy
+        policy: ""
+      # YandexCloud parameters needed for correct publicity status of buckets
+      yandexcloud:
+        # The private key obtained when creating authorized keys for provided service account
+        # Example:
+        # privatekey: |-
+        #   PLEASE DO NOT REMOVE THIS LINE!
+        #   -----BEGIN PRIVATE KEY-----
+        #   ...
+        #   -----END PRIVATE KEY-----
+        privatekey: ""
+        # ID of the public key obtained when creating authorized keys for provided service account
+        publickeyid: ""
+        # Service account ID that the IAM token will be requested for. Account needs the iam.serviceAccounts.tokenCreator role
+        serviceaccountid: ""
     kafka:
       enabled: false
     database:
@@ -111,7 +139,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool-dar
-    tag: v2.12.5
+    tag: v2.12.6
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""

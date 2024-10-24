@@ -101,6 +101,9 @@ app.kubernetes.io/component: detection-tool
 {{- $_ := unset .Values.crawler.cfg.s3 "enabled" -}}
 {{- $_ := set .Values.crawler.cfg.s3 "accessKeyId" "$(S3_ACCESSKEYID)" -}}
 {{- $_ := set .Values.crawler.cfg.s3 "secretAccessKey" "$(S3_SECRETACCESSKEY)" -}}
+{{- if .Values.crawler.cfg.s3.yandexcloud.privatekey }}
+{{- $_ := set .Values.crawler.cfg.s3.yandexcloud "privatekey" "$(S3_PRIVATEKEY)" -}}
+{{- end -}}
 "[{{ toJson .Values.crawler.cfg.s3 | quote | trimPrefix "\"" | trimSuffix "\"" }}]"
 {{- $_ := set .Values.crawler.cfg.s3 "enabled" $enabled -}}
 {{- end -}}
