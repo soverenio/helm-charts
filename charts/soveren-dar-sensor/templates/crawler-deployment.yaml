@@ -59,6 +59,8 @@ spec:
         ports:
         - name: server
           containerPort: 9000
+        - name: grpc
+          containerPort: 10350
         - name: metricsender
           containerPort: 9100
         envFrom:
@@ -121,7 +123,6 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_DATABASE_MSSQL
           value: {{ include "crawl.database.mssql" . }}
         {{- end }}
-
         # S3 Settings
         {{- if .Values.crawler.cfg.s3.enabled }}
         - name: S3_ACCESSKEYID
@@ -167,4 +168,16 @@ spec:
           tcpSocket:
             port: 9000
           timeoutSeconds: 3
+        {{- if .Values.crawler.cfg.grpc.usetls }}
+        volumeMounts:
+          - name: crawler-certs
+            mountPath: /etc/certs/
+            readOnly: true
+        {{- end }}
       restartPolicy: Always
+    {{- if .Values.crawler.cfg.grpc.usetls }}
+    volumes:
+    - name: crawler-certs
+      secret:
+        secretName: {{ .Release.Name }}-crawler-certs
+    {{- end }}
