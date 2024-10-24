@@ -134,6 +134,13 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: awsSecretAccessKey
+        {{- if .Values.crawler.cfg.s3.yandexcloud.privatekey }}
+        - name: S3_PRIVATEKEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-tokens
+              key: privateKey
+        {{- end }}
         - name: SVRN_CRAWLER_CRAWL_S3
           value: {{ include "crawl.s3" . }}
         {{- end }}

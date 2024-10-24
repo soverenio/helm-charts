@@ -11,6 +11,9 @@ data:
   {{- if .Values.crawler.cfg.s3.enabled }}
   awsAccessKeyId: {{ .Values.crawler.cfg.s3.accessKeyId | b64enc }}
   awsSecretAccessKey: {{ .Values.crawler.cfg.s3.secretAccessKey | b64enc }}
+  {{- if .Values.crawler.cfg.s3.yandexcloud.privatekey }}
+  privateKey: {{ .Values.crawler.cfg.s3.yandexcloud.privatekey | replace "\n" "\\n" | b64enc }}
+  {{- end }}
   {{- end }}
 
   {{- if .Values.crawler.cfg.kafka.enabled }}
