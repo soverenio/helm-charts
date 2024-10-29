@@ -42,35 +42,42 @@ crawler:
       level: error
     s3:
       enabled: false
-      # S3 storage URL, leave empty if AWS is used
+      # S3 storage URL. Leave empty for AWS
       url: ""
-      # S3 security token service URL, leave empty if AWS is used
+      # S3 security token service URL. Leave empty for AWS
       stsurl: ""
-      # S3 storage type, possible values: aws, yandexcloud
+      # S3 storage type. Acceptable values: aws, yandexcloud
       type: "aws"
       # Access key ID
       accessKeyId: ""
       # Secret access key
       secretAccessKey: ""
+      # Interval between checking if the bucket info is updated
       checkinterval: "12h"
+      # Max number of attempts for retrying requests to the storage
       retrymaxattempts: 5
+      # Max delay before the next retry request to the storage
       retrymaxbackoffdelay: "20s"
-      # Yandex Cloud folder ID
+      # Folder ID. Relevant only for Yandex Cloud
+      # If left blank, there will be no links to the cloud console available in the UI
       folderid: ""
       # Set false if AWS is used, otherwise true
-      getbucketownerfromlist: false # bool
+      # If true, get owner info from the buckets list; if false, use separate API to get info about the current AWS user
+      getbucketownerfromlist: false
       s3role:
-        # Assume role to access S3 storage
-        enabled: false # bool
+        # Role to assume when accessing the storage
+        enabled: false
         # The Amazon Resource Name (ARN) of the role to assume.
-        rolearn: "" # string
+        rolearn: ""
         # An identifier for the assumed role session.
-        rolesessionname: SoverenCrawlerSession # string
-        # The duration, in seconds, of the role session. Min: 15 minutes. Max: max session duration set for the role. If you specify a value higher than this setting, the operation fails.
-        duration: 15m0s # Duration
+        rolesessionname: SoverenCrawlerSession
+        # The duration of the role session
+        # Min: 15 minutes
+        # Max: max session duration set for the role in the IAM. If you specify a value higher than that, the operation fails
+        duration: 15m0s
         # Access policy
         policy: ""
-      # YandexCloud parameters needed for correct publicity status of buckets
+      # Yandex Cloud parameters needed for correctly inferring the public/non-public status of buckets
       yandexcloud:
         # The private key obtained when creating authorized keys for provided service account
         # Example:
@@ -82,7 +89,8 @@ crawler:
         privatekey: ""
         # ID of the public key obtained when creating authorized keys for provided service account
         publickeyid: ""
-        # Service account ID that the IAM token will be requested for. Account needs the iam.serviceAccounts.tokenCreator role
+        # Service account ID that the IAM token will be requested for.
+        # This service account must have the iam.serviceAccounts.tokenCreator role
         serviceaccountid: ""
     kafka:
       enabled: false

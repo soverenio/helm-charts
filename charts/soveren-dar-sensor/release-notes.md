@@ -32,7 +32,7 @@ This release includes support for Parquet and Yandex Object Storage in S3, along
 1. Support for Parquet in S3
 2. Yandex Object Storage support in S3
 
-#### Detection v2.12.5
+#### Detection v2.12.6
 
 * Fixed metrics
 
