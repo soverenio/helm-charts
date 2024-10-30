@@ -94,7 +94,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.38.0
+    tag: v0.39.0
     pullPolicy: IfNotPresent
     # Default entrypoint for digger: '/usr/local/bin/digger --config /etc/config.yaml'
     # The use of these parameters is now tied to the use on the useExternalSecrets: true
@@ -160,7 +160,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool
-    tag: v2.12.5
+    tag: v2.12.6
     pullPolicy: IfNotPresent
     # Default entrypoint for detection-tool: './entrypoint.sh'
     # The use of these parameters is now tied to the use on the useExternalSecrets: true
@@ -203,7 +203,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.38.0
+    tag: v0.39.0
     pullPolicy: IfNotPresent
   updateStrategy:
     type: RollingUpdate
@@ -247,6 +247,11 @@ interceptor:
       useCapster: true
     privilegeChecker:
       packetTimeout: "30s"
+    openssl:
+      enabled: false
+      observer:
+        strategy: "round-robin"
+        processesCount: 1
 
 prometheusAgent:
   enabled: true
