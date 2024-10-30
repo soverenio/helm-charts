@@ -251,7 +251,7 @@ interceptor:
       enabled: false
       observer:
         strategy: "round-robin"
-        processCount: 1
+        processesCount: 1
 
 prometheusAgent:
   enabled: true
