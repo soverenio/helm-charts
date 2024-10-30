@@ -36,3 +36,6 @@ data:
   SVRN_INTERCEPTOR_PRIVILEGECHECKER_PACKETTIMEOUT: "{{ .Values.interceptor.cfg.privilegeChecker.packetTimeout }}"
   SVRN_INTERCEPTOR_DIGGERCLIENT_ADDRESS: "{{ .Release.Name }}-digger:{{ .Values.digger.service.grpcPort }}"
   SVRN_INTERCEPTOR_PRODUCER_MONITOREDCONNECTIONSTOPIC: "{{ .Values.kafka.topics.monitoredConnectionsTopicName }}"
+  SVRN_INTERCEPTOR_OPENSSL_ENABLED: "{{ .Values.interceptor.cfg.openssl.enabled }}"
+  SVRN_INTERCEPTOR_OPENSSL_OBSERVER_STRATEGY: "{{ .Values.interceptor.cfg.openssl.observer.strategy }}"
+  SVRN_INTERCEPTOR_OPENSSL_OBSERVER_PROCESSESCOUNT: "{{ .Values.interceptor.cfg.openssl.observer.processesCount }}"
