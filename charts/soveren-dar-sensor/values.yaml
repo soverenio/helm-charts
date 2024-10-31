@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.11.0
+    tag: v0.12.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -46,7 +46,7 @@ crawler:
       url: ""
       # S3 security token service URL. Leave empty for AWS
       stsurl: ""
-      # S3 storage type. Acceptable values: aws, yandexcloud
+      # S3 storage type. Acceptable values: aws, yandexcloud, minio
       type: "aws"
       # Access key ID
       accessKeyId: ""
@@ -61,6 +61,12 @@ crawler:
       # Folder ID. Relevant only for Yandex Cloud
       # If left blank, there will be no links to the cloud console available in the UI
       folderid: ""
+      # Fully Qualified Domain Name (FQDN) self-hosted s3 service console URL.
+      # If empty, links to self-hosted console won't be available
+      consoleurl: ""
+      # Fully Qualified Domain Name (FQDN) for self-hosted s3 service domain.
+      # If empty, connections from assets to self-hosted s3 won't be found
+      bucketsdomain: ""
       # Set false if AWS is used, otherwise true
       # If true, get owner info from the buckets list; if false, use separate API to get info about the current AWS user
       getbucketownerfromlist: false
