@@ -16,6 +16,34 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.10.2
+
+Release date: Oct 31, 2024
+
+### Versions
+
+* **Digger**: 0.39.0
+* **Interceptors**: 0.39.0
+* **Detection**: 2.12.6
+* **Helm chart**: 1.47.0
+
+### Changes
+
+This release includes improved detection model, stability fixes and introduces a beta version of TLS encrypted traffic interception.
+
+#### Digger v0.39.0
+
+* Stability fixes
+
+#### Interceptors v0.39.0
+
+* Beta version of TLS encrypted traffic interception 
+
+#### Detection v2.12.6
+
+* Improved detection model
+
+
 ## DIM-24.10.1
 
 Release date: Oct 10, 2024
