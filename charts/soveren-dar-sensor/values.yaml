@@ -47,6 +47,10 @@ crawler:
       # S3 security token service URL. Leave empty for AWS
       stsurl: ""
       # S3 storage type. Acceptable values: aws, yandexcloud, minio
+      #
+      # WARNING!
+      # A separate DAR sensor must be deployed for each S3 implementation, such as AWS or MinIO.
+      #
       type: "aws"
       # Access key ID
       accessKeyId: ""
