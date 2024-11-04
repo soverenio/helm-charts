@@ -45,7 +45,7 @@ crawler:
       # S3 storage URL. Leave empty for AWS
       url: ""
       # S3 security token service URL. Leave empty for AWS
-      # For MinIO, leave it blank or set equal to consoleurl (see below)
+      # For MinIO, leave it blank or set equal to url (see above)
       stsurl: ""
       # S3 storage type. Acceptable values: aws, yandexcloud, minio
       #
