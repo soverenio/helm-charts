@@ -42,9 +42,9 @@ crawler:
       level: error
     s3:
       enabled: false
-      # S3 storage URL. Leave empty for AWS
+      # S3 storage URL, including schema. Leave empty for AWS
       url: ""
-      # S3 security token service URL. Leave empty for AWS
+      # S3 security token service URL, including schema. Leave empty for AWS
       # For MinIO, leave it blank or set equal to url (see above)
       stsurl: ""
       # S3 storage type. Acceptable values: aws, yandexcloud, minio
@@ -66,10 +66,10 @@ crawler:
       # Folder ID. Relevant only for Yandex Cloud
       # If left blank, there will be no links to the cloud console available in the UI
       folderid: ""
-      # Fully Qualified Domain Name (FQDN) self-hosted s3 service console URL.
+      # Fully Qualified Domain Name (FQDN) self-hosted s3 service console URL (including schema).
       # If empty, links to self-hosted console won't be available
       consoleurl: ""
-      # Fully Qualified Domain Name (FQDN) for self-hosted s3 service domain.
+      # Fully Qualified Domain Name (FQDN) for self-hosted s3 service domain (including schema).
       # If empty, connections from assets to self-hosted s3 won't be found
       bucketsdomain: ""
       # Set false if AWS is used, otherwise true
