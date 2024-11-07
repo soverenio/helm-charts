@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.12.0
+    tag: v0.12.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -103,6 +103,9 @@ crawler:
         # Service account ID that the IAM token will be requested for.
         # This service account must have the iam.serviceAccounts.tokenCreator role
         serviceaccountid: ""
+      clienttlsconfig:
+        # Skip tls certificate verification for self-hosted s3 service
+        insecureskipverify: false
     kafka:
       enabled: false
     database:
