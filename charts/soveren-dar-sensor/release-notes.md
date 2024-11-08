@@ -13,6 +13,26 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.10.3-hotfix
+
+Release date: Nov 08, 2024
+
+### Versions
+
+* **Crawler**: 0.12.1
+* **Detection**: 2.12.6
+* **Helm chart**: 0.20.1
+
+### Changes
+
+This hotfix release includes an option to skip certificate validation for self-signed S3 connections and improves the speed of communication errors check with S3.
+
+#### Crawler v0.12.1
+
+1. Option to skip certificate validation for self-signed S3 connections
+2. Improved speed of communication errors check with S3
+
+
 ## DAR-24.10.3
 
 Release date: Oct 31, 2024
