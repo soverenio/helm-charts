@@ -115,9 +115,12 @@ crawler:
         elements:
             # PostgreSQL instance name
           - name: ""
-            # PostgreSQL connection string
+            # PostgreSQL connection string, e.g.:
+            # postgresql://[user[:password]@][netloc][:port][/dbname]
+            # If /dbname is specified then only this database will be scanned by the sensor
             connectionString: ""
-            # Name of default database to connect to. If value is empty and connection string contains dbname, dbname will be used as default value
+            # Default database name to use if not specified in the connection string.
+            # If this value is empty, the dbname from the connection string will be used.
             defaultDBNameToConnect: ""
       mssql:
         enabled: false
