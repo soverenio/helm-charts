@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.12.1
+    tag: v0.13.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -112,6 +112,13 @@ crawler:
       checkinterval: "24h"
       postgres:
         enabled: false
+        elements:
+            # PostgreSQL instance name
+          - name: ""
+            # PostgreSQL connection string
+            connectionString: ""
+            # Name of default database to connect to. If value is empty and connection string contains dbname, dbname will be used as default value
+            defaultDBNameToConnect: ""
       mssql:
         enabled: false
       mysql:
