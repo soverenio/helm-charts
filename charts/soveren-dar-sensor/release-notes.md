@@ -13,6 +13,25 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.11.1
+
+Release date: Nov 13, 2024
+
+### Versions
+
+* **Crawler**: 0.13.1
+* **Detection**: 2.12.6
+* **Helm chart**: 0.21.0
+
+### Changes
+
+In this release, we've added an option to explicitly define the default database name when scanning PostgreSQL databases.
+
+#### Crawler v0.13.1
+
+* `defaultDBName`: an option to set the default database name for PostgreSQL. If left empty, the database name from the connection string will be used
+
+
 ## DAR-24.10.3-hotfix
 
 Release date: Nov 08, 2024
