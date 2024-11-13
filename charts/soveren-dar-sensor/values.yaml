@@ -124,8 +124,28 @@ crawler:
             defaultDBName: ""
       mssql:
         enabled: false
+        elements:
+          # SQL Server instance name
+          - name: ""
+            # SQL Server connection string, e.g.:
+            # sqlserver://[user[:password]@][netloc][:port][/dbname]
+            # If /dbname is specified then only this database will be scanned by the sensor
+            connectionString: ""
+            # Default database name to use if not specified in the connection string.
+            # If this value is empty, the dbname from the connection string will be used.
+            defaultDBName: ""
       mysql:
         enabled: false
+        elements:
+          # SQL Server instance name
+          - name: ""
+            # SQL Server connection string, e.g.:
+            # mysql://[user[:password]@][netloc][:port][/dbname]
+            # If /dbname is specified then only this database will be scanned by the sensor
+            connectionString: ""
+            # Default database name to use if not specified in the connection string.
+            # If this value is empty, the dbname from the connection string will be used.
+            defaultDBName: ""
 
 prometheusAgent:
   enabled: true
