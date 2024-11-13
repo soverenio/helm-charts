@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.13.0
+    tag: v0.13.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -121,7 +121,7 @@ crawler:
             connectionString: ""
             # Default database name to use if not specified in the connection string.
             # If this value is empty, the dbname from the connection string will be used.
-            defaultDBNameToConnect: ""
+            defaultDBName: ""
       mssql:
         enabled: false
       mysql:
