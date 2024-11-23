@@ -40,6 +40,11 @@ crawler:
   cfg:
     log:
       level: error
+    grpc:
+      usetls: false
+      key:
+      certificate:
+      cacertificate:
     s3:
       enabled: false
       # S3 storage URL, including schema. Leave empty for AWS
