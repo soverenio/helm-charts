@@ -30,6 +30,13 @@ spec:
         {{- toYaml .Values.detectionTool.podLabels | nindent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.proxyCertSecret }}
+      volumes:
+        - name: proxy-cert-volume
+          secret:
+            secretName: {{ .Values.proxyCertSecret }}
+            defaultMode: 420
+      {{- end }}
       {{- if .Values.detectionTool.priorityClassName }}
       priorityClassName: {{ .Values.detectionTool.priorityClassName }}
       {{- end }}
@@ -55,6 +62,11 @@ spec:
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
+        {{- if .Values.proxyCertSecret }}
+        volumeMounts:
+        - name: proxy-cert-volume
+          mountPath: /etc/ssl/certs/{{ .Values.proxyCertKey }}
+        {{- end }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         {{- if .Values.useExternalSecrets }}
         {{- if .Values.detectionTool.image.command }}

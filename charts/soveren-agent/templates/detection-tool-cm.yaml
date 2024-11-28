@@ -13,4 +13,7 @@ data:
   {{- if .Values.detectionTool.cfg.log.kafkaEnabled }}
   SVRN_DETECTION_TOOL_LOG_KAFKA: "PLAINTEXT://{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}/logs"
   {{- end }}
+  {{- if .Values.detectionTool.cfg.proxyUrl }}
+  GRPC_DEFAULT_SSL_ROOTS_FILE_PATH: {{ .Values.httpsProxy }}
+  {{- end }}
 
