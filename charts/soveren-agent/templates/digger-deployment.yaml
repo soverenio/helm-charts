@@ -30,6 +30,16 @@ spec:
         {{- toYaml .Values.digger.podLabels | nindent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.proxyCertSecret }}
+      volumes:
+        - name: proxy-cert
+          secret:
+            secretName: {{ .Values.proxyCertSecret }}
+            items:
+              - key: {{ .Values.proxyCertKey }}
+                path: {{ .Values.proxyCertKey }}
+            defaultMode: 420
+      {{- end }}
       {{- if .Values.digger.priorityClassName }}
       priorityClassName: {{ .Values.digger.priorityClassName }}
       {{- end }}
@@ -73,16 +83,6 @@ spec:
         - {{ . | quote }}
         {{- end }}
         {{- end }}
-        {{- end }}
-        {{- if .Values.proxyCertSecret }}
-        volumes:
-          - name: proxy-cert
-            secret:
-              secretName: {{ .Values.proxyCertSecret }}
-              items:
-                - key: {{ .Values.proxyCertKey }}
-                  path: {{ .Values.proxyCertKey }}
-              defaultMode: 420
         {{- end }}
         ports:
         - name: server
