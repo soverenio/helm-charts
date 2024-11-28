@@ -54,6 +54,12 @@ spec:
       - name: digger
         image: {{ .Values.digger.image.name }}:{{ .Values.digger.image.tag }}
         imagePullPolicy: {{ .Values.digger.image.pullPolicy }}
+        {{- if .Values.proxyCertSecret }}
+        volumeMounts:
+          - name: proxy-cert
+            mountPath: /etc/ssl/certs/{{ .Values.proxyCertKey }}
+            subPath: {{ .Values.proxyCertKey }}
+        {{- end }}
         {{- if .Values.useExternalSecrets }}
         {{- if .Values.digger.image.command }}
         command:
@@ -67,6 +73,16 @@ spec:
         - {{ . | quote }}
         {{- end }}
         {{- end }}
+        {{- end }}
+        {{- if .Values.proxyCertSecret }}
+        volumes:
+          - name: proxy-cert
+            secret:
+              secretName: {{ .Values.proxyCertSecret }}
+              items:
+                - key: {{ .Values.proxyCertKey }}
+                  path: {{ .Values.proxyCertKey }}
+              defaultMode: 420
         {{- end }}
         ports:
         - name: server

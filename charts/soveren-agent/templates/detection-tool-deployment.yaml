@@ -55,6 +55,11 @@ spec:
       containers:
       - name: detection-tool
         image: {{ .Values.detectionTool.image.name }}:{{ .Values.detectionTool.image.tag }}
+        {{- if .Values.proxyCertSecret }}
+        volumeMounts:
+        - name: proxy-cert-volume
+          mountPath: /etc/ssl/certs/{{ .Values.proxyCertKey }}
+        {{- end }}
         imagePullPolicy: {{ .Values.detectionTool.image.pullPolicy }}
         {{- if .Values.useExternalSecrets }}
         {{- if .Values.detectionTool.image.command }}
@@ -69,6 +74,13 @@ spec:
         - {{ . | quote }}
         {{- end }}
         {{- end }}
+        {{- end }}
+        {{- if .Values.proxyCertSecret }}
+        volumes:
+          - name: proxy-cert-volume
+            secret:
+              secretName: {{ .Values.proxyCertSecret }}
+              defaultMode: 420
         {{- end }}
         ports:
         - name: api
