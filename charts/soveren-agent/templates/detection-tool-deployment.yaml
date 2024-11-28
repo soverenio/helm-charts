@@ -30,6 +30,13 @@ spec:
         {{- toYaml .Values.detectionTool.podLabels | nindent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.proxyCertSecret }}
+      volumes:
+        - name: proxy-cert-volume
+          secret:
+            secretName: {{ .Values.proxyCertSecret }}
+            defaultMode: 420
+      {{- end }}
       {{- if .Values.detectionTool.priorityClassName }}
       priorityClassName: {{ .Values.detectionTool.priorityClassName }}
       {{- end }}
@@ -74,13 +81,6 @@ spec:
         - {{ . | quote }}
         {{- end }}
         {{- end }}
-        {{- end }}
-        {{- if .Values.proxyCertSecret }}
-        volumes:
-          - name: proxy-cert-volume
-            secret:
-              secretName: {{ .Values.proxyCertSecret }}
-              defaultMode: 420
         {{- end }}
         ports:
         - name: api
