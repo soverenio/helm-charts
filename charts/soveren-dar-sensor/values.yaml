@@ -1,6 +1,6 @@
 # HTTPS Proxy URL
 httpsProxy: ""
-httpsProxyNoProxy: ""
+httpsProxyNoProxy: "{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
 useExternalSecrets: false
 
 crawler:

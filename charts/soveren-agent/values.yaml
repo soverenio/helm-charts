@@ -1,6 +1,6 @@
 # HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
 httpsProxy: ""
-httpsProxyNoProxy: ""
+httpsProxyNoProxy: "{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }},$(KUBERNETES_SERVICE_HOST):$(KUBERNETES_SERVICE_PORT)"
 useExternalSecrets: false
 
 kafka:
