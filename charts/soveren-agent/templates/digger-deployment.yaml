@@ -95,7 +95,7 @@ spec:
         {{- end }}
         {{- if .Values.httpsProxyNoProxy }}
         - name: NO_PROXY
-          value: {{ .Values.httpsProxyNoProxy }}
+          value: {{ tpl .Values.httpsProxyNoProxy . }}
         {{- end }}
         {{- if .Values.digger.env }}
         {{- toYaml .Values.digger.env | nindent 8 }}
