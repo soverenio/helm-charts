@@ -8,7 +8,8 @@ metadata:
 data:
   SVRN_DETECTION_TOOL_LANG: {{ default "none" .Values.detectionTool.lang }}
   SVRN_DETECTION_TOOL_LOG_LEVEL: "{{ .Values.detectionTool.cfg.log.level }}"
-  SVRN_DETECTION_TOOL_OTAREGISTRY_CLIENT_ADDRESS: "updates.soveren.io:443"
+  SVRN_DETECTION_TOOL_OTAREGISTRY_CLIENT_ADDRESS: "{{ .Release.Name }}-digger:{{ .Values.digger.service.grpcPort }}"
+  SVRN_DETECTION_TOOL_OTAREGISTRY_CLIENT_INSECURE: "true"
   SVRN_DETECTION_TOOL_UPDATE_CHECK_FREQ_SEC: "3600"
   {{- if .Values.detectionTool.cfg.log.kafkaEnabled }}
   SVRN_DETECTION_TOOL_LOG_KAFKA: "PLAINTEXT://{{ .Release.Name }}-kafka:{{ .Values.kafka.embedded.service.port }}/logs"
