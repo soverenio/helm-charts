@@ -1,6 +1,6 @@
 # HTTPS Proxy URL - This will apply to both Digger and Detection tool Agent
 httpsProxy: ""
-httpsProxyNoProxy: "{{ .Release.Name }}-digger:{{ .Values.digger.service.grpcPort }},{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }},$(KUBERNETES_SERVICE_HOST):$(KUBERNETES_SERVICE_PORT)"
+httpsProxyNoProxy: "{{ .Release.Name }}-digger,{{ .Release.Name }}-detection-tool,$(KUBERNETES_SERVICE_HOST),{{ .Release.Name }}-digger:{{ .Values.digger.service.grpcPort }},{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }},$(KUBERNETES_SERVICE_HOST):$(KUBERNETES_SERVICE_PORT)"
 useExternalSecrets: false
 
 kafka:
@@ -94,7 +94,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.39.2-fingerprint.17
+    tag: v0.40.0-alpha.1
     pullPolicy: IfNotPresent
     # Default entrypoint for digger: '/usr/local/bin/digger --config /etc/config.yaml'
     # The use of these parameters is now tied to the use on the useExternalSecrets: true
@@ -203,7 +203,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.39.2-fingerprint.17
+    tag: v0.40.0-alpha.1
     pullPolicy: IfNotPresent
   updateStrategy:
     type: RollingUpdate
