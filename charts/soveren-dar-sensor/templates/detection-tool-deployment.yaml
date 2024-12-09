@@ -80,7 +80,7 @@ spec:
         {{- end }}
         {{- if .Values.httpsProxyNoProxy }}
         - name: no_proxy
-          value: {{ .Values.httpsProxyNoProxy }}
+          value: {{ tpl .Values.httpsProxyNoProxy . }}
         {{- end }}
         {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
