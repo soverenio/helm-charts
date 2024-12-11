@@ -20,3 +20,4 @@ data:
   SVRN_CRAWLER_PRODUCER_BROKERS: "{{ include "kafka.brokersStr" . }}"
   SVRN_CRAWLER_PRODUCER_TOPICLOGS: "logs"
   SVRN_CRAWLER_CRAWL_DATABASE_CHECKINTERVAL: "{{ .Values.crawler.cfg.database.checkinterval }}"
+  SVRN_CRAWLER_CRAWL_NOSQLDATABASE_CHECKINTERVAL: "{{ .Values.crawler.cfg.nosqldatabase.checkinterval }}"

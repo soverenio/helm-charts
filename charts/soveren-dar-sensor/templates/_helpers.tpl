@@ -95,6 +95,13 @@ app.kubernetes.io/component: detection-tool
 {{ toJson .Values.crawler.cfg.database.mssql.elements | quote }}
 {{- end -}}
 
+{{- define "crawl.nosqldatabase.mongodb" -}}
+{{- range $key, $value := .Values.crawler.cfg.nosqldatabase.mongodb.elements -}}
+{{- $connString := print "$(NOSQLDATABASE_MONGODB_CONN_STRINGS_" $key ")" -}}
+{{- $_ := set $value "connectionString" $connString -}}
+{{- end -}}
+{{ toJson .Values.crawler.cfg.nosqldatabase.mongodb.elements | quote }}
+{{- end -}}
 
 {{- define "crawl.s3" -}}
 {{- $enabled := .Values.crawler.cfg.s3.enabled -}}
