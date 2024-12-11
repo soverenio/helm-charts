@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.13.1
+    tag: v0.14.0-alpha.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -126,6 +126,18 @@ crawler:
         enabled: false
       mysql:
         enabled: false
+    nosqldatabase:
+      checkinterval: "24h"
+      mongodb:
+        enabled: false
+        elements:
+          # MongoDB instance name
+          - name: ""
+            # MongoDB connection string, e.g.:
+            # mongodb://[user[:password]@][netloc][:port][/dbname]
+            # If /dbname is specified then only this database will be scanned by the sensor
+            connectionString: ""
+
 
 prometheusAgent:
   enabled: true
