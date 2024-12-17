@@ -11,6 +11,6 @@ If you had already added this repo earlier, run `helm repo update` to retrieve
 the latest versions of the packages.  You can then run `helm search repo
 soveren` to see the charts.
 
-## Deployment and onfiguration
+## Deployment and configuration
 
 For deployment and configuration details, please refer to the [Soveren documentation](https://docs.soveren.io/en/stable/getting-started/quick-start/).
