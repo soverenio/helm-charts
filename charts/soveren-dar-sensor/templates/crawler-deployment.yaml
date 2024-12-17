@@ -121,6 +121,18 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_DATABASE_MSSQL
           value: {{ include "crawl.database.mssql" . }}
         {{- end }}
+        # MongoDB settings
+        {{- if .Values.crawler.cfg.nosqldatabase.mongodb.enabled }}
+        {{- range $key, $value := .Values.crawler.cfg.nosqldatabase.mongodb.elements }}
+        - name: NOSQLDATABASE_MONGODB_CONN_STRINGS_{{ $key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Release.Name }}-tokens
+              key: nosqldatabaseMongodbConnStrings-{{ $key }}
+        {{- end }}
+        - name: SVRN_CRAWLER_CRAWL_NOSQLDATABASE_MONGODB
+          value: {{ include "crawl.nosqldatabase.mongodb" . }}
+        {{- end }}
 
         # S3 Settings
         {{- if .Values.crawler.cfg.s3.enabled }}
@@ -149,10 +161,10 @@ spec:
         # HTTPS Proxy Settings
         - name: HTTPS_PROXY
           value: {{ .Values.httpsProxy }}
-        {{- end }}
         {{- if .Values.httpsProxyNoProxy }}
         - name: NO_PROXY
-          value: {{ .Values.httpsProxyNoProxy }}
+          value: {{ tpl .Values.httpsProxyNoProxy . }}
+        {{- end }}
         {{- end }}
         {{- if .Values.crawler.env }}
         {{- toYaml .Values.crawler.env | nindent 8 }}

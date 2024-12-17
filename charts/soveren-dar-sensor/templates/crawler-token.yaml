@@ -42,5 +42,11 @@ data:
   {{- end }}
   {{- end }}
 
+  {{- if .Values.crawler.cfg.nosqldatabase.mongodb.enabled }}
+  {{- range $key, $val := .Values.crawler.cfg.nosqldatabase.mongodb.elements }}
+  nosqldatabaseMongodbConnStrings-{{ $key }}: {{ $val.connectionString | b64enc }}
+  {{- end }}
+  {{- end }}
+
 type: Opaque
 {{- end }}
