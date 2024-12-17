@@ -90,10 +90,10 @@ spec:
         # HTTPS Proxy Settings
         - name: https_proxy
           value: {{ .Values.httpsProxy }}
-        {{- end }}
         {{- if .Values.httpsProxyNoProxy }}
         - name: no_proxy
           value: {{ tpl .Values.httpsProxyNoProxy . }}
+        {{- end }}
         {{- end }}
         {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
