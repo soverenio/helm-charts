@@ -35,7 +35,7 @@ The new release introduces a beta feature for identifying data flows between Kub
 
 1. Beta version for identifying data flows between Kubernetes clusters
 2. Improved memory consumption
-3. Addded support for over-the-air (OtA) ML model updates for Detection
+3. Added support for over-the-air (OtA) ML model updates for Detection
 4. Fixes and improvements
 
 #### Interceptors v0.40.0

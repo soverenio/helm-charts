@@ -13,6 +13,37 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.12.1
+
+Release date: Dec 17, 2024
+
+### Versions
+
+* **Crawler**: 0.14.1
+* **Detection**: 2.13.2
+* **Helm chart**: 0.22.0
+
+### Changes
+
+The new release introduces support for MongoDB in Crawler, enables over-the-air (OtA) ML model updates for Detection via Crawler, and provides default configurations to bypass proxies in the Helm chart. It also includes various fixes and improvements across Crawler, Detection, and the Helm chart.
+
+#### Crawler v0.14.1
+
+1. Support for MongoDB
+2. Added support for over-the-air (OtA) ML model updates for Detection
+3. Fixes and improvements
+
+#### Detection v2.13.2
+
+1. Over-the-air (OtA) ML model updates are now run via Crawler
+2. Fixes and improvements
+
+#### Helm chart v0.22.0
+
+1. Default values for `httpsProxyNoProxy`, to bypass proxy for communications between Crawler and Detection
+2. Added support for over-the-air (OtA) ML model updates for Detection via Crawler
+
+
 ## DAR-24.11.1
 
 Release date: Nov 13, 2024
