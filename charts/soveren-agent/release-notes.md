@@ -16,9 +16,46 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.12.1
+
+Release date: Dec 09, 2024
+
+### Versions
+
+* **Digger**: 0.40.0
+* **Interceptors**: 0.40.0
+* **Detection**: 2.13.0
+* **Helm chart**: 1.48.0
+
+### Changes
+
+The new release introduces a beta feature for identifying data flows between Kubernetes clusters, offers improved memory consumption, and provides over-the-air (OtA) machine learning model updates for Detection through Digger. It also includes refined default settings to bypass proxies and various fixes and enhancements across Digger, Interceptors, Detection, and the Helm chart.
+
+#### Digger v0.40.0
+
+1. Beta version for identifying data flows between Kubernetes clusters
+2. Improved memory consumption
+3. Addded support for over-the-air (OtA) ML model updates for Detection
+4. Fixes and improvements
+
+#### Interceptors v0.40.0
+
+1. Beta version of identifying data flows between Kubernetes clusters
+2. Fixes and improvements
+
+#### Detection v2.13.0
+
+* Over-the-air (OtA) ML model updates are now run via Digger
+
+#### Helm chart v1.48.0
+
+1. Default values for `httpsProxyNoProxy`, to bypass proxy for communications between Digger and Detection and between Digger and Kubernetes API
+2. Added support for over-the-air (OtA) ML model updates for Detection via Digger
+
+
 ## DIM-24.10.2
 
-Release date: Oct 31, 2024
+Release date: Oct 30, 2024
 
 ### Versions
 

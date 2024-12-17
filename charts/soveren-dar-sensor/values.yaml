@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.14.0
+    tag: v0.14.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -50,7 +50,8 @@ crawler:
       # S3 storage type. Acceptable values: aws, yandexcloud, minio
       #
       # WARNING!
-      # A separate DAR sensor must be deployed for each S3 implementation, such as AWS or MinIO.
+      # A separate DAR sensor must be deployed for each S3 implementation,
+      # such as AWS or MinIO.
       #
       type: "aws"
       # Access key ID
@@ -73,7 +74,8 @@ crawler:
       # If empty, connections from assets to self-hosted s3 won't be found
       bucketsdomain: ""
       # Set false if AWS is used, otherwise true
-      # If true, get owner info from the buckets list; if false, use separate API to get info about the current AWS user
+      # If true, get owner info from the buckets list;
+      # if false, use separate API to get info about the current AWS user
       getbucketownerfromlist: false
       s3role:
         # Role to assume when accessing the storage
@@ -84,13 +86,16 @@ crawler:
         rolesessionname: SoverenCrawlerSession
         # The duration of the role session
         # Min: 15 minutes
-        # Max: max session duration set for the role in the IAM. If you specify a value higher than that, the operation fails
+        # Max: max session duration set for the role in the IAM.
+        # If you specify a value higher than that, the operation fails
         duration: 15m0s
         # Access policy
         policy: ""
-      # Yandex Cloud parameters needed for correctly inferring the public/non-public status of buckets
+      # Yandex Cloud parameters needed for correctly inferring
+      # the public/non-public status of buckets
       yandexcloud:
-        # The private key obtained when creating authorized keys for provided service account
+        # The private key obtained when creating authorized keys
+        # for the provided service account
         # Example:
         # privatekey: |-
         #   PLEASE DO NOT REMOVE THIS LINE!
@@ -98,7 +103,8 @@ crawler:
         #   ...
         #   -----END PRIVATE KEY-----
         privatekey: ""
-        # ID of the public key obtained when creating authorized keys for provided service account
+        # ID of the public key obtained when creating authorized keys
+        # for the provided service account
         publickeyid: ""
         # Service account ID that the IAM token will be requested for.
         # This service account must have the iam.serviceAccounts.tokenCreator role
@@ -124,8 +130,28 @@ crawler:
             defaultDBName: ""
       mssql:
         enabled: false
+        elements:
+          # SQL Server instance name
+          - name: ""
+            # SQL Server connection string, e.g.:
+            # sqlserver://[user[:password]@][netloc][:port][/dbname]
+            # If /dbname is specified then only this database will be scanned by the sensor
+            connectionString: ""
+            # Default database name to use if not specified in the connection string.
+            # If this value is empty, the dbname from the connection string will be used.
+            defaultDBName: ""
       mysql:
         enabled: false
+        elements:
+          # SQL Server instance name
+          - name: ""
+            # SQL Server connection string, e.g.:
+            # mysql://[user[:password]@][netloc][:port][/dbname]
+            # If /dbname is specified then only this database will be scanned by the sensor
+            connectionString: ""
+            # Default database name to use if not specified in the connection string.
+            # If this value is empty, the dbname from the connection string will be used.
+            defaultDBName: ""
     nosqldatabase:
       checkinterval: "24h"
       mongodb:
