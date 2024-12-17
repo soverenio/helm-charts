@@ -21,7 +21,7 @@ Release date: Dec 17, 2024
 
 * **Crawler**: 0.14.1
 * **Detection**: 2.13.2
-* **Helm chart**: 0.22.0
+* **Helm chart**: 0.22.2
 
 ### Changes
 
