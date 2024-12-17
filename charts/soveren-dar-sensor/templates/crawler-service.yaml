@@ -18,6 +18,11 @@ spec:
   - name: server
     port: {{ .Values.crawler.service.port }}
     targetPort: 9000
+  {{- if .Values.crawler.service.grpcPort }}
+  - name: grpc
+    port: {{ .Values.crawler.service.grpcPort }}
+    targetPort: {{ .Values.crawler.service.grpcPort }}
+  {{- end }}
   {{- if .Values.prometheusAgent.enabled }}
   - name: metricsender
     port: 9100

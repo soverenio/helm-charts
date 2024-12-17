@@ -61,6 +61,10 @@ spec:
           containerPort: 9000
         - name: metricsender
           containerPort: 9100
+        {{- if .Values.crawler.service.grpcPort }}
+        - name: grpc
+          containerPort: {{ .Values.crawler.service.grpcPort }}
+        {{- end }}
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-crawler
