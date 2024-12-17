@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.14.0-alpha.1
+    tag: v0.14.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -137,8 +137,6 @@ crawler:
             # mongodb://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
             connectionString: ""
-
-
 prometheusAgent:
   enabled: true
   deploymentAnnotations: {}
@@ -183,7 +181,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool-dar
-    tag: v2.12.6
+    tag: v2.13.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
