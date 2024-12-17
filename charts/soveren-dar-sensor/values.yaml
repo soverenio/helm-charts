@@ -1,6 +1,6 @@
 # HTTPS Proxy URL
 httpsProxy: ""
-httpsProxyNoProxy: ""
+httpsProxyNoProxy: "{{ .Release.Name }}-crawler,{{ .Release.Name }}-detection-tool,$(KUBERNETES_SERVICE_HOST),{{ .Release.Name }}-crawler:{{ .Values.digger.service.grpcPort }},{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }},$(KUBERNETES_SERVICE_HOST):$(KUBERNETES_SERVICE_PORT)"
 useExternalSecrets: false
 
 crawler:
@@ -207,7 +207,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool-dar
-    tag: v2.13.0
+    tag: v2.13.2
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
