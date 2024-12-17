@@ -37,6 +37,7 @@ crawler:
     annotations: {}
     labels: {}
     port: 9000
+    grpcPort: 10350
   cfg:
     log:
       level: error
