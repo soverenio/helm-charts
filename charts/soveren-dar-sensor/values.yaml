@@ -115,6 +115,20 @@ crawler:
         insecureskipverify: false
     kafka:
       enabled: false
+      elements:
+        # Name of the Kafka instance
+        - instancename: "<YOUR KAFKA INSTANCE NAME>"
+          # Kafka broker network addresses, i.e. HOST[:PORT] or IP[:PORT]
+          # If your Kafka is deployed in K8s where you're deploying this sensor,
+          # then SERVICE_NAME.NAMESPACE[:PORT] should also work
+          brokers: ["<YOUR KAFKA INSTANCE BROKER 1>", "<YOUR KAFKA INSTANCE BROKER 2>", ..., "<YOUR KAFKA INSTANCE BROKER N>"]
+          tls: false
+          tlsconfig:
+            # Skip server certificate verification
+            insecureskipverify: true
+          sasl: false
+          user: "<YOUR SASL USER>"
+          password: "<YOUR SASL PASSWORD>"
     database:
       checkinterval: "24h"
       postgres:
