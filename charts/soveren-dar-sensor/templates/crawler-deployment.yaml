@@ -161,10 +161,10 @@ spec:
         # HTTPS Proxy Settings
         - name: HTTPS_PROXY
           value: {{ .Values.httpsProxy }}
-        {{- end }}
         {{- if .Values.httpsProxyNoProxy }}
         - name: NO_PROXY
           value: {{ tpl .Values.httpsProxyNoProxy . }}
+        {{- end }}
         {{- end }}
         {{- if .Values.crawler.env }}
         {{- toYaml .Values.crawler.env | nindent 8 }}
