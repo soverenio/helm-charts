@@ -1,6 +1,6 @@
 # HTTPS Proxy URL
 httpsProxy: ""
-httpsProxyNoProxy: "{{ .Release.Name }}-crawler,{{ .Release.Name }}-detection-tool,$(KUBERNETES_SERVICE_HOST),{{ .Release.Name }}-crawler:{{ .Values.digger.service.grpcPort }},{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }},$(KUBERNETES_SERVICE_HOST):$(KUBERNETES_SERVICE_PORT)"
+httpsProxyNoProxy: ""
 useExternalSecrets: false
 
 crawler:
