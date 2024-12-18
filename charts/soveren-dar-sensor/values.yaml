@@ -178,6 +178,7 @@ crawler:
             # mongodb://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
             connectionString: ""
+
 prometheusAgent:
   enabled: true
   deploymentAnnotations: {}
