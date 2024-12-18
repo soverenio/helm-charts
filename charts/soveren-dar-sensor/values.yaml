@@ -158,9 +158,9 @@ crawler:
       mysql:
         enabled: false
         elements:
-          # SQL Server instance name
+          # MySQL instance name
           - name: ""
-            # SQL Server connection string, e.g.:
+            # MySQL connection string, e.g.:
             # mysql://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
             connectionString: ""
