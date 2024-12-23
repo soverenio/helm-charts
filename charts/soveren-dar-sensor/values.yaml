@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.14.1
+    tag: v0.14.2
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
