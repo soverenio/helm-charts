@@ -116,7 +116,6 @@ crawler:
     kafka:
       enabled: false
       elements:
-        # Name of the Kafka instance
         - instancename: "<YOUR KAFKA INSTANCE NAME>"
           # Kafka broker network addresses, i.e. HOST[:PORT] or IP[:PORT]
           # If your Kafka is deployed in K8s where you're deploying this sensor,
@@ -134,8 +133,7 @@ crawler:
       postgres:
         enabled: false
         elements:
-            # PostgreSQL instance name
-          - name: ""
+          - name: "Your PostgreSQL instance name"
             # PostgreSQL connection string, e.g.:
             # postgresql://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
@@ -146,8 +144,7 @@ crawler:
       mssql:
         enabled: false
         elements:
-          # SQL Server instance name
-          - name: ""
+          - name: "Your SQL Server instance name"
             # SQL Server connection string, e.g.:
             # sqlserver://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
@@ -158,8 +155,7 @@ crawler:
       mysql:
         enabled: false
         elements:
-          # MySQL instance name
-          - name: ""
+          - name: "Your MySQL instance name"
             # MySQL connection string, e.g.:
             # mysql://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
@@ -172,8 +168,7 @@ crawler:
       mongodb:
         enabled: false
         elements:
-          # MongoDB instance name
-          - name: ""
+          - name: "Your MongoDB instance name"
             # MongoDB connection string, e.g.:
             # mongodb://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor

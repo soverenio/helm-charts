@@ -13,6 +13,25 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-24.12.2
+
+Release date: Dec 23, 2024
+
+### Versions
+
+* **Crawler**: 0.14.2
+* **Detection**: 2.13.2
+* **Helm chart**: 0.22.3
+
+### Changes
+
+This release includes fixes and improvements for Crawler.
+
+#### Crawler v0.14.2
+
+* Fixes and improvements
+
+
 ## DAR-24.12.1
 
 Release date: Dec 17, 2024
