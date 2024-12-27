@@ -16,6 +16,31 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-24.12.2
+
+Release date: Dec 27, 2024
+
+### Versions
+
+* **Digger**: 0.41.0
+* **Interceptors**: 0.41.0
+* **Detection**: 2.13.3
+* **Helm chart**: 1.49.0
+
+### Changes
+
+The new release of Interceptors extends support for additional cloud infrastructures. Detection now no longer requires an OtA model update at startup, allowing it to function even if the update server is unavailable, and it includes overall improvements to observability.
+
+#### Interceptors v0.41.0
+
+* Extended support for various cloud infrastructures
+
+#### Detection v2.13.3
+
+1. OtA model update at startup is no longer mandatory: Detection will still run even if the update server is unavailable
+2. Improved observability
+
+
 ## DIM-24.12.1
 
 Release date: Dec 09, 2024
