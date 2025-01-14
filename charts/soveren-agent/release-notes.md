@@ -16,6 +16,26 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-25.1.1
+
+Release date: Jan 14, 2025
+
+### Versions
+
+* **Digger**: 0.42.0
+* **Interceptors**: 0.42.0
+* **Detection**: 2.13.3
+* **Helm chart**: 1.50.0
+
+### Changes
+
+This release adds support for namespace labels in filtering, on the data map, and in policies..
+
+#### Digger v0.42.0
+
+* Support for namespace labels
+
+
 ## DIM-24.12.2
 
 Release date: Dec 27, 2024
