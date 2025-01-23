@@ -114,3 +114,19 @@ app.kubernetes.io/component: detection-tool
 "[{{ toJson .Values.crawler.cfg.s3 | quote | trimPrefix "\"" | trimSuffix "\"" }}]"
 {{- $_ := set .Values.crawler.cfg.s3 "enabled" $enabled -}}
 {{- end -}}
+
+{{- define "discoveryservices.consul.kafka" -}}
+{{ toJson .Values.crawler.cfg.discoveryservices.consul.kafka | quote }}
+{{- end -}}
+
+{{- define "discoveryservices.consul.postgres" -}}
+{{ toJson .Values.crawler.cfg.discoveryservices.consul.postgres | quote }}
+{{- end -}}
+
+{{- define "discoveryservices.consul.mysql" -}}
+{{ toJson .Values.crawler.cfg.discoveryservices.consul.mysql | quote }}
+{{- end -}}
+
+{{- define "discoveryservices.consul.mssql" -}}
+{{ toJson .Values.crawler.cfg.discoveryservices.consul.mssql | quote }}
+{{- end -}}
