@@ -161,8 +161,9 @@ spec:
           value: {{ include "crawl.s3" . }}
         {{- end }}
         {{- end }}
-        {{- if .Values.httpsProxy }}
+
         # HTTPS Proxy Settings
+        {{- if .Values.httpsProxy }}
         - name: HTTPS_PROXY
           value: {{ .Values.httpsProxy }}
         {{- if .Values.httpsProxyNoProxy }}

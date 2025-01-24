@@ -11,7 +11,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.14.2
+    tag: v0.15.1
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -173,6 +173,41 @@ crawler:
             # mongodb://[user[:password]@][netloc][:port][/dbname]
             # If /dbname is specified then only this database will be scanned by the sensor
             connectionString: ""
+    discoveryservices:
+      consul:
+        enabled: false
+        # Consul HTTP address
+        address: ""
+        # Interval between checking services in Consul
+        checkinterval: "24h"
+        # Settings for filtering Kafka services
+        kafka:
+            # Specifies the filter expression to query
+            # Example:
+            # filter: "ServicePort==9092"
+          - filter: ""
+            # Specifies the datacenter to query
+            datacenter: ""
+            # nodemeta is deprecated by Consul. Use filter with NodeMeta selector instead.
+            # This parameter is maintained for compatibility with older versions of Consul.
+            # Specifies the desired node metadata key:value pairs.
+            nodemeta: []
+        # Settings for filtering PostgreSQL services
+        postgres:
+          - filter: ""
+            datacenter: ""
+            nodemeta: []
+        # Settings for filtering MySQL services
+        mysql:
+          - filter: ""
+            datacenter: ""
+            nodemeta: []
+        # Settings for filtering MSSQL services
+        mssql:
+          - filter: ""
+            datacenter: ""
+            nodemeta: []
+
 
 prometheusAgent:
   enabled: true
@@ -218,7 +253,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool-dar
-    tag: v2.13.2
+    tag: v2.13.3
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
