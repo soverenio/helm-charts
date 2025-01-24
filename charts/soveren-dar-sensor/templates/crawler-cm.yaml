@@ -23,3 +23,12 @@ data:
   SVRN_CRAWLER_CRAWL_NOSQLDATABASE_CHECKINTERVAL: "{{ .Values.crawler.cfg.nosqldatabase.checkinterval }}"
   SVRN_CRAWLER_GRPC_ADDRESS: "0.0.0.0:{{ .Values.crawler.service.grpcPort }}"
   SVRN_CRAWLER_DISCOVERYSERVICES_CONSUL_CHECKINTERVAL: "{{ .Values.crawler.cfg.discoveryservices.consul.checkinterval }}"
+
+  # Consul discovery settings
+  {{- if .Values.crawler.cfg.discoveryservices.consul.enabled }}
+  CONSUL_HTTP_ADDR: "{{ .Values.crawler.cfg.discoveryservices.consul.address }}"
+  SVRN_CRAWLER_DISCOVERYSERVICES_CONSUL_KAFKA_QUERIES: {{ include "discoveryservices.consul.kafka" . }}
+  SVRN_CRAWLER_DISCOVERYSERVICES_CONSUL_POSTGRES_QUERIES: {{ include "discoveryservices.consul.postgres" . }}
+  SVRN_CRAWLER_DISCOVERYSERVICES_CONSUL_MYSQL_QUERIES: {{ include "discoveryservices.consul.mysql" . }}
+  SVRN_CRAWLER_DISCOVERYSERVICES_CONSUL_MSSQL_QUERIES: {{ include "discoveryservices.consul.mssql" . }}
+  {{- end }}
