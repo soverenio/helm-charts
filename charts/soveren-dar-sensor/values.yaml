@@ -188,7 +188,9 @@ crawler:
           - filter: ""
             # Specifies the datacenter to query
             datacenter: ""
-            # Specifies the NodeMeta parameters to query
+            # nodemeta is deprecated by Consul. Use filter with NodeMeta selector instead.
+            # This parameter is maintained for compatibility with older versions of Consul.
+            # Specifies the desired node metadata key:value pairs.
             nodemeta: []
         # Settings for filtering PostgreSQL services
         postgres:
