@@ -182,30 +182,67 @@ crawler:
         checkinterval: "24h"
         # Settings for filtering Kafka services
         kafka:
-            # Specifies the filter expression to query
+            # Specifies the filter expression to query.
             # Example:
             # filter: "ServicePort==9092"
+            # Must be filled in or the section will be skipped.
           - filter: ""
-            # Specifies the datacenter to query
+            # Specifies the datacenter to query.
+            # If empty, defaults to the datacenter of the agent being queried.
             datacenter: ""
-            # nodemeta is deprecated by Consul. Use filter with NodeMeta selector instead.
-            # This parameter is maintained for compatibility with older versions of Consul.
+            # nodemeta is deprecated by Consul.
+            # Use filter with NodeMeta selector instead.
+            # This parameter is maintained for compatibility
+            # with older versions of Consul.
             # Specifies the desired node metadata key:value pairs.
             nodemeta: []
         # Settings for filtering PostgreSQL services
         postgres:
+            # Specifies the filter expression to query.
+            # Example:
+            # filter: "ServicePort==5432"
+            # Must be filled in or the section will be skipped.
           - filter: ""
+            # Specifies the datacenter to query.
+            # If empty, defaults to the datacenter of the agent being queried.
             datacenter: ""
+            # nodemeta is deprecated by Consul.
+            # Use filter with NodeMeta selector instead.
+            # This parameter is maintained for compatibility
+            # with older versions of Consul.
+            # Specifies the desired node metadata key:value pairs.
             nodemeta: []
         # Settings for filtering MySQL services
         mysql:
+            # Specifies the filter expression to query.
+            # Example:
+            # filter: "ServicePort==3306"
+            # Must be filled in or the section will be skipped.
           - filter: ""
+            # Specifies the datacenter to query.
+            # If empty, defaults to the datacenter of the agent being queried.
             datacenter: ""
+            # nodemeta is deprecated by Consul.
+            # Use filter with NodeMeta selector instead.
+            # This parameter is maintained for compatibility
+            # with older versions of Consul.
+            # Specifies the desired node metadata key:value pairs.
             nodemeta: []
         # Settings for filtering MSSQL services
         mssql:
+            # Specifies the filter expression to query.
+            # Example:
+            # filter: "ServicePort==1433"
+            # Must be filled in or the section will be skipped.
           - filter: ""
+            # Specifies the datacenter to query.
+            # If empty, defaults to the datacenter of the agent being queried.
             datacenter: ""
+            # nodemeta is deprecated by Consul.
+            # Use filter with NodeMeta selector instead.
+            # This parameter is maintained for compatibility
+            # with older versions of Consul.
+            # Specifies the desired node metadata key:value pairs.
             nodemeta: []
 
 
