@@ -13,6 +13,31 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-25.1.1
+
+Release date: Jan 24, 2025
+
+### Versions
+
+* **Crawler**: 0.15.1
+* **Detection**: 2.13.3
+* **Helm chart**: 0.23.0
+
+### Changes
+
+In this release, we introduce the beta version of infrastructure discovery through Consul integration, along with observability improvements in Crawler. Detection no longer requires an OTA model update at startup, enabling it to function even if the update server is unavailable. This release also includes overall improvements to observability.
+
+#### Crawler v0.15.1
+
+1. Infrastructure discovery via Consul
+2. Improved observability
+
+#### Detection v2.13.3
+
+1. An OTA model update at startup is no longer mandatory — Detection will continue to run even if the update server is unavailable
+2. Improved observability
+
+
 ## DAR-24.12.2
 
 Release date: Dec 23, 2024
