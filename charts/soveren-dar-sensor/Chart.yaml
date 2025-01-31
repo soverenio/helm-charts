@@ -1,6 +1,6 @@
 apiVersion: v2
 name: soveren-dar-sensor
 description: Data at rest monitoring and analytics platform
-version: 0.23.0
-appVersion: "25.1.1"
+version: 0.24.0-alpha.1
+appVersion: "25.1.2"
 home: https://soveren.io
