@@ -95,7 +95,7 @@ digger:
   clusterName: ""
   image:
     name: soveren/digger
-    tag: v0.42.0
+    tag: v0.43.0-traffic.1
     pullPolicy: IfNotPresent
     # Default entrypoint for digger: '/usr/local/bin/digger --config /etc/config.yaml'
     # The use of these parameters is now tied to the use on the useExternalSecrets: true
@@ -204,7 +204,7 @@ interceptor:
   podLabels: {}
   image:
     name: soveren/interceptor
-    tag: v0.42.0
+    tag: v0.43.0-traffic.1
     pullPolicy: IfNotPresent
   updateStrategy:
     type: RollingUpdate
