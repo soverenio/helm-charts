@@ -12,6 +12,7 @@ kafka:
     controlResponseTopicName: control_response
     logsTopicName: logs
     monitoredConnectionsTopicName: monitored_connections
+    interfaceStatisticsTopicName: iface_statistics
   embedded:
     enabled: true
     deploymentAnnotations: {}
