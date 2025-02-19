@@ -130,3 +130,22 @@ app.kubernetes.io/component: detection-tool
 {{- define "discoveryservices.consul.mssql" -}}
 {{ toJson .Values.crawler.cfg.discoveryservices.consul.mssql | quote }}
 {{- end -}}
+
+{{- define "common.proxySettings" -}}
+{{- if .Values.httpsProxy }}
+# HTTPS Proxy Settings
+- name: HTTPS_PROXY
+  value: {{ .Values.httpsProxy }}
+{{- $defaultNoProxy := printf "%s-crawler,%s-detection-tool,%s-kafka,%s-crawler:%v,%s-detection-tool:%v,%s-kafka:%v"
+       .Release.Name .Release.Name .Release.Name .Release.Name .Values.crawler.service.grpcPort .Release.Name .Values.detectionTool.service.port .Release.Name .Values.kafka.embedded.service.port -}}
+{{- if .Values.httpsProxyNoProxy }}
+  {{- $userNoProxy := tpl .Values.httpsProxyNoProxy . -}}
+  {{- $mergedNoProxy := printf "%s,%s" $defaultNoProxy $userNoProxy }}
+- name: NO_PROXY
+  value: {{ $mergedNoProxy }}
+{{- else }}
+- name: NO_PROXY
+  value: {{ $defaultNoProxy }}
+{{- end }}
+{{- end }}
+{{- end }}
