@@ -69,3 +69,13 @@ app.kubernetes.io/component: prometheus-agent
 {{ join "," .Values.kafka.external.brokers }}
 {{- end -}}
 {{- end -}}
+
+{{- define "statsClientAddress" -}}
+{{- if eq .Values.appCloud "aws" -}}
+stats.soveren.io:443
+{{- else if eq .Values.appCloud "yandex" -}}
+stats.ru.soveren.io:443
+{{- else -}}
+stats.soveren.io:443
+{{- end -}}
+{{- end -}}

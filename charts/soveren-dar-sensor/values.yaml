@@ -2,6 +2,7 @@
 httpsProxy: ""
 httpsProxyNoProxy: "{{ .Release.Name }}-crawler,{{ .Release.Name }}-detection-tool,{{ .Release.Name }}-crawler:{{ .Values.crawler.service.grpcPort }},{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
 useExternalSecrets: false
+appCloud: "aws"
 
 crawler:
   deploymentAnnotations: {}
