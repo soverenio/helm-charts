@@ -13,6 +13,48 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-25.2.1 hotfix
+
+Release date: Feb 04, 2025
+
+### Versions
+
+* **Crawler**: 0.16.1
+* **Detection**: 2.13.3
+* **Helm chart**: 0.24.1
+
+### Changes
+
+This is a hotfix release.
+
+#### Crawler v0.16.1
+
+* Fixed a panic when discovery services were disabled
+
+#### Helm v0.24.1
+
+* Added the ability to enable `discoveryservices` via ConfigMap
+
+
+## DAR-25.1.2
+
+Release date: Jan 31, 2025
+
+### Versions
+
+* **Crawler**: 0.16.0
+* **Detection**: 2.13.3
+* **Helm chart**: 0.24.0
+
+### Changes
+
+In this version, we've replaced the library used for Kafka scanning and monitoring (previously Segmentio) with Sarama. We've also updated Prometheus to v2.53.3.
+
+#### Crawler v0.16.0
+
+1. Replaced Segmentio with Sarama for Kafka scanning
+2. General fixes and improvements
+
 ## DAR-25.1.1
 
 Release date: Jan 24, 2025
