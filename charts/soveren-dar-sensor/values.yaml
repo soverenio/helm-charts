@@ -1,6 +1,6 @@
 # HTTPS Proxy URL
 httpsProxy: ""
-httpsProxyNoProxy: "{{ .Release.Name }}-crawler,{{ .Release.Name }}-detection-tool,{{ .Release.Name }}-crawler:{{ .Values.crawler.service.grpcPort }},{{ .Release.Name }}-detection-tool:{{ .Values.detectionTool.service.port }}"
+httpsProxyNoProxy: ""
 useExternalSecrets: false
 appCloud: "aws"
 

@@ -75,8 +75,8 @@ spec:
             secretKeyRef:
               name: {{ .Release.Name }}-tokens
               key: token
-        # Kafka Settings
         {{- if .Values.crawler.cfg.kafka.enabled }}
+        # Kafka Settings
         {{- range $key, $value := .Values.crawler.cfg.kafka.elements }}
         {{- if $value.password }}
         - name: KAFKA_PASSWORDS_{{ $key }}
@@ -89,8 +89,8 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_KAFKA
           value: {{ include "crawl.kafka" . }}
         {{- end }}
-        # Postgres settings
         {{- if .Values.crawler.cfg.database.postgres.enabled }}
+        # Postgres settings
         {{- range $key, $value := .Values.crawler.cfg.database.postgres.elements }}
         - name: DATABASE_POSTGRES_CONN_STRINGS_{{ $key }}
           valueFrom:
@@ -101,8 +101,8 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_DATABASE_POSTGRES
           value: {{ include "crawl.database.postgres" . }}
         {{- end }}
-        # MySQL settings
         {{- if .Values.crawler.cfg.database.mysql.enabled }}
+        # MySQL settings
         {{- range $key, $value := .Values.crawler.cfg.database.mysql.elements }}
         - name: DATABASE_MYSQL_CONN_STRINGS_{{ $key }}
           valueFrom:
@@ -113,8 +113,8 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_DATABASE_MYSQL
           value: {{ include "crawl.database.mysql" . }}
         {{- end }}
-        # MSSQL settings
         {{- if .Values.crawler.cfg.database.mssql.enabled }}
+        # MSSQL settings
         {{- range $key, $value := .Values.crawler.cfg.database.mssql.elements }}
         - name: DATABASE_MSSQL_CONN_STRINGS_{{ $key }}
           valueFrom:
@@ -125,8 +125,8 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_DATABASE_MSSQL
           value: {{ include "crawl.database.mssql" . }}
         {{- end }}
-        # MongoDB settings
         {{- if .Values.crawler.cfg.nosqldatabase.mongodb.enabled }}
+        # MongoDB settings
         {{- range $key, $value := .Values.crawler.cfg.nosqldatabase.mongodb.elements }}
         - name: NOSQLDATABASE_MONGODB_CONN_STRINGS_{{ $key }}
           valueFrom:
@@ -137,9 +137,8 @@ spec:
         - name: SVRN_CRAWLER_CRAWL_NOSQLDATABASE_MONGODB
           value: {{ include "crawl.nosqldatabase.mongodb" . }}
         {{- end }}
-
-        # S3 Settings
         {{- if .Values.crawler.cfg.s3.enabled }}
+        # S3 Settings
         - name: S3_ACCESSKEYID
           valueFrom:
             secretKeyRef:
@@ -161,16 +160,7 @@ spec:
           value: {{ include "crawl.s3" . }}
         {{- end }}
         {{- end }}
-
-        # HTTPS Proxy Settings
-        {{- if .Values.httpsProxy }}
-        - name: HTTPS_PROXY
-          value: {{ .Values.httpsProxy }}
-        {{- if .Values.httpsProxyNoProxy }}
-        - name: NO_PROXY
-          value: {{ tpl .Values.httpsProxyNoProxy . }}
-        {{- end }}
-        {{- end }}
+        {{- include "common.proxySettings" . | indent 8 }}
         {{- if .Values.crawler.env }}
         {{- toYaml .Values.crawler.env | nindent 8 }}
         {{- end }}
