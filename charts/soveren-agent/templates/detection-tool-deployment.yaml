@@ -86,15 +86,7 @@ spec:
               name: {{ .Release.Name }}-token
               key: token
         {{- end }}
-        {{- if .Values.httpsProxy }}
-        # HTTPS Proxy Settings
-        - name: https_proxy
-          value: {{ .Values.httpsProxy }}
-        {{- if .Values.httpsProxyNoProxy }}
-        - name: no_proxy
-          value: {{ tpl .Values.httpsProxyNoProxy . }}
-        {{- end }}
-        {{- end }}
+        {{- include "common.proxySettings" . | indent 8 }}
         {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
         {{- end }}
