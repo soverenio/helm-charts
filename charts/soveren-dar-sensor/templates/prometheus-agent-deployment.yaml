@@ -75,8 +75,14 @@ spec:
         - name: config
           mountPath: /etc/prometheus/prometheus.yml
           subPath: prometheus.yml
+        {{- if .Values.prometheusAgent.volumeMounts }}
+        {{- toYaml .Values.prometheusAgent.volumeMounts | nindent 8 }}
+        {{- end }}
       volumes:
       - name: config
         configMap:
           name: {{ .Release.Name }}-prometheus-agent
+      {{- if .Values.prometheusAgent.volumes }}
+      {{- toYaml .Values.prometheusAgent.volumes | nindent 6 }}
+      {{- end }}
 {{- end }}
