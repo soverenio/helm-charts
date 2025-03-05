@@ -73,7 +73,7 @@ spec:
               name: {{ .Release.Name }}-tokens
               key: token
         {{- end }}
-        {{- include "common.proxySettings" . | indent 8 }}
+        {{- include "dt.proxySettings" . | indent 8 }}
         {{- if .Values.detectionTool.env }}
         {{- toYaml .Values.detectionTool.env | nindent 8 }}
         {{- end }}
