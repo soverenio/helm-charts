@@ -13,6 +13,31 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-25.2.2 hotfix
+
+Release date: Feb 26, 2025
+
+### Versions
+
+* **Crawler**: 0.16.3
+* **Detection**: 2.13.3
+* **Helm chart**: 0.24.2
+
+### Changes
+
+This is a hotfix release.
+
+#### Crawler v0.16.3
+
+1. Fixed a panic for MySQL tables with one or zero rows
+2. Fixed a scan error for instances with restricted databases (e.g., `rdsadmin`).
+
+#### Helm v0.24.2
+
+1. Simplified proxy settings
+2. Added a switcher for the Soveren app across different cloud environments
+
+
 ## DAR-25.2.1 hotfix
 
 Release date: Feb 04, 2025
