@@ -102,4 +102,12 @@ spec:
           tcpSocket:
             port: 9000
           timeoutSeconds: 3
+        {{- if .Values.digger.volumeMounts }}
+        volumeMounts:
+          {{- toYaml .Values.digger.volumeMounts | nindent 10 }}
+        {{- end }}
       restartPolicy: Always
+      {{- if .Values.digger.volumes }}
+      volumes:
+        {{- toYaml .Values.digger.volumes | nindent 8 }}
+      {{- end }}

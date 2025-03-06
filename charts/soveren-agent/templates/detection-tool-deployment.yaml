@@ -108,4 +108,13 @@ spec:
           periodSeconds: 30
           timeoutSeconds: 30
           failureThreshold: 10
+        {{- if .Values.detectionTool.volumeMounts }}
+        volumeMounts:
+        {{- toYaml .Values.detectionTool.volumeMounts | nindent 10 }}
+        {{- end }}
       restartPolicy: Always
+      {{- if .Values.detectionTool.volumes }}
+      volumes:
+      {{- toYaml .Values.detectionTool.volumes | nindent 8 }}
+      {{- end }}
+
