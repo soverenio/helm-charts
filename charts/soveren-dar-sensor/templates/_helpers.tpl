@@ -159,3 +159,22 @@ stats.soveren.io:443
 {{- end }}
 {{- end }}
 {{- end }}
+
+{{- define "dt.proxySettings" -}}
+{{- if .Values.httpsProxy }}
+# HTTPS Proxy Settings
+- name: https_proxy
+  value: {{ .Values.httpsProxy }}
+{{- $defaultNoProxy := printf "%s-digger,%s-detection-tool,%s-kafka,$(KUBERNETES_SERVICE_HOST),%s-digger:%v,%s-detection-tool:%v,$(KUBERNETES_SERVICE_HOST):$(KUBERNETES_SERVICE_PORT) %s-kafka:%v"
+       .Release.Name .Release.Name .Release.Name .Release.Name .Values.digger.service.grpcPort .Release.Name .Values.detectionTool.service.port .Release.Name .Values.kafka.embedded.service.port -}}
+{{- if .Values.httpsProxyNoProxy }}
+  {{- $userNoProxy := tpl .Values.httpsProxyNoProxy . -}}
+  {{- $mergedNoProxy := printf "%s,%s" $defaultNoProxy $userNoProxy }}
+- name: no_proxy
+  value: {{ $mergedNoProxy }}
+{{- else }}
+- name: no_proxy
+  value: {{ $defaultNoProxy }}
+{{- end }}
+{{- end }}
+{{- end }}
