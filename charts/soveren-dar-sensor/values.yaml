@@ -12,7 +12,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.16.3
+    tag: v0.17.0
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
@@ -291,7 +291,7 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool-dar
-    tag: v2.13.3
+    tag: v2.13.6
     pullPolicy: IfNotPresent
   env: []
   priorityClassName: ""
