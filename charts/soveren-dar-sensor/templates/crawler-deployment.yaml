@@ -174,4 +174,12 @@ spec:
           tcpSocket:
             port: 9000
           timeoutSeconds: 3
+        {{- if .Values.crawler.volumeMounts }}
+        volumeMounts:
+          {{- toYaml .Values.crawler.volumeMounts | nindent 10 }}
+        {{- end }}
       restartPolicy: Always
+      {{- if .Values.crawler.volumes }}
+      volumes:
+        {{- toYaml .Values.crawler.volumes | nindent 8 }}
+      {{- end }}

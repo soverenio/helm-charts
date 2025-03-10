@@ -85,6 +85,9 @@ spec:
             mountPath: /sys/kernel/debug
           - name: tracefs
             mountPath: /sys/kernel/tracing
+        {{- if .Values.interceptor.volumeMounts }}
+        {{- toYaml .Values.interceptor.volumeMounts | nindent 10 }}
+        {{- end }}
       terminationGracePeriodSeconds: 60
       volumes:
         - name: debugfs
@@ -95,3 +98,6 @@ spec:
           hostPath:
             path: /sys/kernel/tracing
             type: Directory
+      {{- if .Values.interceptor.volumes }}
+      {{- toYaml .Values.interceptor.volumes | nindent 8 }}
+      {{- end }}

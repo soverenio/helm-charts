@@ -65,6 +65,9 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
+        {{- if .Values.kafka.embedded.volumes }}
+        {{- toYaml .Values.kafka.embedded.volumes | nindent 8 }}
+        {{- end }}
       terminationGracePeriodSeconds: 30
       containers:
       - name: kafka
@@ -112,6 +115,9 @@ spec:
         volumeMounts:
           - name: kafka-volume
             mountPath: "/var/lib/kafka"
+        {{- if .Values.kafka.embedded.volumeMounts }}
+          {{- toYaml .Values.kafka.embedded.volumeMounts | nindent 10 }}
+        {{- end }}
         lifecycle:
           preStop:
             exec:
