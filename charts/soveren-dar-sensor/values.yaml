@@ -124,7 +124,7 @@ crawler:
           brokers: ["<YOUR KAFKA INSTANCE BROKER 1>", "<YOUR KAFKA INSTANCE BROKER 2>", ..., "<YOUR KAFKA INSTANCE BROKER N>"]
           tls: false
           tlsconfig:
-            # Skip server's certificate verification
+            # Skip server certificate verification
             insecureskipverify: true
             # Path to PEM file with CA certificate
             cafile: ""
