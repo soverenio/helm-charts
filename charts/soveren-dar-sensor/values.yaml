@@ -127,8 +127,10 @@ crawler:
             # Skip server certificate verification
             insecureskipverify: true
             # Path to PEM file with CA certificate
+            # use volumeMounts and volumes options to mount certificates from secrets
             cafile: ""
             # Paths to PEM files for TLS certificate based client authentication
+            # use volumeMounts and volumes options to mount certificates from secrets
             certfile: ""
             keyfile: ""
           sasl: false
