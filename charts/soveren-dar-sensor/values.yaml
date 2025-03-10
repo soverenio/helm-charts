@@ -367,7 +367,7 @@ detectionTool:
 
 kafka:
   topics:
-#    controlRequestTopicName: control_request
+  # controlRequestTopicName: control_request
     logsTopicName: logs
   # See example in the crawler section
   # of how you can use custom volume mounts
@@ -406,17 +406,19 @@ kafka:
     tolerations: []
     imagePullSecrets: []
     persistentVolume:
-      # -- Create/use Persistent Volume Claim for server component. Empty dir if false
+      # Create/use Persistent Volume Claim for server component.
+      # Empty dir if false
       enabled: false
-      # -- Array of access modes. Must match those of existing PV or dynamic provisioner. Ref: [http://kubernetes.io/docs/user-guide/persistent-volumes/](http://kubernetes.io/docs/user-guide/persistent-volumes/)
+      # Array of access modes. Must match those of existing PV or dynamic provisioner.
+      # Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
       accessModes:
         - ReadWriteOnce
       annotations: {}
-      # -- StorageClass to use for persistent volume.
+      # StorageClass to use for persistent volume.
       storageClass: ""
-      # -- Bind Persistent Volume by labels. Must match all labels of targeted PV.
+      # Bind Persistent Volume by labels. Must match all labels of targeted PV.
       matchLabels: {}
-      # -- Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
+      # Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
       size: 10Gi
     service:
       annotations: {}
@@ -447,11 +449,11 @@ kafka:
     brokers: []
 
 networkPolicy:
-  # -- Specifies whether Network Policies should be created
+  # Specifies whether Network Policies should be created
   enabled: false
-  # -- Specify IP or IP/MASK when the httpsProxy is enabled
+  # Specify IP or IP/MASK when the httpsProxy is enabled
   proxyIp: ""
-  # -- Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
+  # Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
   #  crawlerAdditionalEgress:
   #      - name: postgres
   #        host: 192.168.1.1/32
