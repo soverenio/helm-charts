@@ -15,6 +15,34 @@ crawler:
     tag: v0.16.3
     pullPolicy: IfNotPresent
   env: []
+  # Example of how you can use custom volume mounts:
+  # volumeMounts:
+  #   - name: all-in-one
+  #     mountPath: /etc/config
+  #   - name: secrets-store-inline
+  #     mountPath: /etc/secret
+  # volumes:
+  #   - name: all-in-one
+  #     projected:
+  #       sources:
+  #       - secret:
+  #           name: mysecret
+  #           items:
+  #             - key: username
+  #               path: my-group/my-username
+  #       - configMap:
+  #           name: myconfigmap
+  #           items:
+  #             - key: config
+  #               path: my-group/my-config
+  #   - name: secrets-store-inline
+  #     csi:
+  #       driver: secrets-store.csi.k8s.io
+  #       readOnly: true
+  #       volumeAttributes:
+  #         secretProviderClass: "my-provider"
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -269,6 +297,10 @@ prometheusAgent:
     tag: v2.53.3
     pullPolicy: IfNotPresent
   env: []
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources: 
     requests:
@@ -301,6 +333,10 @@ detectionTool:
     tag: v2.13.3
     pullPolicy: IfNotPresent
   env: []
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -333,6 +369,10 @@ kafka:
   topics:
 #    controlRequestTopicName: control_request
     logsTopicName: logs
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   embedded:
     enabled: true
     deploymentAnnotations: {}
