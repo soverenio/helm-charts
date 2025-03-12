@@ -104,7 +104,7 @@ spec:
           timeoutSeconds: 30
         env:
         - name: "KAFKA_CREATE_TOPICS"
-          value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1,{{ .Values.kafka.topics.iplistTopicName }}:1:1::20000000,{{ .Values.kafka.topics.controlRequestTopicName }}:1:1,{{ .Values.kafka.topics.controlResponseTopicName }}:1:1,{{ .Values.kafka.topics.logsTopicName }}:1:1::104857600,{{ .Values.kafka.topics.monitoredConnectionsTopicName }}:1:1"
+          value: "{{ .Values.kafka.topics.heartbeatTopicName }}:1:1,{{ .Values.kafka.topics.eventsTopicName }}:10:1,{{ .Values.kafka.topics.iplistTopicName }}:1:1::20000000,{{ .Values.kafka.topics.controlRequestTopicName }}:1:1,{{ .Values.kafka.topics.controlResponseTopicName }}:1:1,{{ .Values.kafka.topics.logsTopicName }}:1:1::104857600,{{ .Values.kafka.topics.monitoredConnectionsTopicName }}:1:1,{{ .Values.kafka.topics.interfaceStatisticsTopicName }}:1:1"
         - name: MY_POD_IP
           valueFrom:
             fieldRef:
