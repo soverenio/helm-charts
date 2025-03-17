@@ -12,9 +12,37 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.16.3
+    tag: v0.17.0
     pullPolicy: IfNotPresent
   env: []
+  # Example of how you can use custom volume mounts:
+  # volumeMounts:
+  #   - name: all-in-one
+  #     mountPath: /etc/config
+  #   - name: secrets-store-inline
+  #     mountPath: /etc/secret
+  # volumes:
+  #   - name: all-in-one
+  #     projected:
+  #       sources:
+  #       - secret:
+  #           name: mysecret
+  #           items:
+  #             - key: username
+  #               path: my-group/my-username
+  #       - configMap:
+  #           name: myconfigmap
+  #           items:
+  #             - key: config
+  #               path: my-group/my-config
+  #   - name: secrets-store-inline
+  #     csi:
+  #       driver: secrets-store.csi.k8s.io
+  #       readOnly: true
+  #       volumeAttributes:
+  #         secretProviderClass: "my-provider"
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -126,6 +154,13 @@ crawler:
           tlsconfig:
             # Skip server certificate verification
             insecureskipverify: true
+            # Path to PEM file with CA certificate
+            # use volumeMounts and volumes options to mount certificates from secrets
+            cafile: ""
+            # Paths to PEM files for TLS certificate based client authentication
+            # use volumeMounts and volumes options to mount certificates from secrets
+            certfile: ""
+            keyfile: ""
           sasl: false
           user: "<YOUR SASL USER>"
           password: "<YOUR SASL PASSWORD>"
@@ -262,6 +297,10 @@ prometheusAgent:
     tag: v2.53.3
     pullPolicy: IfNotPresent
   env: []
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources: 
     requests:
@@ -291,9 +330,13 @@ detectionTool:
   podLabels: {}
   image:
     name: soveren/detection-tool-dar
-    tag: v2.13.3
+    tag: v2.13.6
     pullPolicy: IfNotPresent
   env: []
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -324,8 +367,12 @@ detectionTool:
 
 kafka:
   topics:
-#    controlRequestTopicName: control_request
+  # controlRequestTopicName: control_request
     logsTopicName: logs
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   embedded:
     enabled: true
     deploymentAnnotations: {}
@@ -359,17 +406,19 @@ kafka:
     tolerations: []
     imagePullSecrets: []
     persistentVolume:
-      # -- Create/use Persistent Volume Claim for server component. Empty dir if false
+      # Create/use Persistent Volume Claim for server component.
+      # Empty dir if false
       enabled: false
-      # -- Array of access modes. Must match those of existing PV or dynamic provisioner. Ref: [http://kubernetes.io/docs/user-guide/persistent-volumes/](http://kubernetes.io/docs/user-guide/persistent-volumes/)
+      # Array of access modes. Must match those of existing PV or dynamic provisioner.
+      # Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
       accessModes:
         - ReadWriteOnce
       annotations: {}
-      # -- StorageClass to use for persistent volume.
+      # StorageClass to use for persistent volume.
       storageClass: ""
-      # -- Bind Persistent Volume by labels. Must match all labels of targeted PV.
+      # Bind Persistent Volume by labels. Must match all labels of targeted PV.
       matchLabels: {}
-      # -- Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
+      # Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
       size: 10Gi
     service:
       annotations: {}
@@ -400,11 +449,11 @@ kafka:
     brokers: []
 
 networkPolicy:
-  # -- Specifies whether Network Policies should be created
+  # Specifies whether Network Policies should be created
   enabled: false
-  # -- Specify IP or IP/MASK when the httpsProxy is enabled
+  # Specify IP or IP/MASK when the httpsProxy is enabled
   proxyIp: ""
-  # -- Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
+  # Specify IP/MASK, PORT, PROTOCOL for additional IP whitelist egress
   #  crawlerAdditionalEgress:
   #      - name: postgres
   #        host: 192.168.1.1/32

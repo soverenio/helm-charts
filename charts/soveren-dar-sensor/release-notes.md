@@ -13,6 +13,37 @@ Below you can find the release notes with changes in components and their versio
 
 If the component is not mentioned in the release notes, it means that there were no changes in it.
 
+## DAR-25.3.1
+
+Release date: Mar 10, 2025
+
+### Versions
+
+* **Crawler**: 0.17.0
+* **Detection**: 2.13.6
+* **Helm chart**: 0.25.0
+
+### Changes
+
+This release introduces TLS certificate-based authentication for Kafka monitoring in Crawler, along with improved observability and a refactored liveness probe in Detection. Additionally, all components now support custom `volumeMounts` and `volumes`, enhancing deployment flexibility.
+
+#### Crawler v0.17.0
+
+1. Added TLS certificate-based authentication for Kafka monitoring
+2. Support for custom `volumeMounts` and `volumes`
+3. Stability improvements
+
+#### Detection v2.13.6
+
+1. Support for custom `volumeMounts` and `volumes`
+2. Observability improvements
+3. Refactored liveness probe
+
+#### Helm v0.25.0
+
+* Support for custom `volumeMounts` and `volumes`
+
+
 ## DAR-25.2.2 hotfix
 
 Release date: Feb 26, 2025
@@ -30,7 +61,7 @@ This is a hotfix release.
 #### Crawler v0.16.3
 
 1. Fixed a panic for MySQL tables with one or zero rows
-2. Fixed a scan error for instances with restricted databases (e.g., `rdsadmin`).
+2. Fixed a scan error for instances with restricted databases (e.g., `rdsadmin`)
 
 #### Helm v0.24.2
 
@@ -79,6 +110,7 @@ In this version, we've replaced the library used for Kafka scanning and monitori
 
 1. Replaced Segmentio with Sarama for Kafka scanning
 2. General fixes and improvements
+
 
 ## DAR-25.1.1
 
