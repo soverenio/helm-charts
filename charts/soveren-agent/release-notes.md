@@ -16,6 +16,42 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-25.3.1
+
+Release date: Mar 17, 2025
+
+### Versions
+
+* **Digger**: 0.43.0
+* **Interceptors**: 0.43.0
+* **Detection**: 2.13.6
+* **Helm chart**: 1.51.0
+
+### Changes
+
+This release introduces traffic volume estimation for API Endpoints, along with enhanced observability and a refactored liveness probe in Detection. Additionally, all components now support custom `volumeMounts` and `volumes`, enhancing deployment flexibility.
+
+#### Digger v0.43.0
+
+1. Support for traffic volume estimations
+2. Stability and observability improvements
+
+#### Interceptors v0.43.0
+
+1. Support for traffic volume estimations
+2. Stability and observability improvements
+
+#### Detection v2.13.6
+
+1. Observability improvements
+2. Refactored liveness probe
+
+#### Helm v1.51.0
+
+1. Support for custom `volumeMounts` and `volumes`
+2. Simplified `httpsProxyNoProxy` settings
+
+
 ## DIM-25.1.1
 
 Release date: Jan 14, 2025
@@ -29,7 +65,7 @@ Release date: Jan 14, 2025
 
 ### Changes
 
-This release adds support for namespace labels in filtering, on the data map, and in policies..
+This release adds support for namespace labels in filtering, on the data map, and in policies.
 
 #### Digger v0.42.0
 
