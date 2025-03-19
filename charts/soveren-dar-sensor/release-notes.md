@@ -30,14 +30,12 @@ This release introduces TLS certificate-based authentication for Kafka monitorin
 #### Crawler v0.17.0
 
 1. Added TLS certificate-based authentication for Kafka monitoring
-2. Support for custom `volumeMounts` and `volumes`
-3. Stability improvements
+2. Stability improvements
 
 #### Detection v2.13.6
 
-1. Support for custom `volumeMounts` and `volumes`
-2. Observability improvements
-3. Refactored liveness probe
+1. Observability improvements
+2. Refactored liveness probe
 
 #### Helm v0.25.0
 
