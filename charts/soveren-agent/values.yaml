@@ -245,6 +245,10 @@ reflector:
     tag: v0.43.0
     pullPolicy: IfNotPresent
   env: []
+  # See example in the digger section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   resources:
     requests:
       cpu: "100m"
