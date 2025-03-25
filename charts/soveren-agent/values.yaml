@@ -14,6 +14,10 @@ kafka:
     logsTopicName: logs
     monitoredConnectionsTopicName: monitored_connections
     interfaceStatisticsTopicName: iface_statistics
+  # See example in the digger section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   embedded:
     enabled: true
     deploymentAnnotations: {}
@@ -47,17 +51,18 @@ kafka:
     tolerations: []
     imagePullSecrets: []
     persistentVolume:
-      # -- Create/use Persistent Volume Claim for server component. Empty dir if false
+      # Create/use Persistent Volume Claim for server component. Empty dir if false
       enabled: false
-      # -- Array of access modes. Must match those of existing PV or dynamic provisioner. Ref: [http://kubernetes.io/docs/user-guide/persistent-volumes/](http://kubernetes.io/docs/user-guide/persistent-volumes/)
+      # Array of access modes. Must match those of existing PV or dynamic provisioner.
+      # Ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
       accessModes:
         - ReadWriteOnce
       annotations: {}
-      # -- StorageClass to use for persistent volume.
+      # StorageClass to use for persistent volume.
       storageClass: ""
-      # -- Bind Persistent Volume by labels. Must match all labels of targeted PV.
+      # Bind Persistent Volume by labels. Must match all labels of targeted PV.
       matchLabels: {}
-      # -- Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
+      # Size of the volume. Should be calculated based on the metrics you send and retention policy you set.
       size: 10Gi
     service:
       annotations: {}
@@ -104,6 +109,34 @@ digger:
     #command: [ '/bin/bash', '-c' ]
     #args: [ 'source /vault/secrets/soverentokens && /usr/local/bin/digger --config /etc/config.yaml' ]
   env: []
+  # Example of how you can use custom volume mounts:
+  # volumeMounts:
+  #   - name: all-in-one
+  #     mountPath: /etc/config
+  #   - name: secrets-store-inline
+  #     mountPath: /etc/secret
+  # volumes:
+  #   - name: all-in-one
+  #     projected:
+  #       sources:
+  #       - secret:
+  #           name: mysecret
+  #           items:
+  #             - key: username
+  #               path: my-group/my-username
+  #       - configMap:
+  #           name: myconfigmap
+  #           items:
+  #             - key: config
+  #               path: my-group/my-config
+  #   - name: secrets-store-inline
+  #     csi:
+  #       driver: secrets-store.csi.k8s.io
+  #       readOnly: true
+  #       volumeAttributes:
+  #         secretProviderClass: "my-provider"
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -170,6 +203,10 @@ detectionTool:
     #command: [ '/bin/bash', '-c' ]
     #args: [ 'source /vault/secrets/soverentokens && ./entrypoint.sh' ]
   env: []
+  # See example in the crawler section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -246,6 +283,10 @@ interceptor:
     rollingUpdate:
       maxUnavailable: 1
   env: []
+  # See example in the digger section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources:
     requests:
@@ -304,6 +345,10 @@ prometheusAgent:
     tag: v2.37.0
     pullPolicy: IfNotPresent
   env: []
+  # See example in the digger section
+  # of how you can use custom volume mounts
+  volumeMounts: []
+  volumes: []
   priorityClassName: ""
   resources: 
     requests:
@@ -327,10 +372,10 @@ prometheusAgent:
       level: error
 
 networkPolicy:
-  # -- Specifies whether Network Policies should be created
+  # Specifies whether Network Policies should be created
   enabled: false
-  # -- Specify IP or IP/MASK when the httpsProxy is enabled
+  # Specify IP or IP/MASK when the httpsProxy is enabled
   proxyIp: ""
   k8sApi:
-    # -- Specify the k8s API endpoint port
+    # Specify the k8s API endpoint port
     port: 443
