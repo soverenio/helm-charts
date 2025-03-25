@@ -198,6 +198,40 @@ detectionTool:
       kafkaEnabled: true
       level: error
 
+reflector:
+  deploymentAnnotations: {}
+  deploymentLabels: {}
+  podAnnotations: {}
+  podLabels: {}
+  image:
+    name: soveren/reflector
+    tag: v0.43.0
+    pullPolicy: IfNotPresent
+  env: []
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "100Mi"
+    limits:
+      cpu: "400m"
+      memory: "768Mi"
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  imagePullSecrets: []
+  service:
+    annotations: {}
+    labels: {}
+  cfg:
+    log:
+      level: error
+
 interceptor:
   daemonSetAnnotations: {}
   daemonSetLabels: {}

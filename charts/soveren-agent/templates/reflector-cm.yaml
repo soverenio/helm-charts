@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-reflector
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "reflector.labels" . | nindent 4 }}
+data:
+  SVRN_REFLECTOR_LOG_LEVEL: "{{ .Values.reflector.cfg.log.level }}"

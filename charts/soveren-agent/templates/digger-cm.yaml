@@ -37,4 +37,5 @@ data:
   SVRN_DIGGER_DETECTIONCORRECTOR_URL: "{{ .Values.digger.cfg.detectioncorrector.url }}"
   SVRN_DIGGER_DETECTIONCORRECTOR_TOKEN: "{{ .Values.digger.cfg.detectioncorrector.token }}"
   SVRN_DIGGER_DETECTIONCORRECTOR_TYPES: "{{ join "," .Values.digger.cfg.detectioncorrector.types }}"
+  SVRN_DIGGER_REFLECTOR_ADDRESS: "{{ .Release.Name }}-reflector:10351"
   SVRN_DIGGER_GRPC_ADDRESS: "0.0.0.0:{{ .Values.digger.service.grpcPort }}"
