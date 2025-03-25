@@ -52,6 +52,16 @@ app.kubernetes.io/component: interceptor
 {{ include "common.metaLabels" . }}
 {{- end -}}
 
+{{- define "reflector.matchLabels" -}}
+app.kubernetes.io/component: reflector
+{{ include "common.matchLabels" . }}
+{{- end -}}
+
+{{- define "reflector.labels" -}}
+{{ include "reflector.matchLabels" . }}
+{{ include "common.metaLabels" . }}
+{{- end -}}
+
 {{- define "prometheusAgent.matchLabels" -}}
 app.kubernetes.io/component: prometheus-agent
 {{ include "common.matchLabels" . }}

@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-reflector
+  namespace: {{ .Release.Namespace }}
+  {{- if .Values.reflector.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.reflector.deploymentAnnotations | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "reflector.labels" . | nindent 4 }}
+    {{- if .Values.reflector.deploymentLabels }}
+    {{- toYaml .Values.reflector.deploymentLabels | nindent 4 }}
+    {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "reflector.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/reflector-cm.yaml") . | sha256sum }}
+        {{- if .Values.reflector.podAnnotations }}
+          {{- toYaml .Values.reflector.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "reflector.matchLabels" . | nindent 8 }}
+        {{- if .Values.reflector.podLabels }}
+          {{- toYaml .Values.reflector.podLabels | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- if .Values.reflector.priorityClassName }}
+      priorityClassName: {{ .Values.reflector.priorityClassName }}
+      {{- end }}
+      {{- if .Values.reflector.nodeSelector }}
+      nodeSelector:
+        {{- toYaml .Values.reflector.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.reflector.affinity }}
+      affinity:
+        {{- toYaml .Values.reflector.affinity | nindent 8 }}
+      {{- end }}
+      {{- if .Values.reflector.tolerations }}
+      tolerations:
+        {{- toYaml .Values.reflector.tolerations | nindent 8 }}
+      {{- end }}
+      {{- with .Values.reflector.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: reflector
+        image: {{ .Values.reflector.image.name }}:{{ .Values.reflector.image.tag }}
+        imagePullPolicy: {{ .Values.reflector.image.pullPolicy }}
+        ports:
+        - name: api
+          containerPort: 10351
+        - name: instrumentation
+          containerPort: 9000
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-reflector
+        env:
+          {{- if .Values.reflector.env }}
+            {{- toYaml .Values.reflector.env | nindent 10 }}
+          {{- end }}
+        resources:
+          {{- toYaml .Values.reflector.resources | nindent 10 }}
+        {{- if .Values.reflector.securityContext }}
+        securityContext:
+          {{- toYaml .Values.reflector.securityContext | nindent 10 }}
+        {{- end }}
+        readinessProbe:
+          tcpSocket:
+            port: 9000
+          timeoutSeconds: 3
+        {{- if .Values.reflector.volumeMounts }}
+        volumeMounts:
+          {{- toYaml .Values.reflector.volumeMounts | nindent 10 }}
+        {{- end }}
+      restartPolicy: Always
+      {{- if .Values.reflector.volumes }}
+      volumes:
+        {{- toYaml .Values.reflector.volumes | nindent 8 }}
+      {{- end }}
+
