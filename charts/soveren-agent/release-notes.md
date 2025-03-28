@@ -16,6 +16,31 @@ If the component is not mentioned in the release notes, it means that there were
 
 Versions of Digger and Interceptors are synchronized, but sometimes there are changes in one of them only. In this case, the component that has no changes is not mentioned in the release notes.
 
+## DIM-25.3.2
+
+Release date: Mar 28, 2025
+
+### Versions
+
+* **Digger**: 0.44.0
+* **Interceptors**: 0.44.0
+* **Detection**: 2.13.8
+* **Helm chart**: 1.52.0
+
+### Changes
+
+Reduced memory usage and improved Kubernetes metadata handling in Digger; performance and observability enhancements in Detection.
+
+#### Digger v0.44.0
+
+1. Reduced memory footprint
+2. Improvements in K8s metadata handling and caching
+
+#### Detection v2.13.8
+
+* Performance and observability improvements
+
+
 ## DIM-25.3.1
 
 Release date: Mar 17, 2025
