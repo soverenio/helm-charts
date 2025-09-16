@@ -12,7 +12,7 @@ crawler:
   token: ""
   image:
     name: soveren/crawler
-    tag: v0.17.0
+    tag: v0.19.0-s3e.2
     pullPolicy: IfNotPresent
   env: []
   # Example of how you can use custom volume mounts:
@@ -84,7 +84,7 @@ crawler:
       # such as AWS or MinIO.
       #
       type: "aws"
-      # Access key ID
+      # Access key ID. For Cloud.ru S3E, use the <tenant_id>:<access_key_id> format
       accessKeyId: ""
       # Secret access key
       secretAccessKey: ""
